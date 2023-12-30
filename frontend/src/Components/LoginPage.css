@@ -1,0 +1,21 @@
+input {
+  border: none;
+  outline: none;
+}
+.card {
+  width: 100%;
+  max-width: 540px;
+}
+.input:focus-within {
+  border: 2px solid rgb(92, 92, 92);
+}
+.button {
+  width: 225px;
+  min-width: 224px;
+  border: 1.5px solid rgb(186, 186, 186);
+  border-radius: 0.75rem;
+}
+.button:hover {
+  background-color: rgb(223, 228, 233);
+  border: 1.5px solid rgb(125, 125, 125);
+}
