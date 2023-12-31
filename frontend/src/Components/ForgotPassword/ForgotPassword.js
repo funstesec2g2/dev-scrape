@@ -24,7 +24,7 @@ const ForgotPassword = () => {
               </p>
             </div>
 
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-4">
               {/* email text box */}
               <input
                 type="text"
@@ -32,11 +32,11 @@ const ForgotPassword = () => {
                 className="md:border-2 md:border-gray-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></input>
               {/* send button */}
-              <button className="md:bg-slate-900 bg-blue-900 hover:bg-blue-700 active:bg-blue-500 text-white px-4 rounded transition-colors duration-300 ease-in-out py-3">
+              <button className="md:bg-slate-900 bg-blue-900 hover:bg-blue-700 active:bg-blue-500 text-white px-6 rounded transition-colors duration-300 ease-in-out py-3">
                 Send
               </button>
               {/* back to login button */}
-              <button className="md:border md:border-slate-900 bg-blue-900 md:bg-white active:bg-blue-500 rounded px-4 hover:bg-blue-700 hover:text-white md:text-black text-white transition-colors duration-300 ease-in-out py-3">
+              <button className="md:border md:border-slate-900 bg-blue-900 md:bg-white active:bg-blue-500 rounded px-6 hover:bg-blue-700 hover:text-white md:text-black text-white transition-colors duration-300 ease-in-out py-3">
                 Back to Login
               </button>
             </div>
