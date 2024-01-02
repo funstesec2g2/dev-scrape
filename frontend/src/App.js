@@ -4,8 +4,9 @@
 // import VerifyEmail from "./Components/VerifyEmail/VerifyEmail";
 // import ResetPassword from "./Components/ResetPassword/ResetPassword";
 // import ResetSuccess from "./Components/ResetSuccess/ResetSuccess";
-import HelpPage from "./Components/HelpPage/HelpPage";
-import Heading from "./Components/Heading/Heading";
+// import HelpPage from "./Components/HelpPage/HelpPage";
+// import Heading from "./Components/Heading/Heading";
+import FavoritesPage from "./Components/FavoritesPage/FavoritesPage";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <ResetPassword />
         <ResetSuccess /> */}
 
-        <HelpPage />
+        {/* <HelpPage /> */}
         {/* <Heading /> */}
+        <FavoritesPage />
       </div>
     </div>
   );
