@@ -21,8 +21,8 @@ export default function Heading() {
     <>
       <header>
         <div className="flex justify-center items-center flex-col logo py-3">
-          <img src="favicon.ico" alt="Logo" />
-          <p className="text-gray-400 uppercase text-lg">Dev-scape</p>
+          <img src="favicon.ico" className="w-16" alt="Logo" />
+          <p className="text-gray-400 uppercase text-lg">Dev-scrape</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 containe items-center">
