@@ -3,8 +3,12 @@ import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import { useState } from "react";
 import logo from "../assets/logo-img.png";
+import { useLogin } from "../../hooks/useLogin";
+
 
 function passwordToggler() {
+
+
   let icon = document.getElementById("pass");
   if (icon.type == "password") {
     icon.type = "text";
@@ -12,6 +16,10 @@ function passwordToggler() {
     icon.type = "password";
   }
 }
+
+
+ 
+
 
 function login() {
   var email = document.getElementById("email").value;
@@ -26,6 +34,17 @@ function createAccount() {
 function LoginPage() {
   const [action, setAction] = useState("Login");
   const [button, setButton] = useState("Login");
+  const { error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
+  const handleGoogle = async (e) => {
+    e.preventDefault();
+    await signInWithGoogle();
+  };
+  const handleGithub = async (e) => {
+    e.preventDefault();
+    await signInWithGitHub();
+  };
+
+
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
@@ -191,24 +210,31 @@ function LoginPage() {
           <div className="text-center text-gray-400 my-4">- OR -</div>
           <div className="buttons flex flex-wrap justify-around">
             <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
-              <img
-                src={google}
-                alt="google"
-                className="w-8 mx-2 my-3 inline-block"
-              />
-              <a href="" className="mx-2 cursor-pointer my-3">
-                Sign up with Google
-              </a>
+            <button
+    className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
+    onClick={handleGoogle} // Attach the handleGoogle method to the onClick event
+  >
+    <img
+      src={google}
+      alt="google"
+      className="w-8 mx-2 my-3 inline-block"
+    />
+    Sign up with Google
+  </button>
+              
             </div>
             <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
-              <img
-                src={github}
-                alt="google"
-                className="w-8 mx-2 my-3 inline-block"
-              />
-              <a href="" className="mx-2 cursor-pointer my-3">
-                Sign up with Github
-              </a>
+            <button
+    className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
+    onClick={handleGithub} // Attach the handleGithub method to the onClick event
+  >
+    <img
+      src={github}
+      alt="github"
+      className="w-8 mx-2 my-3 inline-block"
+    />
+    Sign up with Github
+  </button>
             </div>
           </div>
         </div>
