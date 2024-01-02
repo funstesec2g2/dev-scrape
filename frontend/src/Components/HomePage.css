@@ -1,0 +1,10 @@
+body {
+  background-color: #03222e;
+  background-image: none;
+}
+* {
+  color: white;
+}
+.title-bar {
+  background-color: #46758a;
+}

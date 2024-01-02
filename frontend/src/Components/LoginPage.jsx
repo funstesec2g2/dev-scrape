@@ -2,6 +2,7 @@ import "./LoginPage.css";
 import google from "./assets/google.svg";
 import github from "./assets/github.svg";
 import { useState } from "react";
+// import { Link } from "react-router-dom";
 
 function passwordToggler() {
   let icon = document.getElementById("pass");
@@ -38,7 +39,7 @@ function LoginPage() {
                   </h1>
                   <span className="text-sm pr-2">Don't have an account?</span>
                   <a
-                    className="text-sm text-cyan-500 cursor-pointer"
+                    className="text-sm hover:text-cyan-600 text-cyan-500 cursor-pointer"
                     href="#"
                     onClick={() => {
                       setAction("Sign Up");
@@ -142,21 +143,21 @@ function LoginPage() {
             {action === "Login" ? (
               <div className="forgot-password text-end">
                 <a
-                  href=""
-                  className="text-sm cursor-pointer text-cyan-500"
-                  onClick={() => {
-                    setAction("Forgot Password");
-                  }}
+                  href="./Forgot_password.jsx"
+                  className="hover:text-cyan-600 text-sm cursor-pointer text-cyan-500"
+                  onClick={() => {}}
                 >
                   Forgot password?
                 </a>
+
+                {/* <Link to="Forgot_password.jsx">Forgot password?</Link> */}
               </div>
             ) : (
               <div></div>
             )}
             <div className="flex justify-center my-6">
               <button
-                className="bg-cyan-950 cursor-pointer block px-8 py-3 justify-self-center rounded-lg w-full text-white"
+                className="hover:bg-cyan-900 bg-cyan-950 cursor-pointer block px-8 py-3 justify-self-center rounded-lg w-full text-white"
                 onClick={action == "Sign Up" ? createAccount : login}
               >
                 {button}
@@ -166,7 +167,7 @@ function LoginPage() {
               <>
                 <span className="text-sm pr-2">Already have an account?</span>
                 <a
-                  className="text-sm text-cyan-500 cursor-pointer"
+                  className="text-sm hover:text-cyan-600 text-cyan-500 cursor-pointer"
                   href="#"
                   onClick={() => {
                     setAction("Login");
