@@ -13,9 +13,9 @@ export default function Heading() {
     navMenu.classList.toggle("hidden");
     navMenu.classList.toggle("flex");
   }
-  function toggleAbout(event) {
-    // const act = document.querySelector(".active");
 
+  function toggleAbout(event) {
+    activation(event);
     const activePage = document.querySelector(".active-page");
     activePage.classList.toggle("hidden");
     activePage.classList.toggle("active-page");
@@ -23,6 +23,7 @@ export default function Heading() {
     aboutPage.classList.toggle("hidden");
     aboutPage.classList.toggle("active-page");
   }
+
   function toggleHelp(event) {
     activation(event);
     const activePage = document.querySelector(".active-page");
@@ -32,6 +33,7 @@ export default function Heading() {
     helpPage.classList.toggle("hidden");
     helpPage.classList.toggle("active-page");
   }
+
   function toggleScrape(event) {
     activation(event);
     const activePage = document.querySelector(".active-page");
@@ -41,6 +43,7 @@ export default function Heading() {
     scrapePage.classList.toggle("hidden");
     scrapePage.classList.toggle("active-page");
   }
+
   function toggleFavorites(event) {
     activation(event);
     const activePage = document.querySelector(".active-page");
@@ -70,7 +73,9 @@ export default function Heading() {
 
           <button
             className="mr-3 justify-self-end hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out md:hidden"
-            onClick={dropDown}
+            onClick={() => {
+              dropDown();
+            }}
           >
             <FontAwesomeIcon icon={faBars} className="px-2 size-6" />
           </button>
@@ -82,17 +87,7 @@ export default function Heading() {
             <a
               href="#"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => {
-                const menuItems = document.querySelectorAll(".menu-item");
-                menuItems.forEach((item) => item.classList.remove("active"));
-                event.target.classList.toggle("active");
-                const activePage = document.querySelector(".active-page");
-                activePage.classList.toggle("hidden");
-                activePage.classList.toggle("active-page");
-                const aboutPage = document.querySelector("#aboutPage");
-                aboutPage.classList.toggle("hidden");
-                aboutPage.classList.toggle("active-page");
-              }}
+              onClick={(event) => toggleAbout(event)}
             >
               About
             </a>
@@ -105,14 +100,14 @@ export default function Heading() {
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
+              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out active"
               onClick={(event) => toggleScrape(event)}
             >
               Scrape
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out active"
+              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out "
               onClick={(event) => toggleFavorites(event)}
             >
               Favorites
