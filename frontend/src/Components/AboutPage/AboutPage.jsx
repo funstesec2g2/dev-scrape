@@ -15,7 +15,7 @@ function AboutPage() {
       <Heading />
       <div className="bg-slate-900 p-10 text-white">
         <div className=" flex flex-col md:flex-row justify-center align-center grid lg:grid-cols-2 mb-28 md:px-28">
-          <p className="text-justify p-10">
+          <div className="text-justify p-10">
             <h1 className="pb-7 text-2xl">About US</h1>Welcome to Dev Scraper,
             your ultimate source for software engineering-related data scraped
             directly from GitHub! At Dev Scraper, we are passionate about
@@ -30,7 +30,7 @@ function AboutPage() {
             is your trusted companion. Join us on this exciting journey as we
             empower you with the latest and most relevant data from the world's
             largest developer community.
-          </p>
+          </div>
           <img className="w-8/12 m-auto flex-shrink-0" src={logo}></img>
         </div>
 

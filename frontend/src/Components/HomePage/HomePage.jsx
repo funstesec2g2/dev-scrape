@@ -40,10 +40,10 @@ function HomePage(props) {
               <h2 className="my-5 text-white">Enter terms to scrap</h2>
               <div className="text-black text-center ">
                 <form>
-                  <label htmlFor="terms"> </label>
+                  <label htmlFor="name"> </label>
 
                   <input
-                    id="terms"
+                    id="term"
                     type="text"
                     name="name"
                     className="w-full p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"

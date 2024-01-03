@@ -9,15 +9,13 @@ import HelpPage from "./Components/HelpPage/HelpPage";
 import HomePage from "./Components/HomePage/HomePage";
 import AboutPage from "./Components/AboutPage/AboutPage";
 import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount";
-
 function App() {
   return (
     <div className="App">
       <div>
-        <div className="" id="login">
-          <AboutPage />
+        {/* <div className="" id="login">
           <LoginPage />
-        </div>
+        </div> */}
 
         <div className="hidden" id="createYourAccount">
           <CreateYourAccount />
@@ -43,7 +41,7 @@ function App() {
           <ResetSuccess />
         </div>
 
-        <div className="hidden" id="homePage">
+        <div className="active-page" id="homePage">
           <HomePage />
         </div>
 
