@@ -1,6 +1,13 @@
 import logo from "../assets/logo-img.png";
 
 const ForgotPassword = () => {
+  function toggleLogin() {
+    const loginPage = document.querySelector("#login");
+    const forgotPassword = document.querySelector("#forgotPassword");
+
+    forgotPassword.classList.toggle("hidden");
+    loginPage.classList.toggle("hidden");
+  }
   return (
     // forgot password page
     <>
@@ -36,7 +43,10 @@ const ForgotPassword = () => {
                 Send
               </button>
               {/* back to login button */}
-              <button className="md:border md:border-slate-900 bg-blue-900 md:bg-white active:bg-blue-500 rounded px-4 hover:bg-blue-700 hover:text-white md:text-black text-white transition-colors duration-300 ease-in-out py-3">
+              <button
+                className="md:border md:border-slate-900 bg-blue-900 md:bg-white active:bg-blue-500 rounded px-4 hover:bg-blue-700 hover:text-white md:text-black text-white transition-colors duration-300 ease-in-out py-3"
+                onClick={toggleLogin}
+              >
                 Back to Login
               </button>
             </div>

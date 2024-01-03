@@ -1,4 +1,4 @@
-// import "./LoginPage.css";
+import "./LoginPage.css";
 import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import { useState } from "react";
@@ -11,6 +11,14 @@ function passwordToggler() {
   } else {
     icon.type = "password";
   }
+}
+
+function toggleForgotPassword() {
+  const loginPage = document.querySelector("#login");
+  const forgotPassword = document.querySelector("#forgotPassword");
+
+  forgotPassword.classList.toggle("hidden");
+  loginPage.classList.toggle("hidden");
 }
 
 function login() {
@@ -74,7 +82,7 @@ function LoginPage() {
                       id="fullname"
                       type="text"
                       name="name"
-                      className="w-full h-full p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter your Full Name here"
                     />
                   </div>
@@ -148,10 +156,11 @@ function LoginPage() {
           {action === "Login" ? (
             <div className="forgot-password ">
               <a
-                href=""
+                href="#"
                 className="text-sm cursor-pointer text-cyan-500"
                 onClick={() => {
-                  setAction("Forgot Password");
+                  toggleForgotPassword();
+                  return false;
                 }}
               >
                 Forgot password?
