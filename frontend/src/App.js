@@ -14,6 +14,7 @@ function App() {
     <div className="App">
       <div>
         <div className="" id="login">
+          <AboutPage/>
           <LoginPage />
         </div>
 
