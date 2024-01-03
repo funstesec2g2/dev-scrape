@@ -41,19 +41,19 @@ function App() {
           <ResetSuccess />
         </div>
 
-        <div className="active-page" id="homePage">
+        <div className="active-page" id="Scrape">
           <HomePage />
         </div>
 
-        <div className="hidden" id="favoritesPage">
+        <div className="hidden" id="Favorites">
           <FavoritesPage />
         </div>
 
-        <div className="hidden" id="helpPage">
+        <div className="hidden" id="Help">
           <HelpPage />
         </div>
 
-        <div className="hidden" id="aboutPage">
+        <div className="hidden" id="About">
           <AboutPage />
         </div>
       </div>
