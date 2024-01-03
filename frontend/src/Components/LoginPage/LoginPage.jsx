@@ -20,7 +20,13 @@ function toggleForgotPassword() {
   forgotPassword.classList.toggle("hidden");
   loginPage.classList.toggle("hidden");
 }
+function toggleVerifyEmail() {
+  const loginPage = document.querySelector("#login");
+  const verifyEmail = document.querySelector("#verifyEmail");
 
+  verifyEmail.classList.toggle("hidden");
+  loginPage.classList.toggle("hidden");
+}
 function login() {
   var email = document.getElementById("email").value;
   console.log(email);
@@ -30,7 +36,9 @@ function login() {
 function createAccount() {
   var pass = document.getElementById("pass").value;
   console.log(pass);
+  toggleVerifyEmail();
 }
+
 function LoginPage() {
   const [action, setAction] = useState("Login");
   const [button, setButton] = useState("Login");

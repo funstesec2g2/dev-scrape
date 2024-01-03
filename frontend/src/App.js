@@ -13,12 +13,20 @@ function App() {
   return (
     <div className="App">
       <div>
-        <div id="login">
+        <div className="" id="login">
           <LoginPage />
+        </div>
+
+        <div className="hidden" id="verifyEmail">
+          <VerifyEmail />
         </div>
 
         <div className="hidden" id="forgotPassword">
           <ForgotPassword />
+        </div>
+
+        <div className="hidden" id="checkYourEmail">
+          <CheckYourEmail />
         </div>
 
         <div className="hidden" id="resetPassword">
@@ -27,14 +35,6 @@ function App() {
 
         <div className="hidden" id="resetSuccess">
           <ResetSuccess />
-        </div>
-
-        <div className="hidden" id="verifyEmail">
-          <VerifyEmail />
-        </div>
-
-        <div className="hidden" id="checkYourEmail">
-          <CheckYourEmail />
         </div>
 
         <div className="hidden" id="homePage">

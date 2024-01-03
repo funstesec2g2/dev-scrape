@@ -1,6 +1,13 @@
 import logo from "../assets/logo-img.png";
 
 export default function CheckYourEmail() {
+  function toggleLogin() {
+    const loginPage = document.querySelector("#login");
+    const checkYourEmail = document.querySelector("#checkYourEmail");
+
+    checkYourEmail.classList.toggle("hidden");
+    loginPage.classList.toggle("hidden");
+  }
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
@@ -16,6 +23,9 @@ export default function CheckYourEmail() {
               We have sent an email with password reset information to
               <span>"Email-address"</span>.
             </p>
+            <form>
+              <input type="type" name="verification code" />
+            </form>
           </div>
           <div className="flex flex-col justify-end">
             <p className="text-sm text-white md:text-black">
@@ -24,7 +34,10 @@ export default function CheckYourEmail() {
             <button className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500">
               Resend Email
             </button>
-            <button className="bg-blue-900 md:bg-white w-full py-3 border border-black rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+            <button
+              className="bg-blue-900 md:bg-white w-full py-3 border border-black rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
+              onClick={toggleLogin}
+            >
               Back to Login
             </button>
           </div>
