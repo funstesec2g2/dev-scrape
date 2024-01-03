@@ -47,7 +47,7 @@ export default function Heading() {
           >
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
+              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
               onClick={(event) => activation(event)}
             >
               About
@@ -61,14 +61,14 @@ export default function Heading() {
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
+              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
               onClick={(event) => activation(event)}
             >
               Scrape
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out active"
+              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out active"
               onClick={(event) => activation(event)}
             >
               Favorites
