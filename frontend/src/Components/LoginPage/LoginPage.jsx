@@ -2,35 +2,59 @@ import "./LoginPage.css";
 import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import logo from "../assets/logo-img.png";
+import { useState } from "react";
 
-function LoginPage() {
-  function passwordToggler() {
-    let icon = document.getElementById("passLogin");
-    if (icon.type ==="password") {
-      icon.type = "text";
-    } else {
-      icon.type = "password";
-    }
+function passwordToggler() {
+  let icon = document.getElementById("pass");
+  if (icon.type === "password") {
+    icon.type = "text";
+  } else {
+    icon.type = "password";
   }
-  function toggleForgotPassword() {
-    const loginPage = document.querySelector("#login");
-    const forgotPassword = document.querySelector("#forgotPassword");
+}
 
-    forgotPassword.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
-  function login() {
-    var email = document.getElementById("email").value;
-    console.log(email);
-    var pass = document.getElementById("passLogin").value;
-    console.log(pass);
-  }
-  function toggleCreatYourAccount() {
-    const loginPage = document.querySelector("#login");
-    const createYourAccount = document.querySelector("#createYourAccount");
+function toggleForgotPassword() {
+  const loginPage = document.querySelector("#login");
+  const forgotPassword = document.querySelector("#forgotPassword");
 
-    createYourAccount.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
+  forgotPassword.classList.toggle("hidden");
+  loginPage.classList.toggle("hidden");
+}
+function toggleVerifyEmail() {
+  const loginPage = document.querySelector("#login");
+  const verifyEmail = document.querySelector("#verifyEmail");
+
+  verifyEmail.classList.toggle("hidden");
+  loginPage.classList.toggle("hidden");
+}
+function login() {
+  var email = document.getElementById("email").value;
+  console.log(email);
+  var pass = document.getElementById("pass").value;
+  console.log(pass);
+}
+const  createAccount = () => {
+  var pass = document.getElementById("pass").value;
+  console.log(pass);
+  toggleVerifyEmail();
+}
+
+const  LoginPage = () => {
+  const [action, setAction] = useState("Login");
+  const [button, setButton] = useState("Login");
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+
+  const registerForm = (e) =>{
+    e.preventDefault();
+    console.log({
+      name,
+      password,
+      email
+    })
   }
 
   return (
@@ -56,8 +80,17 @@ function LoginPage() {
               Sign Up
             </a>
           </div>
+
+
           <div className="inputs">
             <form>
+              {action === "Sign Up" ? (
+                <label htmlFor="email">
+                  <p className="text-white md:text-gray-400">E-Mail </p>
+                </label>
+              ) : (
+                <div></div>
+              )}
               <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
                 <input
                   id="email"
@@ -69,12 +102,23 @@ function LoginPage() {
               </div>
             </form>
             <form>
+              {action === "Sign Up" ? (
+                <label htmlFor="pass">
+                  <p className="text-white md:text-gray-400">Password</p>
+                </label>
+              ) : (
+                <div></div>
+              )}
+
               <div className="input pass md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
                   id="passLogin"
                   name="pwd"
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
+                  placeholder={
+                    action === "Sign Up" ? "Enter New Password" : "Password"
+                  }
                   placeholder="Password"
                 />
                 <span id="eye-holder">
