@@ -15,13 +15,11 @@ export default function Heading() {
     navMenu.classList.toggle("flex");
   }
   function toggleAbout(event) {
-    // const act = document.querySelector(".active");
-
+    activation(event);
     const activePage = document.querySelector(".active-page");
     activePage.classList.toggle("hidden");
     activePage.classList.toggle("active-page");
-
-    const aboutPage = document.querySelector(`#${event.target.innerHTML}`);
+    const aboutPage = document.querySelector("#About");
     aboutPage.classList.toggle("hidden");
     aboutPage.classList.toggle("active-page");
   }
@@ -30,7 +28,7 @@ export default function Heading() {
     const activePage = document.querySelector(".active-page");
     activePage.classList.toggle("hidden");
     activePage.classList.toggle("active-page");
-    const helpPage = document.querySelector("#helpPage");
+    const helpPage = document.querySelector("#Help");
     helpPage.classList.toggle("hidden");
     helpPage.classList.toggle("active-page");
   }
@@ -39,7 +37,7 @@ export default function Heading() {
     const activePage = document.querySelector(".active-page");
     activePage.classList.toggle("hidden");
     activePage.classList.toggle("active-page");
-    const scrapePage = document.querySelector("#homePage");
+    const scrapePage = document.querySelector("#Scrape");
     scrapePage.classList.toggle("hidden");
     scrapePage.classList.toggle("active-page");
   }
@@ -48,7 +46,7 @@ export default function Heading() {
     const activePage = document.querySelector(".active-page");
     activePage.classList.toggle("hidden");
     activePage.classList.toggle("active-page");
-    const favPage = document.querySelector("#favoritesPage");
+    const favPage = document.querySelector("#Favorites");
     favPage.classList.toggle("hidden");
     favPage.classList.toggle("active-page");
   }
@@ -83,26 +81,14 @@ export default function Heading() {
             <a
               href="#"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => {
-                const menuItems = document.querySelectorAll(".menu-item");
-                menuItems.forEach((item) => item.classList.remove("active"));
-                event.target.classList.toggle("active");
-                const activePage = document.querySelector(".active-page");
-                activePage.classList.toggle("hidden");
-                activePage.classList.toggle("active-page");
-                const aboutPage = document.querySelector("#aboutPage");
-                aboutPage.classList.toggle("hidden");
-                aboutPage.classList.toggle("active-page");
-              }}
+              onClick={(event) => toggleAbout(event)}
             >
               About
             </a>
             <a
               href="#"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => {
-                activation(event);
-              }}
+              onClick={(event) => toggleHelp(event)}
             >
               Help
             </a>
