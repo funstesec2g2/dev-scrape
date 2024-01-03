@@ -16,11 +16,11 @@ function AboutPage() {
       <div className="bg-slate-900 p-10 text-white">
         <div className=" flex flex-col md:flex-row justify-center mb-28 md:px-28">
           <p className="text-justify p-10">
-            <h1 className="py-10 text-2xl">About US</h1>Welcome to Dev Scraper,
-            your ultimate source for software engineering-related data scraped
-            directly from GitHub! At Dev Scraper, we are passionate about
-            providing developers, tech enthusiasts, and businesses with a wealth
-            of valuable information to enhance their software development
+            <span className="py-10 text-2xl">About US</span>Welcome to Dev
+            Scraper, your ultimate source for software engineering-related data
+            scraped directly from GitHub! At Dev Scraper, we are passionate
+            about providing developers, tech enthusiasts, and businesses with a
+            wealth of valuable information to enhance their software development
             endeavors. Our cutting-edge scraping technology meticulously
             retrieves data, such as trending repositories, developer profiles,
             and code snippets, giving you unparalleled insights into the
@@ -36,9 +36,9 @@ function AboutPage() {
 
         <div className="text-slate-400">
           <div className="text-center text-slate-400 my-16 justify-center items-center">
-            <h1 className=" text-3xl font-bold">
+            <h2 className=" text-3xl font-bold">
               MEET <i className="font-thin">the</i> TEAM
-            </h1>
+            </h2>
             <p className="text-sm">responsible for making devscarpe</p>
             <div className="w-28 bg-slate-400 h-0.5 mr-auto ml-auto mt-3"></div>
           </div>

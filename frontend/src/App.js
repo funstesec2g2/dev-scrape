@@ -8,6 +8,7 @@ import FavoritesPage from "./Components/FavoritesPage/FavoritesPage";
 import HelpPage from "./Components/HelpPage/HelpPage";
 import HomePage from "./Components/HomePage/HomePage";
 import AboutPage from "./Components/AboutPage/AboutPage";
+import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
       <div>
         <div className="" id="login">
           <LoginPage />
+        </div>
+
+        <div className="hidden" id="createYourAccount">
+          <CreateYourAccount />
         </div>
 
         <div className="hidden" id="verifyEmail">
