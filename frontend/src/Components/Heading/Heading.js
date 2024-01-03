@@ -30,12 +30,12 @@ export default function Heading() {
             <img
               src="logo192.png"
               alt="dynamic image"
-              className="border rounded-full size-14 md:size-16 hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out"
+              className="border rounded-full size-14 md:size-16 hover:bg-sky-900 active:bg-slate-500 transition-colors duration-300 ease-in-out"
             />
           </button>
 
           <button
-            className="mr-3 justify-self-end hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out md:hidden"
+            className="mr-3 justify-self-end hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out md:hidden"
             onClick={dropDown}
           >
             <FontAwesomeIcon icon={faBars} className="px-2 size-6" />
@@ -47,28 +47,28 @@ export default function Heading() {
           >
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out"
+              className="menu-item text-gray-300 hover:text-white px-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
               onClick={(event) => activation(event)}
             >
               About
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out"
+              className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
               onClick={(event) => activation(event)}
             >
               Help
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out"
+              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
               onClick={(event) => activation(event)}
             >
               Scrape
             </a>
             <a
               href="#"
-              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out active"
+              className="menu-item text-gray-300 hover:text-white px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out active"
               onClick={(event) => activation(event)}
             >
               Favorites
