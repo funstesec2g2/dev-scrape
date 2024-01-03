@@ -44,6 +44,7 @@ const ForgotPassword = () => {
                 type="text"
                 placeholder="Email"
                 className="md:border-2 md:border-gray-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               ></input>
               {/* send button */}
               <button

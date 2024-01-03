@@ -1,47 +1,38 @@
 import "./LoginPage.css";
 import google from "../assets/google.svg";
 import github from "../assets/github.svg";
-import { useState } from "react";
 import logo from "../assets/logo-img.png";
 
-function passwordToggler() {
-  let icon = document.getElementById("pass");
-  if (icon.type == "password") {
-    icon.type = "text";
-  } else {
-    icon.type = "password";
-  }
-}
-
-function toggleForgotPassword() {
-  const loginPage = document.querySelector("#login");
-  const forgotPassword = document.querySelector("#forgotPassword");
-
-  forgotPassword.classList.toggle("hidden");
-  loginPage.classList.toggle("hidden");
-}
-function toggleVerifyEmail() {
-  const loginPage = document.querySelector("#login");
-  const verifyEmail = document.querySelector("#verifyEmail");
-
-  verifyEmail.classList.toggle("hidden");
-  loginPage.classList.toggle("hidden");
-}
-function login() {
-  var email = document.getElementById("email").value;
-  console.log(email);
-  var pass = document.getElementById("pass").value;
-  console.log(pass);
-}
-function createAccount() {
-  var pass = document.getElementById("pass").value;
-  console.log(pass);
-  toggleVerifyEmail();
-}
-
 function LoginPage() {
-  const [action, setAction] = useState("Login");
-  const [button, setButton] = useState("Login");
+  function passwordToggler() {
+    let icon = document.getElementById("passLogin");
+    if (icon.type == "password") {
+      icon.type = "text";
+    } else {
+      icon.type = "password";
+    }
+  }
+  function toggleForgotPassword() {
+    const loginPage = document.querySelector("#login");
+    const forgotPassword = document.querySelector("#forgotPassword");
+
+    forgotPassword.classList.toggle("hidden");
+    loginPage.classList.toggle("hidden");
+  }
+  function login() {
+    var email = document.getElementById("email").value;
+    console.log(email);
+    var pass = document.getElementById("passLogin").value;
+    console.log(pass);
+  }
+  function toggleCreatYourAccount() {
+    const loginPage = document.querySelector("#login");
+    const createYourAccount = document.querySelector("#createYourAccount");
+
+    createYourAccount.classList.toggle("hidden");
+    loginPage.classList.toggle("hidden");
+  }
+
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
@@ -51,94 +42,40 @@ function LoginPage() {
       <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white  h-screen">
         <div className="card w-3/4">
           <div className="title mb-7">
-            {action === "Login" ? (
-              <>
-                <h1 className="text-xl font-bold h-10 text-white md:text-black">
-                  Log in
-                </h1>
-                <span className="text-sm pr-2 text-white md:text-black">
-                  Don't have an account?
-                </span>
-                <a
-                  className="text-sm text-cyan-500 cursor-pointer"
-                  href="#"
-                  onClick={() => {
-                    setAction("Sign Up");
-                    setButton("Create Account");
-                  }}
-                >
-                  Sign Up
-                </a>
-              </>
-            ) : (
-              <>
-                <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">
-                  Create your Free Account
-                </h1>
-              </>
-            )}
+            <h1 className="text-xl font-bold h-10 text-white md:text-black">
+              Log in
+            </h1>
+            <span className="text-sm pr-2 text-white md:text-black">
+              Don't have an account?
+            </span>
+            <a
+              className="text-sm text-cyan-500 cursor-pointer"
+              href="#"
+              onClick={toggleCreatYourAccount}
+            >
+              Sign Up
+            </a>
           </div>
           <div className="inputs">
-            {action === "Sign Up" ? (
-              <>
-                <form>
-                  <label htmlFor="fullname">
-                    <p className="text-white md:text-gray-400">Full Name</p>
-                  </label>
-                  <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
-                    <input
-                      id="fullname"
-                      type="text"
-                      name="name"
-                      className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter your Full Name here"
-                    />
-                  </div>
-                </form>
-              </>
-            ) : (
-              <div></div>
-            )}
             <form>
-              {action == "Sign Up" ? (
-                <label htmlFor="email">
-                  <p className="text-white md:text-gray-400">E-Mail </p>
-                </label>
-              ) : (
-                <div></div>
-              )}
               <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
                 <input
                   id="email"
                   type="email"
                   name="email"
                   className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder={
-                    action == "Sign Up"
-                      ? "Enter your E-mail Address here"
-                      : "Email"
-                  }
+                  placeholder="Email"
                 />
               </div>
             </form>
             <form>
-              {action == "Sign Up" ? (
-                <label htmlFor="pass">
-                  <p className="text-white md:text-gray-400">Password</p>
-                </label>
-              ) : (
-                <div></div>
-              )}
-
               <div className="input pass md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
-                  id="pass"
+                  id="passLogin"
                   name="pwd"
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
-                  placeholder={
-                    action == "Sign Up" ? "Enter New Password" : "Password"
-                  }
+                  placeholder="Password"
                 />
                 <span id="eye-holder">
                   <svg
@@ -161,49 +98,28 @@ function LoginPage() {
               </div>
             </form>
           </div>
-          {action === "Login" ? (
-            <div className="forgot-password ">
-              <a
-                href="#"
-                className="text-sm cursor-pointer text-cyan-500"
-                onClick={() => {
-                  toggleForgotPassword();
-                  return false;
-                }}
-              >
-                Forgot password?
-              </a>
-            </div>
-          ) : (
-            <div></div>
-          )}
+
+          <div className="forgot-password ">
+            <a
+              href="#"
+              className="text-sm cursor-pointer text-cyan-500"
+              onClick={() => {
+                toggleForgotPassword();
+                return false;
+              }}
+            >
+              Forgot password?
+            </a>
+          </div>
+
           <div className="flex justify-center mt-2">
             <button
               className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
-              onClick={action === "Sign Up" ? createAccount : login}
+              onClick={login}
             >
-              {button}
+              Login
             </button>
           </div>
-          {action === "Sign Up" ? (
-            <>
-              <span className="text-sm pr-2 md:text-black text-white">
-                Already have an account?
-              </span>
-              <a
-                className="text-sm text-cyan-500 cursor-pointer"
-                href="#"
-                onClick={() => {
-                  setAction("Login");
-                  setButton("Login");
-                }}
-              >
-                Log in
-              </a>
-            </>
-          ) : (
-            <div></div>
-          )}
 
           <div className="text-center text-gray-400 my-4">- OR -</div>
           <div className="buttons flex flex-wrap justify-around">

@@ -33,9 +33,8 @@ export default function ResetPassword() {
           </div>
           <div>
             <form>
-              <div className="input pass md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className="md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
-                  id="pass"
                   name="pwd"
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
@@ -60,9 +59,8 @@ export default function ResetPassword() {
                 </span>
               </div>
 
-              <div className="input pass md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className="md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
-                  id="pass"
                   name="pwd"
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
