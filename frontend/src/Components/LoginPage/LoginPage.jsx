@@ -6,7 +6,7 @@ import logo from "../assets/logo-img.png";
 function LoginPage() {
   function passwordToggler() {
     let icon = document.getElementById("passLogin");
-    if (icon.type == "password") {
+    if (icon.type ==="password") {
       icon.type = "text";
     } else {
       icon.type = "password";

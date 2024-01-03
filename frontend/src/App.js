@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="App">
       <div>
-        {/* <div className="" id="login">
+        <div className="" id="login">
           <LoginPage />
-        </div> */}
+        </div>
 
         <div className="hidden" id="createYourAccount">
           <CreateYourAccount />
