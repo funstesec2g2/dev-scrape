@@ -8,21 +8,23 @@ import HelpPage from "./Components/HelpPage/HelpPage";
 import Heading from "./Components/Heading/Heading";
 import FavoritesPage from "./Components/FavoritesPage/FavoritesPage";
 import HomePage from "./Components/HomePage/HomePage";
+import AboutPage from ".Components/AboutPage/AboutPage";
 
 function App() {
   return (
     <div className="App">
       <div>
-        <HomePage/>
-        {/* <ForgotPassword />
-        <CheckYourEmail />
-        <LoginPage />
-        <VerifyEmail />
-        <ResetPassword />
-        <ResetSuccess />
-        <HelpPage />
-        <Heading />
-        <FavoritesPage /> */}
+        {/* <HomePage/> */}
+        {/* <ForgotPassword /> */}
+        {/* <CheckYourEmail /> */}
+        {/* <LoginPage /> */}
+        {/* <VerifyEmail /> */}
+        {/* <ResetPassword /> */}
+        {/* <ResetSuccess /> */}
+        {/* <HelpPage /> */}
+        {/* <Heading /> */}
+        {/* <FavoritesPage /> */}
+        <AboutPage />
       </div>
     </div>
   );
