@@ -45,8 +45,8 @@ export default function Heading() {
             className="flex-col md:flex-row md:col-start-2 justify-center items-center col-span-2 md:col-span-1 hidden md:flex"
             id="nav-menu"
           >
-            <a
-              href="#"
+            <a 
+            href="#"
               className="menu-item text-gray-300 hover:text-white px-4 hover:bg-blue-700 active:bg-blue-500 transition-colors duration-300 ease-in-out"
               onClick={(event) => activation(event)}
             >

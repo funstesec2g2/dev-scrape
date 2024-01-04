@@ -1,9 +1,10 @@
 import logo from "../assets/logo-img.png";
+import { CCloseButton } from '@coreui/react'
 
 function VerifyEmail(props) {
   return (
     <>
-      <div className="grid md:grid-cols-2">
+      <div className="grid md:grid-cols-2 relative">
         <div className="hidden md:flex h-screen justify-center items-center bg-slate-900">
           <img src={logo} alt="logo-img" />
         </div>
@@ -23,12 +24,17 @@ function VerifyEmail(props) {
                 Didn’t receive the email? Check spam or promotion folder or
               </p>
               <button className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500">
-                Resend Email
-              </button>
+                Resend Email 
+              </button> 
             </div>
           </div>
         </div>
+        <div className="close-btn absolute top-1 right-1 bg-black h-10 w-10 rounded-lg ">
+        <CCloseButton white/>
+
       </div>
+      </div>
+     
     </>
   );
 }

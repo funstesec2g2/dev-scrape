@@ -1,6 +1,20 @@
 import logo from "../assets/logo-img.png";
 
 export default function ResetPassword() {
+  function toggleLogin() {
+    const loginPage = document.querySelector("#login");
+    const resetPassword = document.querySelector("#resetPassword");
+
+    resetPassword.classList.toggle("hidden");
+    loginPage.classList.toggle("hidden");
+  }
+  function toggleResetSuccess() {
+    const resetSuccess = document.querySelector("#resetSuccess");
+    const resetPassword = document.querySelector("#resetPassword");
+
+    resetPassword.classList.toggle("hidden");
+    resetSuccess.classList.toggle("hidden");
+  }
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden md:flex h-screen justify-center items-center bg-slate-900">
@@ -19,9 +33,8 @@ export default function ResetPassword() {
           </div>
           <div>
             <form>
-              <div className="input pass md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className="md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
-                  id="pass"
                   name="pwd"
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
@@ -46,9 +59,8 @@ export default function ResetPassword() {
                 </span>
               </div>
 
-              <div className="input pass md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className="md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
-                  id="pass"
                   name="pwd"
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
@@ -74,10 +86,16 @@ export default function ResetPassword() {
               </div>
             </form>
             <div>
-              <button className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500">
+              <button
+                className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
+                onClick={toggleResetSuccess}
+              >
                 Reset Password
               </button>
-              <button className="bg-blue-900 md:bg-white w-full py-3 border border-black rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+              <button
+                className="bg-blue-900 md:bg-white w-full py-3 border border-black rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
+                onClick={toggleLogin}
+              >
                 Back to Login
               </button>
             </div>
