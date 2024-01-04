@@ -9,11 +9,36 @@ import HelpPage from "./Components/HelpPage/HelpPage";
 import HomePage from "./Components/HomePage/HomePage";
 import AboutPage from "./Components/AboutPage/AboutPage";
 import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount";
+import { Routes, Route, Switch } from "react-router-dom";
+import {UserAlreadyExist} from "./Components/CreateYourAccount/UserAlreadyExist";
+import Heading from "./Components/Heading/Heading.jsx";
 function App() {
   return (
     <div className="App">
       <div>
-        <div className="" id="login">
+        <Heading />
+        <Routes>
+          {/* <CreateYourAccount path='/createYourAccount'/> */}
+          
+          <Route path='/' exact element={<HomePage/>}/>
+          <Route path='/favorites' element={<FavoritesPage/>}/>
+          <Route path='/help' element={<HelpPage/>}/>
+          <Route path='/about' element={<AboutPage/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/createYourAccount' element={<CreateYourAccount/>}/>
+          <Route path='/verifyEmail' element={<VerifyEmail/>}/>
+          <Route path='/forgotPassword' element={<ForgotPassword/>}/>
+          <Route path='/checkYourEmail' element={<CheckYourEmail/>}/>
+          <Route path='/resetPassword' element={<ResetPassword/>}/>
+          <Route path='/resetSuccess' element={<ResetSuccess/>}/>
+          <Route path='/userAlreadyExist' element={<UserAlreadyExist/>}/>
+        
+        </Routes>
+        {/* <UserAlreadyExist>
+
+        </UserAlreadyExist> */}
+     
+        {/* <div className="" id="login">
           <LoginPage />
         </div>
 
@@ -55,7 +80,7 @@ function App() {
 
         <div className="hidden" id="About">
           <AboutPage />
-        </div>
+        </div> */}
       </div>
     </div>
   );

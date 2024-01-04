@@ -1,12 +1,10 @@
 import logo from "../assets/logo-img.png";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckYourEmail() {
+    const navigate = useNavigate();
   function toggleLogin() {
-    const loginPage = document.querySelector("#login");
-    const checkYourEmail = document.querySelector("#checkYourEmail");
-
-    checkYourEmail.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
+    navigate('/login'); 
   }
   return (
     <div className="grid md:grid-cols-2">

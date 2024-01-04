@@ -1,5 +1,4 @@
 import {Injectable} from "@nestjs/common";
-import {DatabaseService} from "src/db/database.service";
 import {AuthDto} from "./dto/auth.dto";
 import * as argon from "argon2"
 import {User} from "src/models/user-folder/user.schema";
@@ -8,13 +7,14 @@ import { InjectModel } from "@nestjs/mongoose";
 import {Model} from 'mongoose';
 import { Response, Request} from "express";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
+import   {DatabaseService} from "src/db/database.service";
 
 import { Res } from "@nestjs/common";
 
 @Injectable()
 class AuthService{
     constructor(@InjectModel(User.name) private readonly userModel: Model<User>,
-    private jwtService: JwtService,
+    private jwtService: JwtService, private databaseService: DatabaseService
     ){}
 
     async validateUser(email: string, pass: string): Promise<User> {
@@ -43,19 +43,10 @@ class AuthService{
     async createUser (createUserDto: AuthDto) : Promise<any>{
         const hash = await argon.hash(createUserDto.password);
         createUserDto.password = hash;
-        const user = await this.userModel.findOne({email: createUserDto.email});
-        if (user){
-            throw new ForbiddenException("User already exists")
-        }
-        
-        const  newUser =   new this.userModel(createUserDto);
-        await newUser.save();
-       
-        const { password, ...result } = newUser.toObject();
-    
-    
-        // Returning the result without the password
-        return result;
+        console.log(createUserDto);
+        return this.databaseService.createUser(createUserDto);
+        // const user =  new this.userModel(createUserDto);
+        //
         
     }
 

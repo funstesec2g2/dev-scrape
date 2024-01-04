@@ -1,5 +1,5 @@
 import "./HomePage.css";
-import Heading from "../Heading/Heading";
+import Heading from "../Heading/Heading.jsx";
 function Liked() {
   let like = document.getElementById("like-icon");
   if (like.classList.contains("none")) {
@@ -15,9 +15,9 @@ function Liked() {
 function HomePage(props) {
   return (
     <>
-      <header>
+      {/* <header>
         <Heading />
-      </header>
+      </header> */}
       <main>
         <div className="grid grid-cols-12">
           <div className="md:col-span-4 col-span-12 sidebar">
