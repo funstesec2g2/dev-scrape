@@ -5,14 +5,19 @@ import { useState } from "react";
 import logo from "../assets/logo-img.png";
 
 function CreateYourAccount() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
-    if (icon.type == "password") {
+    if (icon.type === "password") {
       icon.type = "text";
     } else {
       icon.type = "password";
     }
   }
+
   function toggleLogin() {
     const loginPage = document.querySelector("#login");
     const createYourAccount = document.querySelector("#createYourAccount");
@@ -20,6 +25,7 @@ function CreateYourAccount() {
     createYourAccount.classList.toggle("hidden");
     loginPage.classList.toggle("hidden");
   }
+
   function toggleVerifyEmail() {
     const createYourAccount = document.querySelector("#createYourAccount");
     const verifyEmail = document.querySelector("#verifyEmail");
@@ -27,18 +33,38 @@ function CreateYourAccount() {
     verifyEmail.classList.toggle("hidden");
     createYourAccount.classList.toggle("hidden");
   }
-  function createAccount() {
-    var pass = document.getElementById("passSignup").value;
-    console.log(pass);
-    toggleVerifyEmail();
-  }
+
+  const createAccount = async (event) => {
+    event.preventDefault(); 
+  
+    try {
+      const response = await fetch('http://localhost:5000/auth/register', {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          name, email, password
+        }) 
+      }
+      );
+      const data = await response.json();
+      console.log('Response:', data);
+      console.log(name, email, password);
+  
+      toggleVerifyEmail();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      
+    }
+  };
+  
+
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
         <img src={logo} alt="logo-img" />
       </div>
 
-      <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white  h-screen">
+      <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white h-screen">
         <div className="card w-3/4">
           <div className="title mb-7">
             <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">
@@ -46,7 +72,7 @@ function CreateYourAccount() {
             </h1>
           </div>
           <div className="inputs">
-            <form>
+            <form onSubmit={createAccount}>
               <label htmlFor="fullname">
                 <p className="text-white md:text-gray-400">Full Name</p>
               </label>
@@ -55,35 +81,36 @@ function CreateYourAccount() {
                   id="fullname"
                   type="text"
                   name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your Full Name here"
                 />
               </div>
-            </form>
 
-            <form>
               <label htmlFor="email">
-                <p className="text-white md:text-gray-400">E-Mail </p>
+                <p className="text-white md:text-gray-400">E-Mail</p>
               </label>
-
               <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
                 <input
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your E-mail Address here"
                 />
               </div>
-            </form>
-            <form>
+
               <label htmlFor="passSignup">
                 <p className="text-white md:text-gray-400">Password</p>
               </label>
-
               <div className="input md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
                   id="passSignup"
                   name="pwd"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full h-full py-3 rounded-xl px-3 "
                   type="password"
                   placeholder="Enter New Password"
@@ -107,50 +134,50 @@ function CreateYourAccount() {
                   </svg>
                 </span>
               </div>
+
+              <div className="flex justify-center mt-2">
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-blue-300 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
+                >
+                  Create Account
+                </button>
+              </div>
             </form>
-          </div>
 
-          <div className="flex justify-center mt-2">
-            <button
-              className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
-              onClick={createAccount}
+            <span className="text-sm pr-2 md:text-black text-white">
+              Already have an account?
+            </span>
+            <a
+              className="text-sm text-cyan-500 cursor-pointer"
+              href="#"
+              onClick={toggleLogin}
             >
-              Create Account
-            </button>
-          </div>
+              Log in
+            </a>
 
-          <span className="text-sm pr-2 md:text-black text-white">
-            Already have an account?
-          </span>
-          <a
-            className="text-sm text-cyan-500 cursor-pointer"
-            href="#"
-            onClick={toggleLogin}
-          >
-            Log in
-          </a>
-
-          <div className="text-center text-gray-400 my-4">- OR -</div>
-          <div className="buttons flex flex-wrap justify-around">
-            <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
-              <img
-                src={google}
-                alt="google"
-                className="w-8 mx-2 my-3 inline-block"
-              />
-              <a href="" className="mx-2 cursor-pointer my-3">
-                Sign up with Google
-              </a>
-            </div>
-            <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
-              <img
-                src={github}
-                alt="google"
-                className="w-8 mx-2 my-3 inline-block"
-              />
-              <a href="" className="mx-2 cursor-pointer my-3">
-                Sign up with Github
-              </a>
+            <div className="text-center text-gray-400 my-4">- OR -</div>
+            <div className="buttons flex flex-wrap justify-around">
+              <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+                <img
+                  src={google}
+                  alt="google"
+                  className="w-8 mx-2 my-3 inline-block"
+                />
+                <a href="" className="mx-2 cursor-pointer my-3">
+                  Sign up with Google
+                </a>
+              </div>
+              <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+                <img
+                  src={github}
+                  alt="google"
+                  className="w-8 mx-2 my-3 inline-block"
+                />
+                <a href="" className="mx-2 cursor-pointer my-3">
+                  Sign up with Github
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -158,4 +185,5 @@ function CreateYourAccount() {
     </div>
   );
 }
+
 export default CreateYourAccount;

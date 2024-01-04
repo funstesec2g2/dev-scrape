@@ -14,7 +14,7 @@ class AuthService{
         const hashedPassword = await argon.hash(dto.password);
         dto.password = hashedPassword;
         return await this.databaseService.createUser(dto);
-        
+
        
     }
     async findOne(email: string): Promise<User>{
