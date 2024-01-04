@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <div className="" id="login">
+        <div id="login">
           <LoginPage />
         </div>
 
@@ -41,7 +41,7 @@ function App() {
           <ResetSuccess />
         </div>
 
-        <div className="active-page" id="Scrape">
+        <div className="active-page hidden" id="Scrape">
           <HomePage />
         </div>
 

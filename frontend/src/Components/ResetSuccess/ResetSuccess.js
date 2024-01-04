@@ -1,6 +1,16 @@
 import logo from "../assets/logo-img.png";
 
 export default function ResetSuccess() {
+  function toggleHomePage() {
+    const resetSuccess = document.querySelector("#resetSuccess");
+    const Scrape = document.querySelector("#Scrape");
+
+    Scrape.classList.toggle("hidden");
+    resetSuccess.classList.toggle("hidden");
+  }
+  function login() {
+    toggleHomePage();
+  }
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 h-screen text-white md:flex items-center justify-center">
@@ -30,7 +40,10 @@ export default function ResetSuccess() {
             Password reset Successfully
           </p>
 
-          <button className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500">
+          <button
+            className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
+            onClick={login}
+          >
             Login
           </button>
         </div>

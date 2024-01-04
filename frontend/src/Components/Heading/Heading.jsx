@@ -11,7 +11,8 @@ export default function Heading() {
     const activePage = document.querySelector(".active-page");
     activePage.classList.toggle("hidden");
     activePage.classList.toggle("active-page");
-    const aboutPage = document.querySelector("#About");
+
+    const aboutPage = document.querySelector(`#${event.target.innerHTML}`);
     aboutPage.classList.toggle("hidden");
     aboutPage.classList.toggle("active-page");
   }
@@ -61,7 +62,9 @@ export default function Heading() {
             <a
               href="#"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => toggleHelp(event)}
+              onClick={(event) => {
+                activation(event);
+              }}
             >
               Help
             </a>

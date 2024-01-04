@@ -6,7 +6,7 @@ import logo from "../assets/logo-img.png";
 function LoginPage() {
   function passwordToggler() {
     let icon = document.getElementById("passLogin");
-    if (icon.type ==="password") {
+    if (icon.type === "password") {
       icon.type = "text";
     } else {
       icon.type = "password";
@@ -19,11 +19,19 @@ function LoginPage() {
     forgotPassword.classList.toggle("hidden");
     loginPage.classList.toggle("hidden");
   }
+  function toggleHomePage() {
+    const loginPage = document.querySelector("#login");
+    const Scrape = document.querySelector("#Scrape");
+
+    Scrape.classList.toggle("hidden");
+    loginPage.classList.toggle("hidden");
+  }
   function login() {
     var email = document.getElementById("email").value;
     console.log(email);
     var pass = document.getElementById("passLogin").value;
     console.log(pass);
+    toggleHomePage();
   }
   function toggleCreatYourAccount() {
     const loginPage = document.querySelector("#login");
