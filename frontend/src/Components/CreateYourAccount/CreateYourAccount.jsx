@@ -22,22 +22,22 @@ const  CreateYourAccount = () => {
     }
   }
 
-  function toggleLogin() {
-    const loginPage = document.querySelector("#login");
-    const createYourAccount = document.querySelector("#createYourAccount");
+  // function toggleLogin() {
+  //   const loginPage = document.querySelector("#login");
+  //   const createYourAccount = document.querySelector("#createYourAccount");
 
-    createYourAccount.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
+  //   createYourAccount.classList.toggle("hidden");
+  //   loginPage.classList.toggle("hidden");
+  // }
 
-  function toggleVerifyEmail() {
-    return (
-    <Link to='/verifyEmail'>
-      <button className='text-blue-700 font-bold hover:bg-black'>
-        Verify Email
-      </button>
-    </Link>)
-  }
+  // const  toggleVerifyEmail =() =>{
+  //   return (
+  //   <Link to='/verifyEmail'>
+  //     <button className='text-blue-700 font-bold hover:bg-black'>
+  //       Verify Email
+  //     </button>
+  //   </Link>)
+  // }
   const createAccount = async (event) => {
     event.preventDefault();
     let response;
@@ -58,7 +58,7 @@ const  CreateYourAccount = () => {
     const jsonResponse = await response.json();
     console.log(jsonResponse);
 
-    if ('message' in jsonResponse) {
+    if ('message' in jsonResponse && jsonResponse.message === 'User already exists') {
       // Redirect to login
       navigate('/userAlreadyExist');
     } else {
@@ -67,16 +67,6 @@ const  CreateYourAccount = () => {
     }
   };
 
-
-  const toggleToUserExists = () => {
-    return (
-      <Link to='/userExists'>
-        <button className='text-blue-700 font-bold hover:bg-black'>
-          User Exists
-        </button>
-      </Link>
-    )
-  }
 
   
   
@@ -87,43 +77,46 @@ const  CreateYourAccount = () => {
         <img src={logo} alt="logo-img" />
       </div>
 
-      {/* <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white h-screen"> */}
+      <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white h-screen">
         <div className="card">
           <div className="title mb-7">
             <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">
               Create your Free Account
             </h1>
+
           </div>
           <div className="inputs">
             <form onSubmit={createAccount}>
               <label htmlFor="fullname">
                 <p className="text-white md:text-gray-400">Full Name</p>
               </label>
-              <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
+              {/* <div className=""> */}
                 <input
                   id="fullname"
                   type="text"
                   name="name"
                   value={fullName}
+                  required
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full h-3 py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full h-5 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4"
                   placeholder="Enter your Full Name here"
                 />
-              </div>
+              {/* </div> */}
 
               <label htmlFor="email">
                 <p className="text-white md:text-gray-400">E-Mail</p>
               </label>
-              <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
+              {/* <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4"> */}
                 <input
-                  type="email"
+                  // type="email"
                   name="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-3 py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full h-3 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4"
                   placeholder="Enter your E-mail Address here"
                 />
-              </div>
+              {/* </div> */}
 
               <label htmlFor="passSignup">
                 <p className="text-white md:text-gray-400">Password</p>
@@ -133,6 +126,7 @@ const  CreateYourAccount = () => {
                   id="passSignup"
                   name="pwd"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full h-3 py-3 rounded-xl px-3 "
                   type="password"
@@ -204,7 +198,7 @@ const  CreateYourAccount = () => {
             </div>
           </div>
         </div>
-        {/* </div> */}
+        </div>
       
     </div>
   );

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function CheckYourEmail() {
     const navigate = useNavigate();
-  function toggleLogin() {
+  const  toggleLogin = (e) => {
+    e.preventDefault();
     navigate('/login'); 
   }
   return (

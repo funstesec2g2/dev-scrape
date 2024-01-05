@@ -28,7 +28,7 @@ class AuthController{
     @Post('login')
     async login(@Body() body: any,@Res({passthrough:true}) response: Response ){
 
-        return this.authService.login(body.fullName, body.password, response);
+        return this.authService.login(body.email, body.password, response);
         
     }
 }

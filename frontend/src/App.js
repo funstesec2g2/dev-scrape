@@ -15,7 +15,8 @@ import HomePage from './Components/HomePage/HomePage';
 import AboutPage from './Components/AboutPage/AboutPage';
 import CreateYourAccount from './Components/CreateYourAccount/CreateYourAccount';
 import { UserAlreadyExist } from './Components/CreateYourAccount/UserAlreadyExist';
-import Heading from './Components/Heading/Heading';
+import Heading from './Components/Heading/Heading.jsx';
+import { UserNotExist } from './Components/LoginPage/UserNotExist';
 
 function App() {
   const { user } = useAuthContext();
@@ -28,7 +29,7 @@ function App() {
           <Layout>
           {/* <Heading /> */}
             <Routes>
-        
+    
               <Route path="/" element={<HomePage />} />
               <Route
                 path="/login"
@@ -46,7 +47,8 @@ function App() {
               <Route path="/checkYourEmail" element={<CheckYourEmail />} />
               <Route path="/resetPassword" element={<ResetPassword />} />
               <Route path="/resetSuccess" element={<ResetSuccess />} />
-              <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
+              <Route path="/userAlreadyExist" element={<UserAlreadyExist />}/>
+              <Route path="/userNotExist" element={<UserNotExist/>}/>
             </Routes>
           </Layout>
      

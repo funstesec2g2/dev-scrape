@@ -9,9 +9,8 @@ export class AuthDto{
     @IsNotEmpty()
     fullName: string;
 
-    @IsNotEmpty()
-    lastName: string;
-
+    // @IsNotEmpty()
+    // lastName: string;
     @IsNotEmpty()
     @IsEmail()
     email: string;

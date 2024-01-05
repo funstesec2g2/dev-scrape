@@ -13,7 +13,7 @@ function passwordToggler() {
 
 
   let icon = document.getElementById("pass");
-  if (icon.type == "password") {
+  if (icon.type === "password") {
     icon.type = "text";
   } else {
     icon.type = "password";
@@ -23,17 +23,13 @@ function passwordToggler() {
 
  
 
-
-
-
-
-
 function LoginPage() {
   // const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [wrongPassword, setWrongPassword] = useState('');
   const navigate = useNavigate();
+
   const [action, setAction] = useState("Login");
   const [button, setButton] = useState("Login");
   const { error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
@@ -55,21 +51,36 @@ function LoginPage() {
       response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify({
           email, password
         })
       })
+      console.log(response);
     }
+    
     catch(error){
       console.log(error);
       throw new Error('Something went wrong in the request');
     }
-
-
-
+    
     const jsonResponse = await response.json();
     console.log(jsonResponse);
+
+    if (jsonResponse.message === 'success') {
+      navigate('/');
+    }
+
+    else if (jsonResponse.message === 'no user found') {
+      console.log('the user doesn\'t sfsdfsd;ljfksdl;');
+      navigate('/userNotExist');
+    }
+
+    else if  (jsonResponse.message === 'wrong password') {
+      setWrongPassword('You have entered a wrong password');
+    }
+
+
 
   }
 
@@ -82,13 +93,13 @@ function LoginPage() {
     }
   }
 
-  function toggleForgotPassword() {
-    const loginPage = document.querySelector("#login");
-    const forgotPassword = document.querySelector("#forgotPassword");
+  // function toggleForgotPassword() {
+  //   const loginPage = document.querySelector("#login");
+  //   const forgotPassword = document.querySelector("#forgotPassword");
 
-    forgotPassword.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
+  //   forgotPassword.classList.toggle("hidden");
+  //   loginPage.classList.toggle("hidden");
+  // }
 
   const login = () => {
     navigate("/");
@@ -142,7 +153,7 @@ function LoginPage() {
                   id="passLogin"
                   name="pwd"
                   value={password}
-                  className="w-full h-full py-3 rounded-xl px-3  "
+                  className="w-full  py-3 rounded-xl px-3  "
                   type="password"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
@@ -165,15 +176,16 @@ function LoginPage() {
                     />
                   </svg>
                 </span>
+                
               </div>
+              <div className="text-red-500 text-sm">{wrongPassword}</div>
 
               <div className="forgot-password ">
                 <a
-                  href="#"
                   className="text-sm cursor-pointer text-cyan-500"
                   onClick={() => {
-                    toggleForgotPassword();
-                    return false;
+                    navigate("/forgotPassword");
+                   
                   }}
                 >
                   Forgot password?

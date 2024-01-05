@@ -15,7 +15,7 @@ export const useLogin = () => {
   const login = async ({ email, password }) => {
     setIsLoading(true);
     setError(null);
-    const response = await fetch("http://localhost:5001/api/auth/login", {
+    const response = await fetch("http://localhost:5000/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: {

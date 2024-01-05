@@ -40,27 +40,47 @@ class AuthService{
         return this.userModel.findOne({email: email});
     }
 
+
     async createUser (createUserDto: AuthDto) : Promise<any>{
         const hash = await argon.hash(createUserDto.password);
         createUserDto.password = hash;
-        console.log(createUserDto);
-        return this.databaseService.createUser(createUserDto);
-        // const user =  new this.userModel(createUserDto);
-        //
         
+        const user = await this.userModel.create(createUserDto);
+        await user.save();
+        console.log(user);
+        return user;
+        // const user =  new this.userModel(createUserDto);
+        //  
     }
 
     async login(email: string, password: string, response: Response): Promise<{ message: string }> {
-        const user = await this.validateUser(email, password).catch(()=>{
-            throw new Error("Something happend ")
-        })
-        const payload = { sub: user.email };
-        const access_token: string = await this.jwtService.signAsync(payload);
-        response.cookie('jwt', access_token, { httpOnly: true });
+
+        try{
+            const user: User = await this.userModel.findOne({ email: email });
+            console.log(user);
+            if (!user) {
+                return {message: "no user found"};
+            }
     
-        return {
-            message: 'success'
-        };
+            const pwMatches = await argon.verify(user.password, password);
+        
+            if (!pwMatches) {
+                return {message: "wrong password"};
+            }
+           
+            const payload = { sub: user.email };
+            const access_token: string = await this.jwtService.signAsync(payload);
+            response.cookie('jwt', access_token, { httpOnly: true });
+        
+            return {
+                message: 'success'
+            };
+        }
+        catch(e){
+            console.log(e);
+            return {message: "something went wrong"};
+        }
+        
     }
 
     async user(request: Request): Promise<any>{

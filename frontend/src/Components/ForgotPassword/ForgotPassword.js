@@ -1,20 +1,23 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/logo-img.png";
+import {useNavigate} from 'react-router-dom';
 
 const ForgotPassword = () => {
-  function toggleLogin() {
-    const loginPage = document.querySelector("#login");
-    const forgotPassword = document.querySelector("#forgotPassword");
+  const navigate = useNavigate();
+  // function toggleLogin() {
+  //   const loginPage = document.querySelector("#login");
+  //   const forgotPassword = document.querySelector("#forgotPassword");
 
-    forgotPassword.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
-  function toggleCheckYourEmail() {
-    const checkYourEmail = document.querySelector("#checkYourEmail");
-    const forgotPassword = document.querySelector("#forgotPassword");
+  //   forgotPassword.classList.toggle("hidden");
+  //   loginPage.classList.toggle("hidden");
+  // }
+  // function toggleCheckYourEmail() {
+  //   const checkYourEmail = document.querySelector("#checkYourEmail");
+  //   const forgotPassword = document.querySelector("#forgotPassword");
 
-    forgotPassword.classList.toggle("hidden");
-    checkYourEmail.classList.toggle("hidden");
-  }
+  //   forgotPassword.classList.toggle("hidden");
+  //   checkYourEmail.classList.toggle("hidden");
+  // }
   return (
     // forgot password page
     <>
@@ -49,17 +52,27 @@ const ForgotPassword = () => {
               {/* send button */}
               <button
                 className="md:bg-slate-900 bg-blue-900 hover:bg-blue-700 active:bg-blue-500 text-white px-4 rounded transition-colors duration-300 ease-in-out py-3"
-                onClick={toggleCheckYourEmail}
+                onClick={(e)=>{
+                  e.preventDefault();
+                  navigate('/checkYourEmail');
+                }}
               >
                 Send
               </button>
               {/* back to login button */}
+              {/* <Link to='/login'> */}
               <button
-                className="md:border md:border-slate-900 bg-blue-900 md:bg-white active:bg-blue-500 rounded px-4 hover:bg-blue-700 hover:text-white md:text-black text-white transition-colors duration-300 ease-in-out py-3"
-                onClick={toggleLogin}
+                className="md:border md:border-slate-900 bg-blue-900 md:bg-white active:bg-blue-500 rounded px-4 hover:bg-blue-700 hover:text-white md:text-black text-white transition-colors duration-300 ease-in-out py-3"  onClick={(e)=>{
+                  e.preventDefault();
+                  navigate('/login');
+                
+                }}
+                
               >
                 Back to Login
               </button>
+              {/* </Link> */}
+
             </div>
           </div>
         </div>
