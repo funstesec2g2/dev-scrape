@@ -1,6 +1,6 @@
 import logo from "./images/logo.png";
 import profile from "./images/photo.jpg";
-import Heading from "../Heading/Heading";
+// import Heading from "../Heading/Heading";
 import {
   faGithub,
   faInstagram,
@@ -12,7 +12,7 @@ import React from "react";
 function AboutPage() {
   return (
     <>
-      <Heading />
+      {/* <Heading /> */}
       <div className="bg-slate-900 p-10 text-white">
         <div className=" flex flex-col md:flex-row justify-center align-center lg:grid lg:grid-cols-2 mb-28 md:px-28">
           <div className="text-justify p-10">

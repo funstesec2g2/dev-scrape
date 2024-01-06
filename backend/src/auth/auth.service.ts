@@ -1,5 +1,4 @@
 import {Injectable} from "@nestjs/common";
-import {DatabaseService} from "src/db/database.service";
 import {AuthDto} from "./dto/auth.dto";
 import * as argon from "argon2"
 import {User} from "src/models/user-folder/user.schema";
@@ -8,13 +7,14 @@ import { InjectModel } from "@nestjs/mongoose";
 import {Model} from 'mongoose';
 import { Response, Request} from "express";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
+import   {DatabaseService} from "src/db/database.service";
 
 import { Res } from "@nestjs/common";
 
 @Injectable()
 class AuthService{
     constructor(@InjectModel(User.name) private readonly userModel: Model<User>,
-    private jwtService: JwtService,
+    private jwtService: JwtService, private databaseService: DatabaseService
     ){}
 
     async validateUser(email: string, pass: string): Promise<User> {
@@ -40,36 +40,47 @@ class AuthService{
         return this.userModel.findOne({email: email});
     }
 
+
     async createUser (createUserDto: AuthDto) : Promise<any>{
         const hash = await argon.hash(createUserDto.password);
         createUserDto.password = hash;
-        const user = await this.userModel.findOne({email: createUserDto.email});
-        if (user){
-            throw new ForbiddenException("User already exists")
-        }
         
-        const  newUser =   new this.userModel(createUserDto);
-        await newUser.save();
-       
-        const { password, ...result } = newUser.toObject();
-    
-    
-        // Returning the result without the password
-        return result;
-        
+        const user = await this.userModel.create(createUserDto);
+        await user.save();
+        console.log(user);
+        return user;
+        // const user =  new this.userModel(createUserDto);
+        //  
     }
 
     async login(email: string, password: string, response: Response): Promise<{ message: string }> {
-        const user = await this.validateUser(email, password).catch(()=>{
-            throw new Error("Something happend ")
-        })
-        const payload = { sub: user.email };
-        const access_token: string = await this.jwtService.signAsync(payload);
-        response.cookie('jwt', access_token, { httpOnly: true });
+
+        try{
+            const user: User = await this.userModel.findOne({ email: email });
+            console.log(user);
+            if (!user) {
+                return {message: "no user found"};
+            }
     
-        return {
-            message: 'success'
-        };
+            const pwMatches = await argon.verify(user.password, password);
+        
+            if (!pwMatches) {
+                return {message: "wrong password"};
+            }
+           
+            const payload = { sub: user.email };
+            const access_token: string = await this.jwtService.signAsync(payload);
+            response.cookie('jwt', access_token, { httpOnly: true });
+        
+            return {
+                message: 'success'
+            };
+        }
+        catch(e){
+            console.log(e);
+            return {message: "something went wrong"};
+        }
+        
     }
 
     async user(request: Request): Promise<any>{

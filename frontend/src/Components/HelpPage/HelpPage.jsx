@@ -1,4 +1,4 @@
-import Heading from "../Heading/Heading";
+import Heading from "../Heading/Heading.jsx";
 import "./HelpPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +10,7 @@ import {
 export default function HelpPage() {
   return (
     <>
-      <Heading />
+      {/* <Heading /> */}
       <main className="flex flex-wrap justify-center items-center flex-col md:flex-row">
         <div className="max-w-4xl">
           <h1 className="text-white text-center text-2xl font-bold my-3">

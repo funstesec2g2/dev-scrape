@@ -1,27 +1,15 @@
-import "./Heading.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+// Heading.js
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-export default function Heading() {
-  function activation(event) {
-    const menuItems = document.querySelectorAll(".menu-item");
-    menuItems.forEach((item) => item.classList.remove("active"));
-    event.target.classList.toggle("active");
-
-    const activePage = document.querySelector(".active-page");
-    activePage.classList.toggle("hidden");
-    activePage.classList.toggle("active-page");
-
-    const aboutPage = document.querySelector(`#${event.target.innerHTML}`);
-    aboutPage.classList.toggle("hidden");
-    aboutPage.classList.toggle("active-page");
-  }
-
+const Heading = () => {
   function dropDown() {
-    const navMenu = document.getElementsByClassName("nav-menu");
+    const navMenu = document.getElementsByClassName('nav-menu');
     Array.from(navMenu).forEach((element) => {
-      element.classList.toggle("hidden");
-      element.classList.toggle("flex");
+      element.classList.toggle('hidden');
+      element.classList.toggle('flex');
     });
   }
 
@@ -50,45 +38,49 @@ export default function Heading() {
           </button>
 
           <div className="flex-col md:flex-row md:col-start-2 justify-center items-center col-span-2 md:col-span-1 hidden md:flex nav-menu">
-            <a
-              href="#"
+            {/* Use Link instead of a tags for navigation */}
+            <Link
+              to="/about"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => {
-                activation(event);
-              }}
             >
               About
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/help"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => {
-                activation(event);
-              }}
             >
               Help
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out active"
-              onClick={(event) => {
-                activation(event);
-              }}
             >
-              Scrape
-            </a>
-            <a
-              href="#"
+              Home
+            </Link>
+            <Link
+              to="/favorites"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
-              onClick={(event) => {
-                activation(event);
-              }}
             >
               Favorites
-            </a>
+            </Link>
+
+
+          <div>
+            <Link to='/createYourAccount'>
+            <button
+              className="account-page"
+            >
+              Login
+            </button>
+            </Link>
+           
           </div>
+          </div>
+
         </div>
       </header>
     </>
   );
-}
+};
+
+export default Heading;
