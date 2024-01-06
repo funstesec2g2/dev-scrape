@@ -1,3 +1,8 @@
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "../src/layout/Layout";
+import { useAuthContext } from "./hooks/useAuthContext";
+import "./App.css";
 import CheckYourEmail from "./Components/CheckYourEmail/CheckYourEmail";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 import LoginPage from "./Components/LoginPage/LoginPage";
@@ -9,55 +14,49 @@ import HelpPage from "./Components/HelpPage/HelpPage";
 import HomePage from "./Components/HomePage/HomePage";
 import AboutPage from "./Components/AboutPage/AboutPage";
 import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount";
+import { UserAlreadyExist } from "./Components/CreateYourAccount/UserAlreadyExist";
+import Heading from "./Components/Heading/Heading.jsx";
+import { UserNotExist } from "./Components/LoginPage/UserNotExist";
+import Profile from "./Components/Profile/Profile.jsx";
+
 function App() {
+  const { user } = useAuthContext();
+
   return (
-    <div className="App">
-      <div>
-        <div id="login">
-          <LoginPage />
-        </div>
-
-        <div className="hidden" id="createYourAccount">
-          <CreateYourAccount />
-        </div>
-
-        <div className="hidden" id="verifyEmail">
-          <VerifyEmail />
-        </div>
-
-        <div className="hidden" id="forgotPassword">
-          <ForgotPassword />
-        </div>
-
-        <div className="hidden" id="checkYourEmail">
-          <CheckYourEmail />
-        </div>
-
-        <div className="hidden" id="resetPassword">
-          <ResetPassword />
-        </div>
-
-        <div className="hidden" id="resetSuccess">
-          <ResetSuccess />
-        </div>
-
-        <div className="active-page hidden" id="Scrape">
-          <HomePage />
-        </div>
-
-        <div className="hidden" id="Favorites">
-          <FavoritesPage />
-        </div>
-
-        <div className="hidden" id="Help">
-          <HelpPage />
-        </div>
-
-        <div className="hidden" id="About">
-          <AboutPage />
-        </div>
+    <>
+      <div className="App">
+        <BrowserRouter>
+          <Layout>
+            {/* <Heading /> */}
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/login"
+                element={!user ? <LoginPage /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/favorites"
+                element={user ? <FavoritesPage /> : <Navigate to="/login" />}
+              />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/help" element={<HelpPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route
+                path="/createYourAccount"
+                element={<CreateYourAccount />}
+              />
+              <Route path="/verifyEmail" element={<VerifyEmail />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/checkYourEmail" element={<CheckYourEmail />} />
+              <Route path="/resetPassword" element={<ResetPassword />} />
+              <Route path="/resetSuccess" element={<ResetSuccess />} />
+              <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
+              <Route path="/userNotExist" element={<UserNotExist />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -3,11 +3,15 @@ import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import { useState } from "react";
 import logo from "../assets/logo-img.png";
+import {useNavigate} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-function CreateYourAccount() {
-  const [name, setName] = useState('');
+
+const  CreateYourAccount = () => {
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate  = useNavigate();
 
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
@@ -18,44 +22,53 @@ function CreateYourAccount() {
     }
   }
 
-  function toggleLogin() {
-    const loginPage = document.querySelector("#login");
-    const createYourAccount = document.querySelector("#createYourAccount");
+  // function toggleLogin() {
+  //   const loginPage = document.querySelector("#login");
+  //   const createYourAccount = document.querySelector("#createYourAccount");
 
-    createYourAccount.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
+  //   createYourAccount.classList.toggle("hidden");
+  //   loginPage.classList.toggle("hidden");
+  // }
 
-  function toggleVerifyEmail() {
-    const createYourAccount = document.querySelector("#createYourAccount");
-    const verifyEmail = document.querySelector("#verifyEmail");
-
-    verifyEmail.classList.toggle("hidden");
-    createYourAccount.classList.toggle("hidden");
-  }
-
+  // const  toggleVerifyEmail =() =>{
+  //   return (
+  //   <Link to='/verifyEmail'>
+  //     <button className='text-blue-700 font-bold hover:bg-black'>
+  //       Verify Email
+  //     </button>
+  //   </Link>)
+  // }
   const createAccount = async (event) => {
-    event.preventDefault(); 
-  
+    event.preventDefault();
+    let response;
+
     try {
-      const response = await fetch('http://localhost:5000/auth/register', {
+      response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST',
-        headers: {'Content-Type' : 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name, email, password
-        }) 
-      }
-      );
-      const data = await response.json();
-      console.log('Response:', data);
-      console.log(name, email, password);
-  
-      toggleVerifyEmail();
+          fullName, email, password
+        })
+      })
     } catch (error) {
-      console.error('Error fetching data:', error);
-      
+      console.log(error);
+      throw new Error('Something went wrong in the request');
+    }
+
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+
+    if ('message' in jsonResponse && jsonResponse.message === 'User already exists') {
+      // Redirect to login
+      navigate('/userAlreadyExist');
+    } else {
+      // Redirect to verify email
+      navigate('/checkYourEmail');
     }
   };
+
+
+  
   
 
   return (
@@ -65,42 +78,45 @@ function CreateYourAccount() {
       </div>
 
       <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white h-screen">
-        <div className="card w-3/4">
+        <div className="card">
           <div className="title mb-7">
             <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">
               Create your Free Account
             </h1>
+
           </div>
           <div className="inputs">
             <form onSubmit={createAccount}>
               <label htmlFor="fullname">
                 <p className="text-white md:text-gray-400">Full Name</p>
               </label>
-              <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
+              {/* <div className=""> */}
                 <input
                   id="fullname"
                   type="text"
                   name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={fullName}
+                  required
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="w-full h-5 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4"
                   placeholder="Enter your Full Name here"
                 />
-              </div>
+              {/* </div> */}
 
               <label htmlFor="email">
                 <p className="text-white md:text-gray-400">E-Mail</p>
               </label>
-              <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4">
+              {/* <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4"> */}
                 <input
-                  type="email"
+                  // type="email"
                   name="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-full py-3 rounded-xl px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full h-3 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4"
                   placeholder="Enter your E-mail Address here"
                 />
-              </div>
+              {/* </div> */}
 
               <label htmlFor="passSignup">
                 <p className="text-white md:text-gray-400">Password</p>
@@ -110,8 +126,9 @@ function CreateYourAccount() {
                   id="passSignup"
                   name="pwd"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-full py-3 rounded-xl px-3 "
+                  className="w-full h-3 py-3 rounded-xl px-3 "
                   type="password"
                   placeholder="Enter New Password"
                 />
@@ -148,15 +165,15 @@ function CreateYourAccount() {
             <span className="text-sm pr-2 md:text-black text-white">
               Already have an account?
             </span>
-            <a
-              className="text-sm text-cyan-500 cursor-pointer"
-              href="#"
-              onClick={toggleLogin}
-            >
-              Log in
-            </a>
 
-            <div className="text-center text-gray-400 my-4">- OR -</div>
+            <Link to='/login'>
+            <button className='text-blue-700 font-bold hover:bg-black'>
+              Sign In
+              
+            </button>
+            </Link>
+
+            <div className="text-center text-gray-400 my-1">- OR -</div>
             <div className="buttons flex flex-wrap justify-around">
               <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
                 <img
@@ -174,14 +191,15 @@ function CreateYourAccount() {
                   alt="google"
                   className="w-8 mx-2 my-3 inline-block"
                 />
-                <a href="" className="mx-2 cursor-pointer my-3">
+                <a href="" className="mx-1 cursor-pointer my-1">
                   Sign up with Github
                 </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      
     </div>
   );
 }
