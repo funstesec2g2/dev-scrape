@@ -17,7 +17,7 @@ import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount"
 import { UserAlreadyExist } from "./Components/CreateYourAccount/UserAlreadyExist";
 import Heading from "./Components/Heading/Heading.jsx";
 import { UserNotExist } from "./Components/LoginPage/UserNotExist";
-import Profile from "./Components/Profile/Profile.jsx";
+import Profile from "./Components/Profile-dropdown/Profile-dropdown.jsx";
 
 function App() {
   const { user } = useAuthContext();
@@ -29,6 +29,7 @@ function App() {
           <Layout>
             {/* <Heading /> */}
             <Routes>
+              <Route path="/profile" element={<Profile />} />
               <Route path="/" element={<HomePage />} />
               <Route
                 path="/login"
@@ -38,7 +39,6 @@ function App() {
                 path="/favorites"
                 element={user ? <FavoritesPage /> : <Navigate to="/login" />}
               />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/help" element={<HelpPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route

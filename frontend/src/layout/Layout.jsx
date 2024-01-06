@@ -1,10 +1,11 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Profile from "../Components/Profile-dropdown/Profile-dropdown";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
-
+import photo from "../Components/assets/photo.jpg";
 const Layout = ({ children }) => {
+  const [openProfile, setOpenProfile] = useState(false);
   const { user } = useAuthContext();
   const { logout } = useLogout();
   const handleClick = () => {
@@ -47,7 +48,7 @@ const Layout = ({ children }) => {
         )}
       </header>
       <div className="container mx-auto p-4">
-        <nav className="p-4 shadow-md">
+        <nav className="p-4 flex flex-col justify-center shadow-md">
           <div className="flex">
             <ul className="flex space-x-4 w-full">
               <li>
@@ -83,9 +84,13 @@ const Layout = ({ children }) => {
               {true && (
                 <ul>
                   <li>
-                    <Link to="/profile" className="text-blue-500">
-                      Profile
-                    </Link>
+                    <img
+                      onClick={() => setOpenProfile((prev) => !prev)}
+                      src={photo}
+                      className="w-16 rounded-full"
+                      alt="photo"
+                    />
+                    {openProfile && <Profile />}
                   </li>
                 </ul>
               )}

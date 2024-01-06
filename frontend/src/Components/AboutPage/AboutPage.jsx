@@ -1,5 +1,5 @@
 import logo from "./images/logo.png";
-import profile from "./images/photo.jpg";
+import profile from "../assets/photo.jpg";
 // import Heading from "../Heading/Heading";
 import {
   faGithub,
