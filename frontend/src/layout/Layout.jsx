@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <header className="bg-blue-500 p-4 text-white flex justify-between items-center">
         <div className="container mx-auto">
           <Link to="/">
@@ -47,7 +47,7 @@ const Layout = ({ children }) => {
         )}
       </header>
       <div className="container mx-auto p-4">
-        <nav className="bg-white p-4 shadow-md">
+        <nav className="p-4 shadow-md">
           <div className="flex">
             <ul className="flex space-x-4 w-full">
               <li>
