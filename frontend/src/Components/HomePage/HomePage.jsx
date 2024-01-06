@@ -1,18 +1,19 @@
 import "./HomePage.css";
 import Heading from "../Heading/Heading.jsx";
-function Liked() {
-  let like = document.getElementById("like-icon");
-  if (like.classList.contains("none")) {
-    like.setAttribute("fill", "red");
-    like.setAttribute("stroke", "red");
-    like.classList.remove("none");
-  } else {
-    like.setAttribute("fill", "none");
-    like.setAttribute("stroke", "white");
-    like.classList.add("none");
-  }
-}
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 function HomePage(props) {
+  const handleClick = (event) => {
+    if (event.target.classList.contains("icon")) {
+      alert("Item added to favorites");
+    } else {
+      alert("Item removed from favorites");
+    }
+    event.target.classList.toggle("icon");
+    event.target.classList.toggle("icon-active");
+  };
   return (
     <>
       {/* <header>
@@ -37,7 +38,7 @@ function HomePage(props) {
             </div>
             <div className="w-100 h-1 line my-10"></div>
             <div className="w-9/12 m-auto">
-              <h2 className="my-5 text-white">Enter terms to scrap</h2>
+              <h2 className="my-5 text-white">Enter terms to scrape</h2>
               <div className="text-black text-center ">
                 <form>
                   <label htmlFor="name"> </label>
@@ -67,24 +68,63 @@ function HomePage(props) {
               </div>
               <div className="mx-10 mb-10 px-3 text-white">Data</div>
             </div>
-            <div className="result-box w-10/12"></div>
+            <div className="result-box flex flex-col items-center p-7 w-10/12 rounded-3xl">
+              <div className="item-box">
+                <div className="flex items-end justify-end">
+                  <FontAwesomeIcon
+                    className="icon"
+                    onClick={(event) => handleClick(event)}
+                    icon={faHeart}
+                  />
+                </div>
+                <div className="content text-start">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime possimus culpa dolores suscipit doloribus facere, id
+                  distinctio, quidem natus tempora beatae harum nostrum quaerat
+                  sed? Fugiat deleniti minus, facere enim vero officia repellat
+                  voluptates! Voluptates sint laboriosam culpa nulla officiis
+                  ipsum soluta sequi necessitatibus debitis dolorem. Accusantium
+                  mollitia nam labore?
+                </div>
+              </div>
+              <div className="item-box">
+                <div className="flex items-end justify-end">
+                  <FontAwesomeIcon
+                    className="icon"
+                    onClick={(event) => handleClick(event)}
+                    icon={faHeart}
+                  />
+                </div>
+                <div className="content text-start">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime possimus culpa dolores suscipit doloribus facere, id
+                  distinctio, quidem natus tempora beatae harum nostrum quaerat
+                  sed? Fugiat deleniti minus, facere enim vero officia repellat
+                  voluptates! Voluptates sint laboriosam culpa nulla officiis
+                  ipsum soluta sequi necessitatibus debitis dolorem. Accusantium
+                  mollitia nam labore?
+                </div>
+              </div>
+              <div className="item-box">
+                <div className="flex items-end justify-end">
+                  <FontAwesomeIcon
+                    className="icon"
+                    onClick={(event) => handleClick(event)}
+                    icon={faHeart}
+                  />
+                </div>
+                <div className="content text-start">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime possimus culpa dolores suscipit doloribus facere, id
+                  distinctio, quidem natus tempora beatae harum nostrum quaerat
+                  sed? Fugiat deleniti minus, facere enim vero officia repellat
+                  voluptates! Voluptates sint laboriosam culpa nulla officiis
+                  ipsum soluta sequi necessitatibus debitis dolorem. Accusantium
+                  mollitia nam labore?
+                </div>
+              </div>
+            </div>
             <div className="icons mr-4 flex justify-end w-10/12 gap-3 my-3">
-              <svg
-                onClick={Liked}
-                id="like-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="white"
-                className="w-6 h-6 none"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                />
-              </svg>
               <svg
                 id="Broom-icon"
                 className="w-5 h-5 none"

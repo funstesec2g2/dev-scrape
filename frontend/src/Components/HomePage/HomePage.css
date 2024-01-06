@@ -26,16 +26,32 @@ option {
 
 .result-box {
   background-color: #82a5b4;
-  height: 60vh;
+  min-height: 60vh;
 }
 .data {
   display: flex;
   flex-direction: column;
   align-items: end;
 }
+
+.item-box {
+  border-radius: 10px;
+  background-color: aliceblue;
+  width: 95%;
+  margin: 10px 0;
+  min-height: 150px;
+  padding: 20px;
+}
 @media screen and (max-width: 768px) {
   .data {
     justify-content: center;
     align-items: center;
   }
+}
+
+.icon {
+  color: black;
+}
+.icon-active {
+  color: red;
 }
