@@ -1,4 +1,4 @@
-import logo from "./images/logo.png";
+import logo from "../assets/logo.png";
 import profile from "../assets/photo.jpg";
 // import Heading from "../Heading/Heading";
 import {
@@ -13,7 +13,7 @@ function AboutPage() {
   return (
     <>
       {/* <Heading /> */}
-      <div className="bg-slate-900 p-10 text-white">
+      <div className=" p-10 text-white">
         <div className=" flex flex-col md:flex-row justify-center align-center lg:grid lg:grid-cols-2 mb-28 md:px-28">
           <div className="text-justify p-10">
             <h1 className="pb-7 text-2xl">About US</h1>Welcome to Dev Scraper,

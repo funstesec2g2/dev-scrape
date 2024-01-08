@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
         {!user ? (
           <>
             {" "}
-            <div className="flex gap-4">
+            <div className="flex px-4 gap-4">
               <Link to="/register" className="text-white">
                 Signup
               </Link>
@@ -47,8 +47,8 @@ const Layout = ({ children }) => {
           </>
         )}
       </header>
-      <div className="container mx-auto p-4">
-        <nav className="p-4 flex flex-col justify-center shadow-md">
+      <div className="mx-auto">
+        <nav className="p-4 px-10 flex flex-col justify-center shadow-md">
           <div className="flex">
             <ul className="flex space-x-4 w-full">
               <li>
