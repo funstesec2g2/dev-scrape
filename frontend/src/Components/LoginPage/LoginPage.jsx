@@ -4,7 +4,8 @@ import "./LoginPage.css";
 import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import logo from "../assets/logo-img.png";
-
+import Eyeclosed from "../assets/Eyeclosed";
+import Eyeopened from "../assets/Eyeopened";
 import { useLogin } from "../../hooks/useLogin";
 
 function passwordToggler() {
@@ -22,7 +23,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [wrongPassword, setWrongPassword] = useState("");
   const navigate = useNavigate();
-
+  const [eye, setEye] = useState("closed");
   const [action, setAction] = useState("Login");
   const [button, setButton] = useState("Login");
   const { error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
@@ -69,12 +70,7 @@ function LoginPage() {
   };
 
   function passwordToggler() {
-    let icon = document.getElementById("passLogin");
-    if (icon.type === "password") {
-      icon.type = "text";
-    } else {
-      icon.type = "password";
-    }
+    setEye();
   }
 
   // function toggleForgotPassword() {
@@ -136,27 +132,15 @@ function LoginPage() {
                   id="passLogin"
                   name="pwd"
                   value={password}
-                  type="password"
+                  type={eye == "closed" ? "password" : "text"}
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span id="eye-holder">
-                  <svg
-                    onClick={passwordToggler}
-                    id="eye-closed"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="grey"
-                    className="w-5 text-red h-5 mr-4 text-end inline-block "
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
-                    />
-                  </svg>
+                <span
+                  id="eye-holder"
+                  onClick={() => setEye(eye == "open" ? "closed" : "open")}
+                >
+                  {eye == "closed" ? <Eyeclosed /> : <Eyeopened />}
                 </span>
               </div>
               <div className="text-red-500 text-sm">{wrongPassword}</div>
