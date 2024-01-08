@@ -6,11 +6,11 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function HomePage(props) {
   const handleClick = (event) => {
-    if (event.target.classList.contains("icon")) {
-      alert("Item added to favorites");
-    } else {
-      alert("Item removed from favorites");
-    }
+    // if (event.target.classList.contains("icon")) {
+    //   alert("Item removed from favorites");
+    // } else {
+    //   alert("Item added to favorites");
+    // }
     event.target.classList.toggle("icon");
     event.target.classList.toggle("icon-active");
   };
