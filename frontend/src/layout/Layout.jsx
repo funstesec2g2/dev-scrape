@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Profile from "../Components/ProfileDropdown/ProfileDropdown";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import photo from "../Components/assets/photo.jpg";
+import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);
   const { user } = useAuthContext();
@@ -36,13 +36,13 @@ const Layout = ({ children }) => {
         ) : (
           <>
             {" "}
-            <Link to="/editProfile" className="ml-4">
+            <div className="">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm-9OvBU3eVMJZbGbQ84dAqW8XdebaXNyqpyV3tO_x5TJyfbEkbf29ATX55L_Ws2UbdxQ&usqp=CAU" // Replace with your profile image URL
                 alt="Profile"
-                className="w-8 h-8 rounded-full"
+                className="w-8 h-8  rounded-full"
               />
-            </Link>
+            </div>
             <button onClick={handleClick}>Log Out</button>
           </>
         )}
@@ -80,21 +80,7 @@ const Layout = ({ children }) => {
               </li>
               {/* Add more menu items as needed */}
             </ul>
-            <div className="self-end">
-              {true && (
-                <ul>
-                  <li>
-                    <img
-                      onClick={() => setOpenProfile((prev) => !prev)}
-                      src={photo}
-                      className="w-16 rounded-full"
-                      alt="profile"
-                    />
-                    {openProfile && <Profile />}
-                  </li>
-                </ul>
-              )}
-            </div>
+            <div className="self-end">{true && <ProfileDropdown />}</div>
           </div>
         </nav>
         <main>{children}</main>

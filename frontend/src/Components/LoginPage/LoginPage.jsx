@@ -8,15 +8,6 @@ import Eyeclosed from "../assets/Eyeclosed";
 import Eyeopened from "../assets/Eyeopened";
 import { useLogin } from "../../hooks/useLogin";
 
-function passwordToggler() {
-  let icon = document.getElementById("pass");
-  if (icon.type === "password") {
-    icon.type = "text";
-  } else {
-    icon.type = "password";
-  }
-}
-
 function LoginPage() {
   // const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -98,13 +89,13 @@ function LoginPage() {
       <div className="hidden text-white md:flex items-center justify-center">
         <img src={logo} alt="logo-img" className="w-8/12" />
       </div>
-      <div className="flex flex-col justify-center items-center md:bg-white h-screen">
+      <div className="flex cont flex-col justify-center items-center md:bg-white">
         <div className="card w-3/4">
           <div className="title mb-7">
             <h1 className="text-xl font-bold h-10 text-white md:text-black text-center">
               Log in
             </h1>
-            <span className="text-sm pr-2 text-black md:text-black ml-5">
+            <span className="text-sm pr-2 text-white md:text-black ml-5">
               Don't have an account?
             </span>
             <Link to="/createYourAccount">
