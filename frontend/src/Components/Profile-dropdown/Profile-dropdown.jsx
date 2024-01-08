@@ -5,7 +5,7 @@ function Profile() {
   return (
     <div className="flex flex-col dropDownProfile">
       <ul className="flex flex-col gap-4">
-        <Link to='/profile'>Profile</Link>
+        <Link to="/editProfile">Edit Profile</Link>
         <li>Logout</li>
         <li>Exit</li>
       </ul>
