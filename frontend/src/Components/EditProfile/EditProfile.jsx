@@ -38,7 +38,7 @@ export default function EditProfile() {
               </label>
               <input
                 placeholder="User name"
-                className="p-2 w-1/2 h-10 rounded-xl border-2 border-slate-500"
+                className="p-2 w-1/2 h-10 rounded-xl text-gray-600 border-2 border-slate-500 focus:border-slate-700"
                 name="username"
                 type="text"
               />
@@ -49,7 +49,7 @@ export default function EditProfile() {
               </label>
               <input
                 placeholder="Password"
-                className="p-2 w-1/2 h-10 rounded-xl border-2 border-slate-500"
+                className="p-2 w-1/2 h-10 text-gray-600 rounded-xl border-2 border-slate-500 focus:border-slate-700"
                 name="username"
                 type="password"
               />

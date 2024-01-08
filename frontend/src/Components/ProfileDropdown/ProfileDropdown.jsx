@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
-function Profile() {
+function ProfileDropdown() {
   return (
     <div className="flex flex-col dropDownProfile">
       <ul className="flex flex-col gap-4">
@@ -12,4 +12,4 @@ function Profile() {
     </div>
   );
 }
-export default Profile;
+export default ProfileDropdown;

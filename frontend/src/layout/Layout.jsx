@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Profile from "../Components/Profile-dropdown/Profile-dropdown";
+import Profile from "../Components/ProfileDropdown/ProfileDropdown";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
         ) : (
           <>
             {" "}
-            <Link to="/profile" className="ml-4">
+            <Link to="/editProfile" className="ml-4">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm-9OvBU3eVMJZbGbQ84dAqW8XdebaXNyqpyV3tO_x5TJyfbEkbf29ATX55L_Ws2UbdxQ&usqp=CAU" // Replace with your profile image URL
                 alt="Profile"
@@ -88,7 +88,7 @@ const Layout = ({ children }) => {
                       onClick={() => setOpenProfile((prev) => !prev)}
                       src={photo}
                       className="w-16 rounded-full"
-                      alt="photo"
+                      alt="profile"
                     />
                     {openProfile && <Profile />}
                   </li>

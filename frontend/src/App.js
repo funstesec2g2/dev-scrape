@@ -17,8 +17,8 @@ import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount"
 import { UserAlreadyExist } from "./Components/CreateYourAccount/UserAlreadyExist";
 import Heading from "./Components/Heading/Heading.jsx";
 import { UserNotExist } from "./Components/LoginPage/UserNotExist";
-import Profile from "./Components/Profile-dropdown/Profile-dropdown.jsx";
 import EditProfile from "./Components/EditProfile/EditProfile.jsx";
+import ProfileDropdown from "./Components/ProfileDropdown/ProfileDropdown.jsx";
 
 function App() {
   const { user } = useAuthContext();
@@ -31,7 +31,6 @@ function App() {
             {/* <Heading /> */}
             <Routes>
               <Route path="/editProfile" element={<EditProfile />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/" element={<HomePage />} />
               <Route
                 path="/login"
