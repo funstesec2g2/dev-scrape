@@ -4,7 +4,7 @@ import {User} from "../../models/user-folder/user.schema"
 
 
 @Injectable()
-export class bookMarkService{
+export class BookMarkService{
 
     constructor(private databaseService: DatabaseService){
 
