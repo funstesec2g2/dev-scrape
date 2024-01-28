@@ -1,15 +1,74 @@
 import logo from "../assets/logo.png";
-import profile from "../assets/photo.jpg";
+// import profile from "../assets/photo.jpg";
 // import Heading from "../Heading/Heading";
-import {
-  faGithub,
-  faInstagram,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faGithub,
+//   faInstagram,
+//   faLinkedin,
+// } from "@fortawesome/free-brands-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import MemberCards from "../MemberCards/MemberCards";
 
 function AboutPage() {
+  const memberList = [
+    {
+      name: "Abrham Wube Gobezie ",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+    {
+      name: "Amanuel Tsehay Wondim ",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+    {
+      name: "Bikila Tariku Abate",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+    {
+      name: "Estifanos Taye Tamirat",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+    {
+      name: "Jashua Taye Alemayehu",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+    {
+      name: "Lidet Tadesse Tenaw",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+    {
+      name: "Meaza Tadele Alemayehu",
+      discription: "",
+      profile_pic: "",
+      instagram: "",
+      github: "",
+      linkedin: "",
+    },
+  ];
   return (
     <>
       {/* <Heading /> */}
@@ -31,7 +90,11 @@ function AboutPage() {
             empower you with the latest and most relevant data from the world's
             largest developer community.
           </div>
-          <img className="w-8/12 m-auto flex-shrink-0" src={logo}></img>
+          <img
+            alt="logo"
+            className="w-8/12 m-auto flex-shrink-0"
+            src={logo}
+          ></img>
         </div>
 
         <div className="text-slate-400">
@@ -49,188 +112,23 @@ function AboutPage() {
             {/* first row */}
 
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
-              <div className=" flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
+              <MemberCards key={0} memInfo={memberList[0]} />
+              <MemberCards key={1} memInfo={memberList[1]} />
+              <MemberCards key={2} memInfo={memberList[2]} />
             </div>
 
             {/* second row */}
 
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
-              <div className="flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, , at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
+              <MemberCards key={3} memInfo={memberList[3]} />
+              <MemberCards key={4} memInfo={memberList[4]} />
+              <MemberCards key={5} memInfo={memberList[5]} />
             </div>
 
             {/* third row */}
 
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
-              <div className="flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
-                <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
-                </p>
-                <div className="flex gap-2">
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faInstagram}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faLinkedin}
-                  />
-                </div>
-              </div>
+              <MemberCards key={6} memInfo={memberList[6]} />
             </div>
           </div>
         </div>

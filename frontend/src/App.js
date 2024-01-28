@@ -15,10 +15,10 @@ import HomePage from "./Components/HomePage/HomePage";
 import AboutPage from "./Components/AboutPage/AboutPage";
 import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount";
 import { UserAlreadyExist } from "./Components/CreateYourAccount/UserAlreadyExist";
-import Heading from "./Components/Heading/Heading.jsx";
+// import Heading from "./Components/Heading/Heading.jsx";
 import { UserNotExist } from "./Components/LoginPage/UserNotExist";
 import EditProfile from "./Components/EditProfile/EditProfile.jsx";
-import ProfileDropdown from "./Components/ProfileDropdown/ProfileDropdown.jsx";
+// import ProfileDropdown from "./Components/ProfileDropdown/ProfileDropdown.jsx";
 
 function App() {
   const { user } = useAuthContext();

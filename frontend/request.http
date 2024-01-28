@@ -1,0 +1,15 @@
+GET https://api.github.com/search/code?q=addClass
+Authorization: Token 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
+
+
+###
+GET github.com/codesearch
+
+###
+GET https://api.github.com/search/topics?q=oop
+Authorization: Token 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
+
+
+###
+GET https://api.github.com/search/repositories?q=oop
+Authorization: Token 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

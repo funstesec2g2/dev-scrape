@@ -4,16 +4,16 @@ import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/authContext";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+// import { Provider } from "react-redux";
+// import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <AuthContextProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    {/* <React.StrictMode> */}
+    <App />
+    {/* </React.StrictMode> */}
   </AuthContextProvider>
 );
 
