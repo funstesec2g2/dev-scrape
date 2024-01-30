@@ -21,7 +21,7 @@ def search_route():
     else:
         return jsonify({'error': 'No results found.'})
 
-# youtube search by title route
+# Update youtube_search_by_title route
 @flask_app.route('/youtube_search_title', methods=['GET'])
 def youtube_search_by_title():
     video_title = request.args.get('video_title')
@@ -35,7 +35,9 @@ def youtube_search_by_title():
                 video_info = {
                     'title': first_video['title'],
                     'author': first_video['uploader'],
-                    'video_id': first_video['id'],
+                    'channel': first_video.get('channel'),
+                    'likes': first_video.get('like_count'),
+                    'url': first_video.get('url'),  # Correct attribute for the download link
                 }
                 return jsonify({'video_info': video_info})
             else:
@@ -43,35 +45,38 @@ def youtube_search_by_title():
 
     except Exception as e:
         return jsonify({'error': str(e)})
-    
 
 
 
 
-# wikipedia search by title route
+# Update the /wikipedia_search_title route in app.py
 @flask_app.route('/wikipedia_search_title', methods=['GET'])
 def wikipedia_search_by_title():
     page_title = request.args.get('page_title')
 
     try:
-        # Specify a user agent to comply with Wikipedia's policy
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
 
         wiki_wiki = wikipediaapi.Wikipedia('en', headers=headers)
-
-        # Perform the Wikipedia search
         page_py = wiki_wiki.page(page_title)
 
         if page_py.exists():
-            return jsonify({'page_info': {'title': page_py.title, 'text': page_py.text}})
+            # Add more attributes to the response
+            response = {
+                'title': page_py.title,
+                'text': page_py.text,
+                'summary': page_py.summary,  # New attribute
+                'sections': [section.title for section in page_py.sections],  # New attribute
+            }
+            return jsonify({'page_info': response})
         else:
             return jsonify({'error': 'Wikipedia page not found.'})
 
     except Exception as e:
         return jsonify({'error': str(e)})
-    
+
 
 @flask_app.route('/tmdb_search_title', methods=['GET'])
 def tmdb_search_by_title():
@@ -104,6 +109,22 @@ def tmdb_search_by_title():
         else:
             return jsonify({'error': 'Failed to retrieve movie details.'})
 
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    
+
+@flask_app.route('/github_search_topic', methods=['GET'])
+def github_search_by_topic():
+    topic = request.args.get('topic')
+
+    try:
+        # Add your GitHub API logic here
+        # This is just a placeholder
+        response = requests.get(f'https://api.github.com/search/repositories?q=topic:{topic}')
+        repositories = response.json().get('items', [])
+
+        # Modify the response format as needed
+        return jsonify({'repositories': repositories})
     except Exception as e:
         return jsonify({'error': str(e)})
 
