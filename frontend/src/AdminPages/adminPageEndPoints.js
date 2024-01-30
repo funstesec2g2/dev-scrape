@@ -14,7 +14,10 @@ export const blockUser = (email) => {
     body: JSON.stringify({ email }),
   });
 
-  if (response.ok)
+  if (!response.ok) {
+    const errorData = response.json();
+    throw new Error(errorData.message);
+  }
 
 
 

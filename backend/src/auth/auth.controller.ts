@@ -40,19 +40,21 @@ class AuthController{
         
     }
     @Post('verify')
-    async verifyUser(@Body() body: { verificationCode: string }): Promise<string> {
+    async verifyUser(@Body() body: { verificationCode: string }): Promise<{ message: string }> {
       const { verificationCode } = body;
-    
-      const user = await this.authService.findByVerificationCode(verificationCode);
+      console.log('this method is being called')
+   
+      const user = await this.authService.findByVerificationCode(verificationCode.trim());
+      console.log(user)
     
       if (!user) {
-        throw new NotFoundException('User not found or already verified.');
+        return { message: 'Wrong verification code' };
       }
     
       user.isVerified = true;
       await user.save();
     
-      return 'User verified successfully. You can now log in.';
+      return { message: 'User verified successfully' };
     }
     
     @Post('forgot-password')
@@ -75,7 +77,7 @@ class AuthController{
 
 
 
-    @Get('block-user')
+    @Post('block-user')
     @UseGuards(AdminAuthorizationGuard)
     @UseGuards(AuthGuard)
     async blockUser(@Body('email') email: string){

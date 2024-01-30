@@ -40,7 +40,7 @@ export const useLogin = () => {
         dispatch({ type: "LOGIN", payload: json });
         setError(null);
       
-    } else if (json.message === "no user found") {
+    } else if (json?.message === "no user found") {
       console.log("the user doesn't exist");
       navigate("/userNotExist");
       if (json.message === "user is blocked") {
@@ -49,6 +49,9 @@ export const useLogin = () => {
     } else if (json.message === "wrong password") {
       onWrongPassword("You have entered a wrong password");
     }
+      else if (json?.message === 'user is not verified'){
+        navigate('/verifyEmail');
+      }
      
     }
   };

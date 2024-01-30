@@ -23,7 +23,6 @@ const  CreateYourAccount = () => {
   const createAccount = async (event) => {
     event.preventDefault();
     let response;
-
     try {
       response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST',
@@ -43,7 +42,6 @@ const  CreateYourAccount = () => {
     if ('message' in jsonResponse){
 
       if (jsonResponse.message === 'User already exists') {
-        // Redirect to login
         navigate('/userAlreadyExist');
     } 
     if (jsonResponse.message === 'user is blocked'){
@@ -51,7 +49,6 @@ const  CreateYourAccount = () => {
 
     }
     } else {
-      // Redirect to verify email
       navigate('/verifyEmail');
     }
   };

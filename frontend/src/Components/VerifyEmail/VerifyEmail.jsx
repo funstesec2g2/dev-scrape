@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo-img.png';
 import { CCloseButton } from '@coreui/react';
+import { Link } from 'react-router-dom';
+
 
 function VerifyEmail(props) {
   const [verificationStatus, setVerificationStatus] = useState('');
   const API = 'http://localhost:5000/auth/verify'
   const [verificationCode, setVerificationCode] = useState(null);
-
-  const handleVerification = async (verificationCode) => {
+  const [showLoginButton, setShowLoginButton] = useState(false);
+  const handleVerification = async (e) => {
     try {
       const response = await fetch(API, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ verificationCode }),
-     
       });
 
       if (!response.ok) {
@@ -23,9 +24,24 @@ function VerifyEmail(props) {
         throw new Error(errorData.message);
       }
 
+  
+  
+
       const responseData = await response.json();
-      console.log(responseData); 
-      setVerificationStatus(responseData);
+      console.log(responseData?.message);
+      if (responseData?.message === 'User verified successfully') {
+        console.log("sfshdfsdfkljh")
+        console.log(responseData?.message);
+        setShowLoginButton(true);
+        setVerificationStatus(responseData?.message);}
+      else if (responseData?.message === 'Wrong verification code') {
+        setVerificationStatus(responseData?.message);
+        setShowLoginButton(false);
+
+
+      }
+   
+
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -65,6 +81,9 @@ function VerifyEmail(props) {
               >
                 Verify Email
               </button>
+
+              <div className='text-blue-800'>{verificationStatus} {showLoginButton && <Link 
+              className ='text-red-500' to="/login">Go to login page</Link>}</div>
             </div>
           </div>
         </div>

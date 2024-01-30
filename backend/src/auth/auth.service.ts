@@ -12,8 +12,7 @@ import   {DatabaseService} from "src/db/database.service";
 import { sendVerificationEmail, generateVerificationCode } from './email_service/email.service';
 
 import { Res } from "@nestjs/common";
-import { UserModule } from "src/models/user-folder/user.module";
-import { threadId } from "worker_threads";
+
 
 @Injectable()
 class AuthService{
@@ -83,7 +82,12 @@ class AuthService{
             if (user.isBlocked){
                 return {message: 'user is blocked'}
             }
+
+            if (!user.isVerified){
+                return {message: 'user is not verified'}
+            }
            
+
             const payload = {
                 sub: user.email,
                 roles: user.roles
@@ -163,9 +167,9 @@ class AuthService{
     }
 
     async findByVerificationCode(verificationCode: string){
-        return this.userModel.findOne({ emailToken: verificationCode }).exec();
+        return await this.userModel.findOne({ emailToken: verificationCode });
       }
-      
+
 
   
 

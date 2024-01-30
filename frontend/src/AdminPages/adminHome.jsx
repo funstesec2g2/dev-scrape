@@ -2,10 +2,41 @@ import React, { useState } from 'react';
 import { BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
 import {  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import './admin.css';
-import { blockUser } from './adminPageEndPoints';
+import { getCookie } from '../Components/LoginPage/LoginHelper';
 
 
 const AdminHome = () => {
+  const [message, setMessage] = useState('');
+
+  const API = 'http://localhost:5000/auth';
+  const accessToken = getCookie('user');
+  const blockUser = async (email) => {
+    try {
+      const response = await fetch(`${API}/block-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(data?.message); 
+      } else {
+        
+       setMessage('Something went wrong in blocking the user');
+       
+      }
+  
+    } catch (error) {
+      setMessage('Something went wrong in blocking the user');
+     
+    }
+  };
+  
+
   const data = [
     { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
     { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
@@ -84,17 +115,29 @@ const AdminHome = () => {
       </div>
 
       {/* Block User Form */}
-      <div className='block-user-form'>
-        <label htmlFor='blockUserEmail'>User Email:</label>
-        <input
-          type='email'
-          id='blockUserEmail'
-          value={blockUserEmail}
-          onChange={(e) => setBlockUserEmail(e.target.value)}
-          placeholder="Enter user's email"
-        />
-        <button onClick={blockUser(blockUser)}>Block User</button>
-      </div>
+      <div className="block-user-form max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+  <label htmlFor="blockUserEmail" className="block text-gray-700 text-sm font-bold mb-2">
+    User Email:
+  </label>
+  <input
+  type="email"
+  id="blockUserEmail"
+  value={blockUserEmail}
+  onChange={(e) => setBlockUserEmail(e.target.value)}
+  placeholder="Enter user's email"
+  className="w-full px-4 py-2 border border-gray-300 rounded-md bg-black text-white focus:outline-none focus:border-blue-500"
+/>
+
+  <button
+  onClick={() => blockUser(blockUserEmail)}  
+  className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-700"
+>
+  Block User
+</button>
+<div className='text-red-500'>{message}</div>
+
+</div>
+
     </main>
   );
 };
