@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Play App Search</title>
+</head>
+<body>
+    <h1>Google Play App Search</h1>
+    <form method="post">
+        <label for="keyword">Enter Keyword:</label>
+        <input type="text" id="keyword" name="keyword" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    {% if app_details %}
+        <h2>{{ app_details.title }}</h2>
+        <p>{{ app_details.description }}</p>
+        <p>Rating: {{ app_details.score }}</p>
+        <img src="{{ app_details.icon }}" alt="App Icon">
+        <p><a href="{{ app_details.url }}" target="_blank">View on Google Play</a></p>
+    {% endif %}
+</body>
+</html>

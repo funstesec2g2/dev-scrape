@@ -19,7 +19,10 @@ import Heading from "./Components/Heading/Heading.jsx";
 import { UserNotExist } from "./Components/LoginPage/UserNotExist";
 import EditProfile from "./Components/EditProfile/EditProfile.jsx";
 import ProfileDropdown from "./Components/ProfileDropdown/ProfileDropdown.jsx";
-
+import PlayStore from './scrap/playstore/PlayStore.jsx'
+import TwitterSearch from "./Components/Twitter/Twitter.jsx";
+import SearchComponent from "./scrap/playstore/Wikipedia.jsx";
+import FilmSearch from "./scrap/playstore/Film.jsx";
 function App() {
   const { user } = useAuthContext();
 
@@ -53,6 +56,10 @@ function App() {
               <Route path="/resetSuccess" element={<ResetSuccess />} />
               <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
               <Route path="/userNotExist" element={<UserNotExist />} />
+              <Route path="/playstore" element={<PlayStore  />} />
+              <Route path="/twitter" element={<TwitterSearch  />} />
+              <Route path="/wikipedia" element={<SearchComponent  />} />
+              <Route path="/film" element={<FilmSearch />} />
             </Routes>
           </Layout>
         </BrowserRouter>
