@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
-import photo from "../Components/assets/photo.jpg";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);

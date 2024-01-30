@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './admin.css'
-import AdminHeader from './adminHeader'
 import AdminSidebar from './adminSidebar'
 import { getUserEmail, getUserRole } from '../Components/LoginPage/LoginHelper'
 

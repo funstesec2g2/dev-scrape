@@ -7,9 +7,6 @@ import logo from "../assets/logo.png";
 import Eyeclosed from "../assets/Eyeclosed";
 import Eyeopened from "../assets/Eyeopened";
 import { useLogin } from "../../hooks/useLogin";
-import { setCookie } from "./LoginHelper";
-import { useAuth } from "../../hooks/useAuthContext";
-
 const  LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,8 +15,6 @@ const  LoginPage = () => {
   const navigate = useNavigate();
   
   const [eye, setEye] = useState("closed");
-  const [action, setAction] = useState("Login");
-  const [button, setButton] = useState("Login");
   const { login,  error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
 
 

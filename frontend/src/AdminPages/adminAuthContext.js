@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { isLogged, setCookie, getCookie, getUserEmail, getUserRole } from "../Components/LoginPage/LoginHelper";
+import { getUserRole } from "../Components/LoginPage/LoginHelper";
 
 // import {Navigate, Outlet} from "react-router-dom";
 

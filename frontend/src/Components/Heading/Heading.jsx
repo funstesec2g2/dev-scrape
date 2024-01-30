@@ -1,17 +1,15 @@
 // Heading.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Heading = () => {
-  function dropDown() {
-    const navMenu = document.getElementsByClassName('nav-menu');
-    Array.from(navMenu).forEach((element) => {
-      element.classList.toggle('hidden');
-      element.classList.toggle('flex');
-    });
-  }
+  // function dropDown() {
+  //   const navMenu = document.getElementsByClassName('nav-menu');
+  //   Array.from(navMenu).forEach((element) => {
+  //     element.classList.toggle('hidden');
+  //     element.classList.toggle('flex');
+  //   });
+  // }
 
   return (
     <>

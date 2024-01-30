@@ -1,43 +1,26 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Layout from "../src/layout/Layout";
-import { useAuthContext } from "./hooks/useAuthContext";
+import Layout from "./layout/Layout.jsx";
+import { useAuthContext } from "./hooks/useAuthContext.js";
 import "./App.css";
-import CheckYourEmail from "./Components/CheckYourEmail/CheckYourEmail";
-import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
-import LoginPage from "./Components/LoginPage/LoginPage";
-import VerifyEmail from "./Components/VerifyEmail/VerifyEmail";
-import ResetPassword from "./Components/ResetPassword/ResetPassword";
-import ResetSuccess from "./Components/ResetSuccess/ResetSuccess";
-import FavoritesPage from "./Components/FavoritesPage/FavoritesPage";
-import HelpPage from "./Components/HelpPage/HelpPage";
-import HomePage from "./Components/HomePage/HomePage";
-import AboutPage from "./Components/AboutPage/AboutPage";
-import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount";
-import { UserAlreadyExist } from "./Components/CreateYourAccount/UserAlreadyExist";
-import Heading from "./Components/Heading/Heading.jsx";
-import { UserNotExist } from "./Components/LoginPage/UserNotExist";
-import EditProfile from "./Components/EditProfile/EditProfile.jsx";
-import ProfileDropdown from "./Components/ProfileDropdown/ProfileDropdown.jsx";
-import AdminHome from "./AdminPages/adminHome.jsx"; // Import your AdminHome component
+import CheckYourEmail from "./Components/CheckYourEmail/CheckYourEmail.js";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword.js";
+import LoginPage from "./Components/LoginPage/LoginPage.jsx";
+import VerifyEmail from "./Components/VerifyEmail/VerifyEmail.jsx";
+import ResetPassword from "./Components/ResetPassword/ResetPassword.js";
+import ResetSuccess from "./Components/ResetSuccess/ResetSuccess.js";
+import FavoritesPage from "./Components/FavoritesPage/FavoritesPage.js";
+import HelpPage from "./Components/HelpPage/HelpPage.jsx";
+import HomePage from "./Components/HomePage/HomePage.jsx";
+import AboutPage from "./Components/AboutPage/AboutPage.jsx";
+import CreateYourAccount from "./Components/CreateYourAccount/CreateYourAccount.jsx";
+import { UserAlreadyExist } from "./Components/CreateYourAccount/UserAlreadyExist.jsx";
+import { UserNotExist } from "./Components/LoginPage/UserNotExist.jsx";
+import EditProfile from "./Components/EditProfile/EditProfile.jsx"; // Import your AdminHome component
 import AdminApp from "./AdminPages/adminApp.jsx";
-import AdminHeader from "./AdminPages/adminHeader.jsx";
-import AdminSidebar from "./AdminPages/adminSidebar.jsx";
-import RequireAuth from "./AuthComponent/RequireAuth.jsx";
-import { AdminPrivateRoute } from "./AdminPages/adminAuthContext.js";
 import { ProtectedRoute } from "./Routs/protectedRoute.jsx";
-import { authContext } from "./context/authContext.js";
-import { deleteCookie, getCookie, getUserEmail } from "./Components/LoginPage/LoginHelper.js";
-import PlayStore from './scrap/playstore/PlayStore.jsx'
-import TwitterSearch from "./Components/Twitter/Twitter.jsx";
-import SearchComponent from "./scrap/playstore/Wikipedia.jsx";
-import FilmSearch from "./scrap/playstore/Film.jsx";
+
 function App() {
-  // deleteCookie('user');
-  // const user = getCookie('user');
-  // console.log(user);
-  // const useEmail = getUserEmail();
-  // console.log(useEmail);
 
   const { user } = useAuthContext();
 
@@ -71,10 +54,10 @@ function App() {
               <Route path="/resetSuccess" element={<ResetSuccess />} />
               <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
               <Route path="/userNotExist" element={<UserNotExist />} />
-              <Route path="/playstore" element={<PlayStore  />} />
+              {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />
               <Route path="/wikipedia" element={<SearchComponent  />} />
-              <Route path="/film" element={<FilmSearch />} />
+              <Route path="/film" element={<FilmSearch />} /> */}
               
               {/* Admin protected pages  */}
 

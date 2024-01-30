@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo-img.png';
 import { CCloseButton } from '@coreui/react';
-import { json } from 'express';
 
 function VerifyEmail(props) {
   const [verificationStatus, setVerificationStatus] = useState('');

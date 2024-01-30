@@ -5,9 +5,6 @@ import { useState } from "react";
 import logo from "../assets/logo-img.png";
 import {useNavigate} from 'react-router-dom';
 import { Link } from "react-router-dom";
-import { json } from "express";
-
-
 const  CreateYourAccount = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');

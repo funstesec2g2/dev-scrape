@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo-img.png";
 
 export default function ResetPassword() {
-  function toggleLogin() {
-    const loginPage = document.querySelector("#login");
-    const resetPassword = document.querySelector("#resetPassword");
+  // function toggleLogin() {
+  //   const loginPage = document.querySelector("#login");
+  //   const resetPassword = document.querySelector("#resetPassword");
 
-    resetPassword.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
+  //   resetPassword.classList.toggle("hidden");
+  //   loginPage.classList.toggle("hidden");
+  // }
   function toggleResetSuccess() {
     const resetSuccess = document.querySelector("#resetSuccess");
     const resetPassword = document.querySelector("#resetPassword");
