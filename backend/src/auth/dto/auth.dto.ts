@@ -1,10 +1,13 @@
-import { IS_LENGTH, IsEmail, IsNotEmpty } from "class-validator";
+import { IS_LENGTH, IsEmail, IsNotEmpty, IsOptional } from "class-validator";
 
 export class AuthDto{
 
 
     @IsNotEmpty()
     password: string;
+
+    @IsOptional()
+    roles?: string;
 
     @IsNotEmpty()
     fullName: string;
@@ -14,6 +17,17 @@ export class AuthDto{
     @IsNotEmpty()
     @IsEmail()
     email: string;
+
+    @IsOptional()
+    profilePicture?: string;
+
+    @IsOptional()
+    isVerified?: boolean;
+
+    @IsOptional()
+    emailToken?: string
+
+    
 
     
 }

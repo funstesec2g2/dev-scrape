@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { authContext } from "../context/authContext";
 
+
 export const useAuthContext = () => {
   const context = useContext(authContext);
   if (!context) {
@@ -8,3 +9,8 @@ export const useAuthContext = () => {
   }
   return context;
 };
+
+
+export const useAuth = ()=>{
+  return useContext(authContext);
+}

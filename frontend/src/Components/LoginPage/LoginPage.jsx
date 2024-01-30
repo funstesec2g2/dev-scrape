@@ -7,17 +7,22 @@ import logo from "../assets/logo.png";
 import Eyeclosed from "../assets/Eyeclosed";
 import Eyeopened from "../assets/Eyeopened";
 import { useLogin } from "../../hooks/useLogin";
+import { setCookie } from "./LoginHelper";
+import { useAuth } from "../../hooks/useAuthContext";
 
-function LoginPage() {
-  // const [fullName, setFullName] = useState("");
+const  LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [wrongPassword, setWrongPassword] = useState("");
+  const [onUserBlocked, setOnUserBlocked] = useState(false);  
   const navigate = useNavigate();
+  
   const [eye, setEye] = useState("closed");
   const [action, setAction] = useState("Login");
   const [button, setButton] = useState("Login");
-  const { error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
+  const { login,  error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
+
+
   const handleGoogle = async (e) => {
     e.preventDefault();
     await signInWithGoogle();
@@ -27,62 +32,17 @@ function LoginPage() {
     await signInWithGitHub();
   };
 
-  const signInUser = async (event) => {
+  const Login = async (event) => {
+    console.log("this funciton is called")
     event.preventDefault();
-
-    let response;
     try {
-      response = await fetch("http://localhost:5000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // credentials: 'include',
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-      console.log(response);
+      await login({email, password, onWrongPassword: setWrongPassword, onUserBlocked: setOnUserBlocked});
     } catch (error) {
       console.log(error);
-      throw new Error("Something went wrong in the request");
-    }
-
-    const jsonResponse = await response.json();
-    console.log(jsonResponse);
-
-    if (jsonResponse.message === "success") {
-      navigate("/");
-    } else if (jsonResponse.message === "no user found") {
-      console.log("the user doesn't sfsdfsd;ljfksdl;");
-      navigate("/userNotExist");
-    } else if (jsonResponse.message === "wrong password") {
-      setWrongPassword("You have entered a wrong password");
+      setWrongPassword('Sever Error, please try again')
+      return 
     }
   };
-
-  function passwordToggler() {
-    setEye();
-  }
-
-  // function toggleForgotPassword() {
-  //   const loginPage = document.querySelector("#login");
-  //   const forgotPassword = document.querySelector("#forgotPassword");
-
-  //   forgotPassword.classList.toggle("hidden");
-  //   loginPage.classList.toggle("hidden");
-  // }
-
-  const login = () => {
-    navigate("/");
-  };
-
-  function toggleCreatYourAccount() {
-    const loginPage = document.querySelector("#login");
-    const createYourAccount = document.querySelector("#createYourAccount");
-
-    createYourAccount.classList.toggle("hidden");
-    loginPage.classList.toggle("hidden");
-  }
 
   return (
     <div className="grid md:grid-cols-2">
@@ -105,7 +65,7 @@ function LoginPage() {
             </Link>
           </div>
           <div className="inputs">
-            <form onSubmit={signInUser}>
+            <form onSubmit={Login}>
               {/* <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4"> */}
               <input
                 id="email"

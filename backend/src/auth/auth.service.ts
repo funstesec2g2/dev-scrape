@@ -9,7 +9,11 @@ import { Response, Request} from "express";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
 import   {DatabaseService} from "src/db/database.service";
 
+import { sendVerificationEmail, generateVerificationCode } from './email_service/email.service';
+
 import { Res } from "@nestjs/common";
+import { UserModule } from "src/models/user-folder/user.module";
+import { threadId } from "worker_threads";
 
 @Injectable()
 class AuthService{
@@ -44,16 +48,25 @@ class AuthService{
     async createUser (createUserDto: AuthDto) : Promise<any>{
         const hash = await argon.hash(createUserDto.password);
         createUserDto.password = hash;
-        
+        const verificationCode = generateVerificationCode();
+
+        console.log(verificationCode);
+        createUserDto.emailToken = verificationCode;
+
+        await sendVerificationEmail(createUserDto.email,  verificationCode).catch((err) => {
+            console.log(err)
+            throw new Error(err)
+            ;});
+
         const user = await this.userModel.create(createUserDto);
         await user.save();
+    
         console.log(user);
         return user;
-        // const user =  new this.userModel(createUserDto);
-        //  
+       
     }
 
-    async login(email: string, password: string, response: Response): Promise<{ message: string }> {
+    async login(email: string, password: string, response: Response): Promise<{ message: string, access_token?:string, email?: string }> {
 
         try{
             const user: User = await this.userModel.findOne({ email: email });
@@ -67,12 +80,23 @@ class AuthService{
             if (!pwMatches) {
                 return {message: "wrong password"};
             }
+            if (user.isBlocked){
+                return {message: 'user is blocked'}
+            }
            
-            const payload = { sub: user.email };
+            const payload = {
+                sub: user.email,
+                roles: user.roles
+      
+              };
             const access_token: string = await this.jwtService.signAsync(payload);
-            response.cookie('jwt', access_token, { httpOnly: true });
+            
+        
+            console.log(access_token);
         
             return {
+                access_token,
+                email,
                 message: 'success'
             };
         }
@@ -86,7 +110,7 @@ class AuthService{
     async user(request: Request): Promise<any>{
 
         try{
-            const cookie = request.cookies['jwt'];
+            const cookie = request.cookies['user'];
 
             const data = await this.jwtService.verifyAsync(cookie);
 
@@ -124,7 +148,7 @@ class AuthService{
 
     async logout(@Res({passthrough: true}) response: Response)  {
 
-        response.clearCookie('jwt');
+        response.clearCookie('user');
 
         return {
             message: "succses"
@@ -132,8 +156,20 @@ class AuthService{
         
 
     }
+    async blockUser(email: string){
+        const user = this.userModel.findOne({email: email});
+        (await user).isBlocked = true;
+        return (await user).save();
+    }
 
+    async findByVerificationCode(verificationCode: string){
+        return this.userModel.findOne({ emailToken: verificationCode }).exec();
+      }
+      
+
+  
 
 }
+
 
 export default AuthService;

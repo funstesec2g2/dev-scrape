@@ -6,13 +6,16 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { auth } from "../firebase/index";
+import { useNavigate } from "react-router-dom";
+import { setCookie } from "../Components/LoginPage/LoginHelper";
 
 export const useLogin = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
   const { dispatch } = useAuthContext();
-  const login = async ({ email, password }) => {
+  const login = async ({ email, password , onWrongPassword = () => {}}, onUserBlocked = () => {}) => {
     setIsLoading(true);
     setError(null);
     const response = await fetch("http://localhost:5000/auth/login", {
@@ -31,9 +34,22 @@ export const useLogin = () => {
       setError(json.message);
     }
     if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(json));
-      dispatch({ type: "LOGIN", payload: json });
-      setError(null);
+      if (json?.message === "success") {
+        console.log(json.access_token, 'the access token in the fetch')
+        setCookie("user", json.access_token, email, 3);
+        dispatch({ type: "LOGIN", payload: json });
+        setError(null);
+      
+    } else if (json.message === "no user found") {
+      console.log("the user doesn't exist");
+      navigate("/userNotExist");
+      if (json.message === "user is blocked") {
+        onUserBlocked("User is blocked you cant login");
+      }
+    } else if (json.message === "wrong password") {
+      onWrongPassword("You have entered a wrong password");
+    }
+     
     }
   };
   const signInWithGoogle = async () => {

@@ -30,12 +30,12 @@ const Heading = () => {
             />
           </button>
 
-          <button
+          {/* <button
             className="mr-3 justify-self-end hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out md:hidden"
             onClick={dropDown}
           >
             <FontAwesomeIcon icon={faBars} className="px-2 size-6" />
-          </button>
+          </button> */}
 
           <div className="flex-col md:flex-row md:col-start-2 justify-center items-center col-span-2 md:col-span-1 hidden md:flex nav-menu">
             {/* Use Link instead of a tags for navigation */}

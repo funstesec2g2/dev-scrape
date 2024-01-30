@@ -5,6 +5,7 @@ import { useState } from "react";
 import logo from "../assets/logo-img.png";
 import {useNavigate} from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { json } from "express";
 
 
 const  CreateYourAccount = () => {
@@ -12,6 +13,7 @@ const  CreateYourAccount = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate  = useNavigate();
+  const [userBlockedErrorMessage, setUserBlockedErrorMessage] = useState('');
 
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
@@ -21,23 +23,6 @@ const  CreateYourAccount = () => {
       icon.type = "password";
     }
   }
-
-  // function toggleLogin() {
-  //   const loginPage = document.querySelector("#login");
-  //   const createYourAccount = document.querySelector("#createYourAccount");
-
-  //   createYourAccount.classList.toggle("hidden");
-  //   loginPage.classList.toggle("hidden");
-  // }
-
-  // const  toggleVerifyEmail =() =>{
-  //   return (
-  //   <Link to='/verifyEmail'>
-  //     <button className='text-blue-700 font-bold hover:bg-black'>
-  //       Verify Email
-  //     </button>
-  //   </Link>)
-  // }
   const createAccount = async (event) => {
     event.preventDefault();
     let response;
@@ -52,18 +37,25 @@ const  CreateYourAccount = () => {
       })
     } catch (error) {
       console.log(error);
-      throw new Error('Something went wrong in the request');
+      return;
     }
 
     const jsonResponse = await response.json();
     console.log(jsonResponse);
 
-    if ('message' in jsonResponse && jsonResponse.message === 'User already exists') {
-      // Redirect to login
-      navigate('/userAlreadyExist');
+    if ('message' in jsonResponse){
+
+      if (jsonResponse.message === 'User already exists') {
+        // Redirect to login
+        navigate('/userAlreadyExist');
+    } 
+    if (jsonResponse.message === 'user is blocked'){
+      setUserBlockedErrorMessage('You are blocked you cant register');
+
+    }
     } else {
       // Redirect to verify email
-      navigate('/checkYourEmail');
+      navigate('/verifyEmail');
     }
   };
 
@@ -169,9 +161,10 @@ const  CreateYourAccount = () => {
             <Link to='/login'>
             <button className='text-blue-700 font-bold hover:bg-black'>
               Sign In
-              
             </button>
             </Link>
+
+            <div className="text-red-700">{userBlockedErrorMessage}</div>
 
             <div className="text-center text-gray-400 my-1">- OR -</div>
             <div className="buttons flex flex-wrap justify-around">

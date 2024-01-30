@@ -19,8 +19,22 @@ import Heading from "./Components/Heading/Heading.jsx";
 import { UserNotExist } from "./Components/LoginPage/UserNotExist";
 import EditProfile from "./Components/EditProfile/EditProfile.jsx";
 import ProfileDropdown from "./Components/ProfileDropdown/ProfileDropdown.jsx";
-
+import AdminHome from "./AdminPages/adminHome.jsx"; // Import your AdminHome component
+import AdminApp from "./AdminPages/adminApp.jsx";
+import AdminHeader from "./AdminPages/adminHeader.jsx";
+import AdminSidebar from "./AdminPages/adminSidebar.jsx";
+import RequireAuth from "./AuthComponent/RequireAuth.jsx";
+import { AdminPrivateRoute } from "./AdminPages/adminAuthContext.js";
+import { ProtectedRoute } from "./Routs/protectedRoute.jsx";
+import { authContext } from "./context/authContext.js";
+import { deleteCookie, getCookie, getUserEmail } from "./Components/LoginPage/LoginHelper.js";
 function App() {
+  // deleteCookie('user');
+  // const user = getCookie('user');
+  // console.log(user);
+  // const useEmail = getUserEmail();
+  // console.log(useEmail);
+
   const { user } = useAuthContext();
 
   return (
@@ -53,6 +67,25 @@ function App() {
               <Route path="/resetSuccess" element={<ResetSuccess />} />
               <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
               <Route path="/userNotExist" element={<UserNotExist />} />
+              
+              {/* Admin protected pages  */}
+
+              <Route path="" element={<ProtectedRoute role='admin'/>}>
+                  <Route path="/admin" element={<AdminApp/>} />
+              </Route>
+
+              {/* <Route element={
+                <AdminPrivateRoute>
+              <Route path="/admin" element={<AdminApp/>} />
+              <Route path="/adminHome" element={<AdminHome/>} />
+              <Route path="/adminHeader" element={<AdminHeader/>} />
+              <Route path="/adminSidebar" element={<AdminSidebar/>} />
+                </AdminPrivateRoute>
+              }>
+              </Route> */}
+
+              
+              
             </Routes>
           </Layout>
         </BrowserRouter>

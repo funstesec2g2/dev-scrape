@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 import photo from "../Components/assets/photo.jpg";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
 const Layout = ({ children }) => {
@@ -11,6 +12,16 @@ const Layout = ({ children }) => {
   const handleClick = () => {
     logout();
   };
+  const navigate = useNavigate();
+
+  const handleAdminClick = (e) => {
+    e.preventDefault();
+    console.log("admin clicked");
+    navigate("/admin");
+   
+
+  }
+
 
   return (
     <div className="min-h-screen">
@@ -43,6 +54,7 @@ const Layout = ({ children }) => {
                 className="w-8 h-8  rounded-full"
               />
             </div>
+            <button onClick={handleAdminClick}>admin page</button>
             <button onClick={handleClick}>Log Out</button>
           </>
         )}
