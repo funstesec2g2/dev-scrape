@@ -4,7 +4,7 @@
 
 
 # Ignore environment-specific configuration files
-/backend/.env
+# /backend/.env
 
 # Logs
 /backend/logs
