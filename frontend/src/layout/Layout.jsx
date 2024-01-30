@@ -80,7 +80,7 @@ const Layout = ({ children }) => {
               </li>
               {/* Add more menu items as needed */}
             </ul>
-            <div className="self-end">{true && <ProfileDropdown />}</div>
+            <div className="self-end">{user && <ProfileDropdown />}</div>
           </div>
         </nav>
         <main>{children}</main>
