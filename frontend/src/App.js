@@ -28,6 +28,10 @@ import { AdminPrivateRoute } from "./AdminPages/adminAuthContext.js";
 import { ProtectedRoute } from "./Routs/protectedRoute.jsx";
 import { authContext } from "./context/authContext.js";
 import { deleteCookie, getCookie, getUserEmail } from "./Components/LoginPage/LoginHelper.js";
+import PlayStore from './scrap/playstore/PlayStore.jsx'
+import TwitterSearch from "./Components/Twitter/Twitter.jsx";
+import SearchComponent from "./scrap/playstore/Wikipedia.jsx";
+import FilmSearch from "./scrap/playstore/Film.jsx";
 function App() {
   // deleteCookie('user');
   // const user = getCookie('user');
@@ -67,6 +71,10 @@ function App() {
               <Route path="/resetSuccess" element={<ResetSuccess />} />
               <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
               <Route path="/userNotExist" element={<UserNotExist />} />
+              <Route path="/playstore" element={<PlayStore  />} />
+              <Route path="/twitter" element={<TwitterSearch  />} />
+              <Route path="/wikipedia" element={<SearchComponent  />} />
+              <Route path="/film" element={<FilmSearch />} />
               
               {/* Admin protected pages  */}
 
