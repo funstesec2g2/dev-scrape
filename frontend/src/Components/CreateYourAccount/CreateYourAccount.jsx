@@ -146,7 +146,7 @@ const CreateYourAccount = () => {
                 value={fullName}
                 onBlur={validateName}
                 onChange={(e) => setFullName(e.target.value)}
-                className={`w-full py-3 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${nameError ? 'border-red-500' : ''}`}
+                className={`w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${nameError ? 'border-red-500' : ''}`}
                 placeholder="Enter your Full Name here"
               />
               {nameError && (
@@ -164,7 +164,7 @@ const CreateYourAccount = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full py-3 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4 ${emailError ? 'border-red-500' : ''}`}
+                className={`w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4 ${emailError ? 'border-red-500' : ''}`}
                 placeholder="Enter your E-mail Address here"
               />
               {emailError && (
@@ -183,7 +183,7 @@ const CreateYourAccount = () => {
                   onBlur={validatePassword}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full py-3 rounded-xl px-3 "
+                  className="w-full py-2 rounded-xl px-3 "
                   type="password"
                   placeholder="Enter New Password"
                 />
@@ -229,7 +229,7 @@ const CreateYourAccount = () => {
                   value={confirmPassword}
                   required
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full py-3 rounded-xl px-3 "
+                  className="w-full py-2 rounded-xl px-3 "
                   type="password"
                   placeholder="Confirm Password"
                 />
@@ -273,16 +273,19 @@ const CreateYourAccount = () => {
             </span>
 
             <Link to='/login'>
-              <button className='text-blue-700 font-bold hover:bg-black'>
+              <button className='text-white font-bold hover:text-black'>
                 Sign In
               </button>
             </Link>
 
             <div className="text-red-700">{userBlockedErrorMessage}</div>
 
-            <div className="text-center text-gray-400 my-1">- OR -</div>
+            <div className="text-center text-white my-1">- OR -</div>
             <div className="buttons flex flex-wrap justify-around">
-              <button className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={handleGoogle}>
+              <div className="button bg-blue-900 text-sm md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={(e)=>{
+                e.preventDefault();
+                signInWithGoogle();
+              }}>
                 <img
                   src={google}
                   alt="google"
@@ -291,8 +294,11 @@ const CreateYourAccount = () => {
                 <a href="" className="mx-2 cursor-pointer my-3">
                   Sign up with Google
                 </a>
-              </button>
-              <button className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={handleGithub}>
+              </div>
+              <button className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={(e)=>{
+                e.preventDefault();
+                signInWithGitHub();
+              }}>
                 <img
                   src={github}
                   alt="google"

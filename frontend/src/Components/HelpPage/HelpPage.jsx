@@ -1,9 +1,8 @@
-import React from 'react';
-import emailjs from 'emailjs-com';
-import Heading from '../Heading/Heading.jsx';
-import './HelpPage.css';
+import { faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import emailjs from 'emailjs-com';
+import React from 'react';
+import './HelpPage.css';
 
 export default function HelpPage() {
   const sendEmail = (e) => {
@@ -48,7 +47,7 @@ export default function HelpPage() {
               <FontAwesomeIcon icon={faLocationDot} />
             </div>
             <div>
-              <h3 className="text-green-500 text-xl ">Address</h3>
+              <h3 className="text-green-500 text-xl text-left ">Address</h3>
               <a
                 href="https://aait.edu.et/contact-us"
                 target="_blank"
@@ -65,7 +64,7 @@ export default function HelpPage() {
             </div>
             <div>
               <h3 className="text-green-500 text-xl ">Phone Number</h3>
-              <p className="text-white ">09......4</p>
+              <p className="text-white text-left">+709123454</p>
             </div>
           </div>
           <div className="flex gap-4">
@@ -73,7 +72,7 @@ export default function HelpPage() {
               <FontAwesomeIcon icon={faEnvelope} />
             </div>
             <div>
-              <h3 className="text-green-500 text-xl ">Email</h3>
+              <h3 className="text-green-500 text-xl text-left ">Email</h3>
               <a
                 href="mailto:est.....@.....com"
                 className="text-blue-300 hover:text-blue-500 active:text-blue-700"
