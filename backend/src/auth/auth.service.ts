@@ -39,11 +39,25 @@ class AuthService{
         return await this.userModel.find().exec();
     }
 
-    async findOne(email: string): Promise<User>{
+    async findOne(email: string){
         console.log(this.userModel)
         return this.userModel.findOne({email: email});
     }
 
+    async findUserByResetCode(code: string){
+        return this.userModel.findOne({passwordResetCode: code})
+    }
+
+    async updatePassword(email: string, newPassword: string){
+        console.log(email)
+        const user = await this.userModel.findOne({email: email});
+        if (!user){
+            throw new Error("user not found");
+        }
+        user.password = await argon.hash(newPassword);
+        user.passwordResetCode = null;
+        return user.save();
+    }
 
     async createUser (createUserDto: AuthDto) : Promise<any>{
         const hash = await argon.hash(createUserDto.password);
@@ -72,6 +86,7 @@ class AuthService{
             const user: User = await this.userModel.findOne({ email: email });
             console.log(user);
             if (!user) {
+                console.log('the user doesnt exist ')
                 return {message: "no user found"};
             }
     

@@ -94,7 +94,7 @@ const  LoginPage = () => {
                 <a
                   className="text-sm cursor-pointer text-cyan-500 hover:text-cyan-700"
                   onClick={() => {
-                    navigate("/forgotPassword");
+                    navigate("/sendResetCode");
                   }}
                 >
                   Forgot password?

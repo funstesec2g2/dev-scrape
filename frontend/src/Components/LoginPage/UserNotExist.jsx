@@ -26,6 +26,9 @@ export const UserNotExist = (props) => {
               <button className="w-[100px] py-3 h-8 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500 flex items-center justify-center  " onClick={()=>navigate('/login')}>
                 Login
               </button>
+              <button className="w-[100px] py-3 h-8 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500 flex items-center justify-center  " onClick={()=>navigate('/createYourAccount')}>
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
