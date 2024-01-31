@@ -68,7 +68,7 @@ const Layout = ({ children }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/favorites" className="text-blue-500">
+                <Link to="/favorited" className="text-blue-500">
                   Favorites
                 </Link>
               </li>

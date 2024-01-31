@@ -56,7 +56,7 @@ const Heading = () => {
               Home
             </Link>
             <Link
-              to="/favorites"
+              to="/favorited"
               className="menu-item text-gray-300 hover:text-white rounded-lg px-4 md:ml-4 hover:bg-sky-900 active:bg-sky-900 transition-colors duration-300 ease-in-out"
             >
               Favorites

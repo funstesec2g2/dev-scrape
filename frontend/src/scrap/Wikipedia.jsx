@@ -6,11 +6,17 @@ import { searchWikipediaByTitle } from './api';
 const SearchComponent = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleSearch = async () => {
     try {
       const response = await searchWikipediaByTitle(searchTerm);
       const wikipediaResults = response.page_info;
+
+      // Check local storage to set initial favorite state
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const isResultFavorite = favorites.some((fav) => fav.title === wikipediaResults.title);
+      setIsFavorite(isResultFavorite);
 
       setSearchResults({
         wikipedia: wikipediaResults,
@@ -18,6 +24,32 @@ const SearchComponent = () => {
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
+  };
+
+  const handleToggleFavorite = () => {
+    if (!searchResults || !searchResults.wikipedia) {
+      return;
+    }
+
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (isFavorite) {
+      // Remove from favorites
+      const updatedFavorites = favorites.filter(
+        (fav) => fav.title !== searchResults.wikipedia.title
+      );
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    } else {
+      // Add to favorites
+      const newFavorite = {
+        title: searchResults.wikipedia.title,
+        url: `https://en.wikipedia.org/wiki/${searchResults.wikipedia.title}`,
+      };
+      const updatedFavorites = [...favorites, newFavorite];
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    }
+
+    setIsFavorite(!isFavorite);
   };
 
   return (
@@ -93,6 +125,17 @@ const SearchComponent = () => {
                   Read More on Wikipedia
                 </a>
               </div>
+
+              <div className="flex items-center justify-end">
+              <span
+                className={`text-xl cursor-pointer ${
+                  isFavorite ? 'text-red-500' : 'text-gray-400'
+                }`}
+                onClick={handleToggleFavorite}
+              >
+                &#10084;
+              </span>
+            </div>
             </div>
           </div>
         </div>

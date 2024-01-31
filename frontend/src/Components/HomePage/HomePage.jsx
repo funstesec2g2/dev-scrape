@@ -7,10 +7,7 @@ const HomePage = () => {
   const [selectedWebsite, setSelectedWebsite] = useState("");
   const navigate = useNavigate();
 
-  const handleClick = (event) => {
-    event.target.classList.toggle("icon");
-    event.target.classList.toggle("icon-active");
-  };
+  
 
   const handleWebsiteChange = (event) => {
     setSelectedWebsite(event.target.value);
@@ -38,7 +35,7 @@ const HomePage = () => {
                 <option value="">Select a website</option>
                 <option value="GitHub">GitHub</option>
                 <option value="YouTube">YouTube</option>
-                <option value="Play Store">Play Store</option>
+                <option value="PlayStore">Play Store</option>
                 <option value="Wikipedia">Wikipedia</option>
                 <option value="Film">Film</option>
               </select>
