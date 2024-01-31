@@ -1,0 +1,25 @@
+body {
+  background-color: rgba(2, 34, 46, 1);
+}
+
+.containe {
+  background-color: rgba(44, 93, 115, 1);
+  padding-bottom: 0;
+}
+.logo {
+  background-color: rgba(68, 117, 139, 1);
+}
+.menu-item.active {
+  background-color: rgb(16, 66, 90);
+  font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+  .containe .flex {
+    width: 100%;
+    background-color: rgba(2, 34, 46, 1);
+  }
+}
+
+

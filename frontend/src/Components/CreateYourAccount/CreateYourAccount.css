@@ -1,0 +1,15 @@
+input {
+  /* border: none; */
+  outline: none;
+}
+.card {
+  width: 100%;
+  max-width: 540px;
+}
+
+.button {
+  width: 225px;
+  min-width: 224px;
+  border: 1.5px solid rgb(186, 186, 186);
+  border-radius: 0.75rem;
+}
