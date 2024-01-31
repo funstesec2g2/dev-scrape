@@ -24,7 +24,11 @@ import Youtube from "./scrap/Youtube.jsx";
 import PlayStore  from './scrap/PlayStore.jsx'
 import Wikipedia from './scrap/Wikipedia.jsx'
 import Film from './scrap/Film.jsx'
+<<<<<<< HEAD
 import SendResetCode from "./Components/ForgotPassword/SendResetCode.js";
+=======
+import Favorites from "./Components/Favorites/Favorite.jsx";
+>>>>>>> 8281374e6ffa4af602d22a38ec9e943414e84104
 
 function App() {
 
@@ -67,7 +71,12 @@ function App() {
               <Route path="/playstore" element={<PlayStore />} />
               <Route path="/wikipedia" element={<Wikipedia />} />
               <Route path="/film" element={<Film />} />
+<<<<<<< HEAD
               <Route path="/sendResetCode" element={<SendResetCode />} />
+=======
+              <Route path="/favorited" element={<Favorites />} />
+              
+>>>>>>> 8281374e6ffa4af602d22a38ec9e943414e84104
 
               {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />

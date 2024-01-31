@@ -25,7 +25,11 @@ const  CreateYourAccount = () => {
     let response;
 
     try {
+<<<<<<< HEAD
       response = await fetch('http://localhost:5500/auth/register', {
+=======
+      response = await fetch('http://localhost:6000/auth/register', {
+>>>>>>> 8281374e6ffa4af602d22a38ec9e943414e84104
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

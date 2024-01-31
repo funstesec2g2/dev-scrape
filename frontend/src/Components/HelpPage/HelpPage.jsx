@@ -1,24 +1,42 @@
-import Heading from "../Heading/Heading.jsx";
-import "./HelpPage.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faPhone,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import emailjs from 'emailjs-com';
+import Heading from '../Heading/Heading.jsx';
+import './HelpPage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export default function HelpPage() {
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    const templateParams = {
+      name: e.target['full-name'].value,
+      email: e.target.email.value,
+      subject: 'New Message from Contact Form',
+      message: e.target.message.value,
+    };
+
+    emailjs.send('service_j78femla', 'template_8kjyozs', templateParams, 'plLnMxkqli4nCAQgc')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+
+    // Clear the form fields after sending the email
+    e.target.reset();
+  };
+
   return (
     <>
-      {/* <Heading /> */}
       <main className="flex flex-wrap justify-center items-center flex-col md:flex-row">
         <div className="max-w-4xl">
           <h1 className="text-white text-center text-2xl font-bold my-3">
             Contact Us
           </h1>
           <p className="text-white text-center px-8 text-sm">
-            Here you can forward some question to one of our helper. Just fill
-            in the form with the right information and we will contact you
+            Here you can forward some questions to one of our helpers. Just fill
+            in the form with the right information, and we will contact you
             through your Email, or you can use the phone number we have
             attached, to reach out to us directly.
           </p>
@@ -66,7 +84,11 @@ export default function HelpPage() {
           </div>
         </div>
 
-        <form className="md:mb-4 md:mx-10 w-full max-w-lg md:w-2/5 grid justify-center mb-5 mt-3 md:mt-8 bg-white py-3">
+        
+        <form
+          onSubmit={sendEmail}
+          className="md:mb-4 md:mx-10 w-full max-w-lg md:w-2/5 grid justify-center mb-5 mt-3 md:mt-8 bg-white py-3"
+        >
           <h2 className="text-gray-600 text-center text-xl font-bold pb-3">
             Send Your Message
           </h2>
@@ -90,6 +112,7 @@ export default function HelpPage() {
           </div>
           <div className="w-full mt-2 ">
             <textarea
+              name="message"
               required="required"
               className="w-full py-2 my-2 outline-none border-slate-900 border-b-2 border-b-solid resize-none"
               placeholder="Your Message"
@@ -103,6 +126,8 @@ export default function HelpPage() {
             />
           </div>
         </form>
+
+
       </main>
     </>
   );

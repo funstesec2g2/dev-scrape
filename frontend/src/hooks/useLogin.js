@@ -18,7 +18,11 @@ export const useLogin = () => {
   const login = async ({ email, password , onWrongPassword = () => {}}, onUserBlocked = () => {}) => {
     setIsLoading(true);
     setError(null);
+<<<<<<< HEAD
     const response = await fetch("http://localhost:5500/auth/login", {
+=======
+    const response = await fetch("http://localhost:6000/auth/login", {
+>>>>>>> 8281374e6ffa4af602d22a38ec9e943414e84104
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: {
