@@ -42,9 +42,10 @@ class AuthController{
     }
     @Post('verify')
     async verifyUser(@Body() body: { verificationCode: string }): Promise<string> {
+      console.log('this method is being called')
       const { verificationCode } = body;
     
-      const user = await this.authService.findByVerificationCode(verificationCode);
+      const user = await this.authService.findByVerificationCode(verificationCode.trim());
       console.log(user);
     
       if (!user) {
@@ -109,7 +110,7 @@ class AuthController{
     }
 
 
-    @Get('block-user')
+    @Post('block-user')
     @UseGuards(AdminAuthorizationGuard)
     @UseGuards(AuthGuard)
     async blockUser(@Body('email') email: string){
@@ -125,6 +126,25 @@ class AuthController{
       
        
     }
+
+  @Get('total-users')
+  @UseGuards(AdminAuthorizationGuard)
+  @UseGuards(AuthGuard)
+  async getTotalUsers() {
+    const totalUsers = await this.authService.getTotalUsers();
+    return { totalUsers };
+  }
+
+  
+  @Get('total-blocked-users')
+  @UseGuards(AdminAuthorizationGuard)
+  @UseGuards(AuthGuard)
+  async getTotalBlockedUsers() {
+    const totalBlockedUsers = await this.authService.getTotalBlockedUsers();
+    return { totalBlockedUsers };
+  }
+
+
 
 
     

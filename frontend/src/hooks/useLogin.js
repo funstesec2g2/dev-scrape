@@ -49,6 +49,11 @@ export const useLogin = () => {
     } else if (json.message === "wrong password") {
       onWrongPassword("You have entered a wrong password");
     }
+
+      else if (json?.message ==='user is not verified') {
+        navigate("/verifyEmail");
+      
+    }
      
     }
   };

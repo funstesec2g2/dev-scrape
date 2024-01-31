@@ -7,12 +7,10 @@ import { InjectModel } from "@nestjs/mongoose";
 import {Model} from 'mongoose';
 import { Response, Request} from "express";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
-import {DatabaseService} from "src/db/database.service";
-
 import { sendVerificationEmail, generateVerificationCode } from './email_service/email.service';
 
 import { Res } from "@nestjs/common";
-import { UserModule } from "src/models/user-folder/user.module";
+
 
 
 @Injectable()
@@ -98,12 +96,20 @@ class AuthService{
             if (user.isBlocked){
                 return {message: 'user is blocked'}
             }
+            if (!user.isVerified){
+                const code = generateVerificationCode();
+                user.emailToken = code;
+                sendVerificationEmail(user.email, code);
+                return {message: 'user is not verified'}
+            }
            
             const payload = {
                 sub: user.email,
-                roles: user.roles
+                roles: user.roles,
+                name: user.fullName,
       
               };
+              console.log(user.fullName);
             const access_token: string = await this.jwtService.signAsync(payload);
             
         
@@ -180,7 +186,24 @@ class AuthService{
     async findByVerificationCode(verificationCode: string){
         return this.userModel.findOne({ emailToken: verificationCode }).exec();
       }
+
+      async getTotalUsers(): Promise<number> {
+        const totalUsers = await this.userModel.countDocuments();
+        console.log('this method is being called', totalUsers)
+        return totalUsers;
+      }
+    
+      async getTotalBlockedUsers(): Promise<number> {
+        console.log('this method is being called', )
+        const totalBlockedUsers = await this.userModel.countDocuments({
+          isBlocked: true,
+        });
+        console.log('this method is being called', totalBlockedUsers)
+        return totalBlockedUsers;
+      }
       
+
+    
 
   
 

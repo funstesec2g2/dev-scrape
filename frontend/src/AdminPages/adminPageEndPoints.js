@@ -1,7 +1,7 @@
 
 import { getCookie } from "../Components/LoginPage/LoginHelper";
 
-const API = 'http://localhost:5000/auth';
+const API = 'http://localhost:5500/auth';
 const accessToken = getCookie('user');
 
 export const blockUser = (email) => {

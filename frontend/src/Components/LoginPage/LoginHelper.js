@@ -39,6 +39,16 @@ export const getCookie = (name) => {
 
     return null;
   }
+  export const getUserName = () =>{
+    console.log("this is the getUserName function")
+    const token = getCookie('user');
+    console.log(token, 'the token ')
+    if (token){
+      const name = jwt_decode(token);
+      return name?.name;
+    }
+    return "";
+  }
 
   export const getUserRole = () =>{
     console.log("this is the getUserRole function")

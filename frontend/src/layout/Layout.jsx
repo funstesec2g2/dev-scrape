@@ -4,7 +4,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
-import { getUserRole } from "../Components/LoginPage/LoginHelper";
+import { getUserName, getUserRole } from "../Components/LoginPage/LoginHelper";
+import { useEffect } from "react";
 
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);
@@ -14,6 +15,8 @@ const Layout = ({ children }) => {
     logout();
   };
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  console.log('this is the username', userName)
 
   const handleAdminClick = (e) => {
     e.preventDefault();
@@ -22,6 +25,12 @@ const Layout = ({ children }) => {
    
 
   }
+
+  useEffect(() => {
+
+   const user = getUserName();
+    setUserName(user);
+  }, []);
 
 
   return (
@@ -48,12 +57,9 @@ const Layout = ({ children }) => {
         ) : (
           <>
             {" "}
-            <div className="">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm-9OvBU3eVMJZbGbQ84dAqW8XdebaXNyqpyV3tO_x5TJyfbEkbf29ATX55L_Ws2UbdxQ&usqp=CAU" // Replace with your profile image URL
-                alt="Profile"
-                className="w-8 h-8  rounded-full"
-              />
+            <div className="user-name position-absolute ">
+              {userName }
+            
             </div>
             {getUserRole()=== "admin" && (
               <button onClick={handleAdminClick}>Admin Page</button>

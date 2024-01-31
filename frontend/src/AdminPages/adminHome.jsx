@@ -3,6 +3,8 @@ import { BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/
 import {  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import './admin.css';
 import { blockUser } from './adminPageEndPoints';
+import { useEffect } from 'react';
+import { getCookie } from '../Components/LoginPage/LoginHelper';
 
 
 const AdminHome = () => {
@@ -16,9 +18,59 @@ const AdminHome = () => {
     { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
   ];
 
-  const [dailyUsers, setDailyUsers] = useState(1);
+  const [dailyUsers, setDailyUsers] = useState(0);
   const [blockUserEmail, setBlockUserEmail] = useState('');
   const [blockedUsers, setBlockedUsers] = useState([]);
+  
+  // adminPageEndPoints.js
+
+const API_BASE_URL = 'http:localhost:5500/auth'; // Replace with your actual API base URL
+
+const getTotalUsers = async () => {
+  const response = await fetch(`${API_BASE_URL}/total-users`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getCookie('user')}`
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Error fetching total users');
+  }
+
+  return response;
+};
+
+const getBlockedUsers = async () => {
+  console.log(getCookie('user'))
+  const response = await fetch(`${API_BASE_URL}/total-blocked-users`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getCookie('user')}`
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Error fetching total blocked users');
+  }
+
+  return response;
+};
+
+
+useEffect(() => {
+  getTotalUsers()
+    .then((response) => setDailyUsers(response.totalUsers))
+    .catch((error) => console.error('Error fetching total users:', error));
+
+  getBlockedUsers()
+    .then((response) => setBlockedUsers(response.totalBlockedUsers))
+    .catch((error) => console.error('Error fetching total blocked users:', error));
+}, []);
+
+
 
  
 
@@ -38,17 +90,17 @@ const AdminHome = () => {
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>{dailyUsers} Daily Users </h3>
+            <h3>{dailyUsers} Total User Users </h3>
             <BsPeopleFill className='card_icon' />
           </div>
           <h1>{dailyUsers}</h1>
         </div>
         <div className='card'>
           <div className='card-inner'>
-            <h3>Blocked Users </h3>
+            <h3>Block Users </h3>
             <BsPeopleFill className='card_icon' />
           </div>
-          <h1>{blockedUsers.length}</h1>
+          <h1>{blockedUsers}</h1>
         </div>
         <div className='card'>
           <div className='card-inner'>
