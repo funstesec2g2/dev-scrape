@@ -26,6 +26,7 @@ import Wikipedia from './scrap/Wikipedia.jsx'
 import Film from './scrap/Film.jsx'
 import SendResetCode from "./Components/ForgotPassword/SendResetCode.js";
 
+import Favorites from "./Components/Favorites/Favorite.jsx";
 function App() {
 
   const { user } = useAuthContext();
@@ -68,6 +69,9 @@ function App() {
               <Route path="/wikipedia" element={<Wikipedia />} />
               <Route path="/film" element={<Film />} />
               <Route path="/sendResetCode" element={<SendResetCode />} />
+
+              <Route path="/favorited" element={<Favorites />} />
+
 
               {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />

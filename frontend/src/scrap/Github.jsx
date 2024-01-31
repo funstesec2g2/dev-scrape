@@ -1,6 +1,6 @@
 // Github.jsx
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { searchGithubReposByTopic } from './api';
 
 const Github = () => {
@@ -32,6 +32,30 @@ const Github = () => {
   const endIndex = startIndex + reposPerPage;
 
   const displayedRepos = repositories?.slice(startIndex, endIndex) || [];
+
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('githubFavorites')) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  const handleToggleFavorite = (repo) => {
+    const existingFavoriteIndex = favorites.findIndex((fav) => fav.id === repo.id);
+
+    if (existingFavoriteIndex !== -1) {
+      // Remove from favorites
+      const updatedFavorites = [...favorites];
+      updatedFavorites.splice(existingFavoriteIndex, 1);
+      setFavorites(updatedFavorites);
+      localStorage.setItem('githubFavorites', JSON.stringify(updatedFavorites));
+    } else {
+      // Add to favorites
+      const updatedFavorites = [...favorites, repo];
+      setFavorites(updatedFavorites);
+      localStorage.setItem('githubFavorites', JSON.stringify(updatedFavorites));
+    }
+  };
 
   return (
     <div className="container mx-auto p-8 bg-gray-100 rounded-md shadow-md my-10">
@@ -84,6 +108,15 @@ const Github = () => {
                   <p className='text-blue-400'>License: {repo.license?.name || 'N/A'}</p>
                   <p className='text-blue-400'>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
                 </div>
+
+                <span
+                  className="cursor-pointer text-xl"
+                  role="img"
+                  aria-label="Favorite"
+                  onClick={() => handleToggleFavorite(repo)}
+                >
+                  {favorites.some((fav) => fav.id === repo.id) ? '❤️' : '🤍'}
+                </span>
               </div>
             </div>
           ))}

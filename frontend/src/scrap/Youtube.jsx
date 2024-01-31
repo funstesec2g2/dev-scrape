@@ -1,12 +1,20 @@
 // Updated Youtube.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { searchYoutubeByTitle } from './api';
 
 const Youtube = () => {
   const [videoTitle, setVideoTitle] = useState('');
   const [youtubeInfo, setYoutubeInfo] = useState(null);
   const [error, setError] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    // Check local storage to set initial favorite state
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const isVideoFavorite = favorites.some((fav) => fav.title === youtubeInfo?.title);
+    setIsFavorite(isVideoFavorite);
+  }, [youtubeInfo]);
 
   const handleSearch = async () => {
     try {
@@ -19,8 +27,26 @@ const Youtube = () => {
     }
   };
 
+  const handleToggleFavorite = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (isFavorite) {
+      // Remove from favorites
+      const updatedFavorites = favorites.filter((fav) => fav.title !== youtubeInfo.title);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    } else {
+      // Add to favorites
+      const newFavorite = { title: youtubeInfo.title, url: youtubeInfo.url };
+      const updatedFavorites = [...favorites, newFavorite];
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    }
+
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <div className="w-full max-w-screen-xl mx-auto p-8 bg-gray-100 rounded-md shadow-md my-10">
+   
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Discover YouTube Videos</h1>
       <p className="text-gray-600 mb-6">
         Welcome to our YouTube Video Information tool! Enter the title of a video, and we'll provide
@@ -44,8 +70,11 @@ const Youtube = () => {
       </button>
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
+     
 
       {youtubeInfo && (
+
+        
         <div className="mt-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">Title: {youtubeInfo.title}</h2>
           <p className="text-gray-600 mb-2">Author: {youtubeInfo.author}</p>
@@ -64,6 +93,18 @@ const Youtube = () => {
               </a>
             </p>
           </div>
+
+          <div className="mt-4">
+            {/* Heart icon for favorites */}
+            <span
+              className={`text-xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-gray-400'}`}
+              onClick={handleToggleFavorite}
+            >
+              &#10084;
+            </span>
+          </div>
+
+          
         </div>
       )}
     </div>

@@ -11,7 +11,6 @@ import { AuthGuard } from "./auth_guards/auth.guard";
 import { sendVerificationEmail } from "./email_service/email.service";
 import { sendForgotPasswordEmail } from "./email_service/email.service";
 import { generateVerificationCode } from "./email_service/email.service";
-import { use } from "passport";
 import { InternalServerErrorException } from "@nestjs/common";
 
 @Controller('auth')

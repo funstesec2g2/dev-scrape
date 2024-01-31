@@ -1,11 +1,24 @@
 // src/App.js
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { search } from './api';
 
 const SearchApp = () => {
   const [keyword, setKeyword] = useState('');
   const [appDetails, setAppDetails] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    // Check local storage to set initial favorite state
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
+
+    if (appDetails) {
+      const isAppFavorite = storedFavorites.some((fav) => fav.title === appDetails.title);
+      setIsFavorite(isAppFavorite);
+    }
+  }, [appDetails]);
 
   const handleSearch = async () => {
     try {
@@ -19,6 +32,31 @@ const SearchApp = () => {
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
+  };
+
+  const handleToggleFavorite = () => {
+    if (!appDetails) {
+      return;
+    }
+
+    const updatedFavorites = [...favorites];
+    const existingFavoriteIndex = updatedFavorites.findIndex((fav) => fav.title === appDetails.title);
+
+    if (existingFavoriteIndex !== -1) {
+      // Remove from favorites
+      updatedFavorites.splice(existingFavoriteIndex, 1);
+    } else {
+      // Add to favorites
+      updatedFavorites.push({
+        title: appDetails.title,
+        icon: appDetails.icon,
+        url: appDetails.url,
+      });
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+    setIsFavorite(!isFavorite);
   };
 
   const styles = {
@@ -116,6 +154,18 @@ const SearchApp = () => {
           >
             View on Play Store
           </a>
+
+          <button
+  href="#"
+  className={`${styles.favoriteButton} ${isFavorite ? styles.favoriteIcon : ''}`}
+  onClick={(e) => {
+    e.preventDefault();
+    handleToggleFavorite();
+  }}
+  style={{ textDecoration: 'none', color: isFavorite ? 'red' : '' }}
+>
+  &#10084;
+</button>
         </div>
       )}
     </div>
