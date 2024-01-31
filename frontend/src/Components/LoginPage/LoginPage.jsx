@@ -50,11 +50,11 @@ const  LoginPage = () => {
             <h1 className="text-xl font-bold h-10 text-white md:text-black text-center">
               Log in
             </h1>
-            <span className="text-sm pr-2 text-white md:text-black ml-5">
+            <span className="text-sm pr-2 text-white md:text-slate-900 ml-5">
               Don't have an account?
             </span>
             <Link to="/createYourAccount">
-              <button className="text-yellow-500 hover:text-yellow-800">
+              <button className="text-gray-300 hover:text-black">
                 Sign Up
               </button>
             </Link>
@@ -92,7 +92,7 @@ const  LoginPage = () => {
 
               <div className="forgot-password flex justify-end mb-6">
                 <a
-                  className="text-sm cursor-pointer "
+                  className="text-sm cursor-pointer text-gray-300 hover:text-slate-800 "
                   onClick={() => {
                     navigate("/sendResetCode");
                   }}
@@ -114,7 +114,7 @@ const  LoginPage = () => {
             </form>
           </div>
 
-          <div className="text-center text-gray-400 my-4">- OR -</div>
+          <div className="text-center text-gray-300 my-4">- OR -</div>
           <div className="buttons flex flex-wrap justify-around">
             <div>
               <button
