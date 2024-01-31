@@ -24,6 +24,7 @@ import Youtube from "./scrap/Youtube.jsx";
 import PlayStore  from './scrap/PlayStore.jsx'
 import Wikipedia from './scrap/Wikipedia.jsx'
 import Film from './scrap/Film.jsx'
+import Favorites from "./Components/Favorites/Favorite.jsx";
 
 function App() {
 
@@ -64,6 +65,8 @@ function App() {
               <Route path="/playstore" element={<PlayStore />} />
               <Route path="/wikipedia" element={<Wikipedia />} />
               <Route path="/film" element={<Film />} />
+              <Route path="/favorited" element={<Favorites />} />
+              
 
               {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />
