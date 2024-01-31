@@ -28,7 +28,7 @@ export const sendVerificationEmail = async (email: string, verificationCode: str
   });
 };
 
-export const sendForgotPasswordEmail = async (email: string, newPassword: string) => {
+export const sendForgotPasswordEmail = async (email: string, resetCode: string) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -44,7 +44,7 @@ export const sendForgotPasswordEmail = async (email: string, newPassword: string
     from: { address: 'funstesec2g2@gmail.com' },
     to: email,
     subject: 'Password Reset',
-    text: `Your new password is: ${newPassword}`,
+    text: `Your new password is: ${resetCode}`,
   };
 
   await transporter.sendMail(mailOptions, (error, info) => {

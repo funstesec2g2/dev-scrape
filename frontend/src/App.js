@@ -24,6 +24,7 @@ import Youtube from "./scrap/Youtube.jsx";
 import PlayStore  from './scrap/PlayStore.jsx'
 import Wikipedia from './scrap/Wikipedia.jsx'
 import Film from './scrap/Film.jsx'
+import SendResetCode from "./Components/ForgotPassword/SendResetCode.js";
 
 function App() {
 
@@ -52,8 +53,10 @@ function App() {
                 path="/createYourAccount"
                 element={<CreateYourAccount />}
               />
+              <Route path="/register" element={<CreateYourAccount />} />
               <Route path="/verifyEmail" element={<VerifyEmail />} />
-              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/forgotPassword" element={<ForgotPassword/>} />
+
               <Route path="/checkYourEmail" element={<CheckYourEmail />} />
               <Route path="/resetPassword" element={<ResetPassword />} />
               <Route path="/resetSuccess" element={<ResetSuccess />} />
@@ -64,6 +67,7 @@ function App() {
               <Route path="/playstore" element={<PlayStore />} />
               <Route path="/wikipedia" element={<Wikipedia />} />
               <Route path="/film" element={<Film />} />
+              <Route path="/sendResetCode" element={<SendResetCode />} />
 
               {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />

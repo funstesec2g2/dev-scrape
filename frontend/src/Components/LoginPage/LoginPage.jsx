@@ -92,9 +92,9 @@ const  LoginPage = () => {
 
               <div className="forgot-password flex justify-end mb-6">
                 <a
-                  className="text-sm cursor-pointer text-cyan-500 hover:text-cyan-700"
+                  className="text-sm cursor-pointer "
                   onClick={() => {
-                    navigate("/forgotPassword");
+                    navigate("/sendResetCode");
                   }}
                 >
                   Forgot password?

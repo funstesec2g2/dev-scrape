@@ -34,6 +34,9 @@ export class User {
   @Prop()
   emailToken: string;
 
+  @Prop()
+  passwordResetCode: string
+
   
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookmark' }] })

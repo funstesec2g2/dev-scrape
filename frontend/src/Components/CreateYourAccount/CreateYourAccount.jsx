@@ -3,14 +3,20 @@ import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import { useState } from "react";
 import logo from "../assets/logo-img.png";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
-const  CreateYourAccount = () => {
+
+const CreateYourAccount = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate  = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [userBlockedErrorMessage, setUserBlockedErrorMessage] = useState('');
+  const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
 
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
@@ -20,45 +26,87 @@ const  CreateYourAccount = () => {
       icon.type = "password";
     }
   }
+
+  const validateName = () => {
+    if (!fullName) {
+      setNameError('Name is required.');
+    } else {
+      setNameError('');
+    }
+  };
+
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError('Email is required.');
+    } else if (!emailRegex.test(email)) {
+      setEmailError('Invalid email format.');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const validatePassword = () => {
+    // Password should contain at least one digit, one uppercase, one lowercase letter, and be at least 8 characters long
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    if (!password) {
+      setPasswordError('Password is required.');
+    } else if (!passwordRegex.test(password)) {
+      setPasswordError('Password should contain at least one digit, one uppercase letter, one lowercase letter, and be at least 8 characters long.');
+    } else {
+      setPasswordError('');
+    }
+  };
+
   const createAccount = async (event) => {
     event.preventDefault();
-    let response;
+
+    // Validate name, email, and password
+    validateName();
+    validateEmail();
+    validatePassword();
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setPasswordMatchError('Passwords do not match.');
+      return;
+    }
+
+    // Reset password match error if passwords match
+    setPasswordMatchError('');
+
+    // Check if there are any validation errors
+    if (nameError || emailError || passwordError) {
+      return;
+    }
 
     try {
-      response = await fetch('http://localhost:5000/auth/register', {
+      const response = await fetch('http://localhost:5500/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fullName, email, password
         })
-      })
+      });
+
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+
+      if ('message' in jsonResponse) {
+        if (jsonResponse.message === 'User already exists') {
+          // Redirect to login
+          navigate('/userAlreadyExist');
+        } else if (jsonResponse.message === 'user is blocked') {
+          setUserBlockedErrorMessage('You are blocked; you cannot register');
+        }
+      } else {
+        // Redirect to verify email
+        navigate('/verifyEmail');
+      }
     } catch (error) {
-      console.log(error);
-      return;
-    }
-
-    const jsonResponse = await response.json();
-    console.log(jsonResponse);
-
-    if ('message' in jsonResponse){
-
-      if (jsonResponse.message === 'User already exists') {
-        // Redirect to login
-        navigate('/userAlreadyExist');
-    } 
-    if (jsonResponse.message === 'user is blocked'){
-      setUserBlockedErrorMessage('You are blocked you cant register');
-
-    }
-    } else {
-      // Redirect to verify email
-      navigate('/verifyEmail');
+      console.error(error);
     }
   };
-
-
-  
-  
 
   return (
     <div className="grid md:grid-cols-2">
@@ -72,50 +120,55 @@ const  CreateYourAccount = () => {
             <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">
               Create your Free Account
             </h1>
-
           </div>
           <div className="inputs">
             <form onSubmit={createAccount}>
               <label htmlFor="fullname">
                 <p className="text-white md:text-gray-400">Full Name</p>
               </label>
-              {/* <div className=""> */}
-                <input
-                  id="fullname"
-                  type="text"
-                  name="name"
-                  value={fullName}
-                  required
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full h-5 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4"
-                  placeholder="Enter your Full Name here"
-                />
-              {/* </div> */}
+              <input
+                id="fullname"
+                type="text"
+                name="name"
+                value={fullName}
+                onBlur={validateName}
+                onChange={(e) => setFullName(e.target.value)}
+                className={`w-full h-5 py-5 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${nameError ? 'border-red-500' : ''}`}
+                placeholder="Enter your Full Name here"
+              />
+              {nameError && (
+                <div className="text-red-500 text-sm mt-1">
+                  {nameError}
+                </div>
+              )}
 
               <label htmlFor="email">
                 <p className="text-white md:text-gray-400">E-Mail</p>
               </label>
-              {/* <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4"> */}
-                <input
-                  // type="email"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-3 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4"
-                  placeholder="Enter your E-mail Address here"
-                />
-              {/* </div> */}
+              <input
+                name="email"
+                onBlur={validateEmail}
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`w-full h-3 py-5 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4 ${emailError ? 'border-red-500' : ''}`}
+                placeholder="Enter your E-mail Address here"
+              />
+              {emailError && (
+                <div className="text-red-500 text-sm mt-1">
+                  {emailError}
+                </div>
+              )}
 
               <label htmlFor="passSignup">
                 <p className="text-white md:text-gray-400">Password</p>
               </label>
-              <div className="input md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${passwordError ? 'border-red-500' : ''}`}>
                 <input
                   id="passSignup"
                   name="pwd"
+                  onBlur={validatePassword}
                   value={password}
-                  required
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full h-3 py-3 rounded-xl px-3 "
                   type="password"
@@ -140,6 +193,57 @@ const  CreateYourAccount = () => {
                   </svg>
                 </span>
               </div>
+              {passwordError && (
+                <div className="text-red-500 text-sm mt-1">
+                  {passwordError}
+                </div>
+              )}
+
+              <label htmlFor="confirmPass">
+                <p className="text-white md:text-gray-400">Confirm Password</p>
+              </label>
+              <div className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${passwordMatchError ? 'border-red-500' : ''}`}>
+                <input
+                  id="confirmPass"
+                  name="confirmPwd"
+                  onBlur={() => {
+                    if (password !== confirmPassword) {
+                      setPasswordMatchError('Passwords do not match.');
+                    } else {
+                      setPasswordMatchError('');
+                    }
+                  }}
+                  value={confirmPassword}
+                  required
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full h-3 py-3 rounded-xl px-3 "
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+                <span id="eye-holder">
+                  <svg
+                    onClick={passwordToggler}
+                    id="eye-closed"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="grey"
+                    className="w-5 text-red h-5 mr-4 text-end inline-block "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
+                    />
+                  </svg>
+                </span>
+              </div>
+              {passwordMatchError && (
+                <div className="text-red-500 text-sm mt-1">
+                  {passwordMatchError}
+                </div>
+              )}
 
               <div className="flex justify-center mt-2">
                 <button
@@ -156,9 +260,9 @@ const  CreateYourAccount = () => {
             </span>
 
             <Link to='/login'>
-            <button className='text-blue-700 font-bold hover:bg-black'>
-              Sign In
-            </button>
+              <button className='text-blue-700 font-bold hover:bg-black'>
+                Sign In
+              </button>
             </Link>
 
             <div className="text-red-700">{userBlockedErrorMessage}</div>
@@ -188,8 +292,7 @@ const  CreateYourAccount = () => {
             </div>
           </div>
         </div>
-        </div>
-      
+      </div>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
+import { getUserRole } from "../Components/LoginPage/LoginHelper";
+
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);
   const { user } = useAuthContext();
@@ -53,7 +55,9 @@ const Layout = ({ children }) => {
                 className="w-8 h-8  rounded-full"
               />
             </div>
-            <button onClick={handleAdminClick}>admin page</button>
+            {getUserRole()=== "admin" && (
+              <button onClick={handleAdminClick}>Admin Page</button>
+            )}
             <button onClick={handleClick}>Log Out</button>
           </>
         )}
