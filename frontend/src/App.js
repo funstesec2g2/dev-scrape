@@ -19,6 +19,11 @@ import { UserNotExist } from "./Components/LoginPage/UserNotExist.jsx";
 import EditProfile from "./Components/EditProfile/EditProfile.jsx"; // Import your AdminHome component
 import AdminApp from "./AdminPages/adminApp.jsx";
 import { ProtectedRoute } from "./Routs/protectedRoute.jsx";
+import Github from "./scrap/Github.jsx";
+import Youtube from "./scrap/Youtube.jsx";
+import PlayStore  from './scrap/PlayStore.jsx'
+import Wikipedia from './scrap/Wikipedia.jsx'
+import Film from './scrap/Film.jsx'
 
 function App() {
 
@@ -54,6 +59,12 @@ function App() {
               <Route path="/resetSuccess" element={<ResetSuccess />} />
               <Route path="/userAlreadyExist" element={<UserAlreadyExist />} />
               <Route path="/userNotExist" element={<UserNotExist />} />
+              <Route path="/github" element={<Github />} />
+              <Route path="/youtube" element={<Youtube />} />
+              <Route path="/playstore" element={<PlayStore />} />
+              <Route path="/wikipedia" element={<Wikipedia />} />
+              <Route path="/film" element={<Film />} />
+
               {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />
               <Route path="/wikipedia" element={<SearchComponent  />} />
@@ -64,6 +75,7 @@ function App() {
               <Route path="" element={<ProtectedRoute role='admin'/>}>
                   <Route path="/admin" element={<AdminApp/>} />
               </Route>
+              
 
               {/* <Route element={
                 <AdminPrivateRoute>
