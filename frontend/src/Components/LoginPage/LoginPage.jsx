@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import "./LoginPage.css";
-import google from "../assets/google.svg";
-import github from "../assets/github.svg";
-import logo from "../assets/logo.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 import Eyeclosed from "../assets/Eyeclosed";
 import Eyeopened from "../assets/Eyeopened";
-import { useLogin } from "../../hooks/useLogin";
+import github from "../assets/github.svg";
+import google from "../assets/google.svg";
+import logo from "../assets/logo.png";
+import "./LoginPage.css";
 const  LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [wrongPassword, setWrongPassword] = useState("");
-  const [onUserBlocked, setOnUserBlocked] = useState(false);  
+  const [onUserBlocked, setOnUserBlocked] = useState(false);
   const navigate = useNavigate();
   
   const [eye, setEye] = useState("closed");
@@ -35,7 +35,7 @@ const  LoginPage = () => {
     } catch (error) {
       console.log(error);
       setWrongPassword('Sever Error, please try again')
-      return 
+      return
     }
   };
 

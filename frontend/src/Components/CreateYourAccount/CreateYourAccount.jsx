@@ -1,10 +1,9 @@
-import "./CreateYourAccount.css";
-import google from "../assets/google.svg";
-import github from "../assets/github.svg";
 import { useState } from "react";
-import logo from "../assets/logo-img.png";
-import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import github from "../assets/github.svg";
+import google from "../assets/google.svg";
+import logo from "../assets/logo.png";
+import "./CreateYourAccount.css";
 
 const CreateYourAccount = () => {
   const [fullName, setFullName] = useState('');
@@ -110,8 +109,8 @@ const CreateYourAccount = () => {
 
   return (
     <div className="grid md:grid-cols-2">
-      <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
-        <img src={logo} alt="logo-img" />
+      <div className="hidden text-white md:flex items-center justify-center">
+        <img src={logo} alt="logo-img" className="w-8/12" />
       </div>
 
       <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white h-screen">
@@ -124,7 +123,7 @@ const CreateYourAccount = () => {
           <div className="inputs">
             <form onSubmit={createAccount}>
               <label htmlFor="fullname">
-                <p className="text-white md:text-gray-400">Full Name</p>
+                <p className="text-white md:text-gray-900 text-left">Full Name</p>
               </label>
               <input
                 id="fullname"
@@ -133,7 +132,7 @@ const CreateYourAccount = () => {
                 value={fullName}
                 onBlur={validateName}
                 onChange={(e) => setFullName(e.target.value)}
-                className={`w-full h-5 py-5 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${nameError ? 'border-red-500' : ''}`}
+                className={`w-full py-3 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${nameError ? 'border-red-500' : ''}`}
                 placeholder="Enter your Full Name here"
               />
               {nameError && (
@@ -143,7 +142,7 @@ const CreateYourAccount = () => {
               )}
 
               <label htmlFor="email">
-                <p className="text-white md:text-gray-400">E-Mail</p>
+                <p className="text-white md:text-gray-900 text-left">E-Mail</p>
               </label>
               <input
                 name="email"
@@ -151,7 +150,7 @@ const CreateYourAccount = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full h-3 py-5 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4 ${emailError ? 'border-red-500' : ''}`}
+                className={`w-full py-3 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4 ${emailError ? 'border-red-500' : ''}`}
                 placeholder="Enter your E-mail Address here"
               />
               {emailError && (
@@ -161,7 +160,7 @@ const CreateYourAccount = () => {
               )}
 
               <label htmlFor="passSignup">
-                <p className="text-white md:text-gray-400">Password</p>
+                <p className="text-white md:text-gray-900 text-left">Password</p>
               </label>
               <div className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${passwordError ? 'border-red-500' : ''}`}>
                 <input
@@ -170,7 +169,7 @@ const CreateYourAccount = () => {
                   onBlur={validatePassword}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-3 py-3 rounded-xl px-3 "
+                  className="w-full py-3 rounded-xl px-3 "
                   type="password"
                   placeholder="Enter New Password"
                 />
@@ -200,7 +199,7 @@ const CreateYourAccount = () => {
               )}
 
               <label htmlFor="confirmPass">
-                <p className="text-white md:text-gray-400">Confirm Password</p>
+                <p className="text-white md:text-gray-900 text-left">Confirm Password</p>
               </label>
               <div className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${passwordMatchError ? 'border-red-500' : ''}`}>
                 <input
@@ -216,7 +215,7 @@ const CreateYourAccount = () => {
                   value={confirmPassword}
                   required
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full h-3 py-3 rounded-xl px-3 "
+                  className="w-full py-3 rounded-xl px-3 "
                   type="password"
                   placeholder="Confirm Password"
                 />
