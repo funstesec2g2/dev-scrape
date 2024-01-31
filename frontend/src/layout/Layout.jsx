@@ -4,8 +4,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
-import { getUserName, getUserRole } from "../Components/LoginPage/LoginHelper";
-import { useEffect } from "react";
+import { getCookie, getUserName, getUserRole } from "../Components/LoginPage/LoginHelper";
+import {useEffect} from 'react'
 
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);
@@ -27,12 +27,10 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-
-   const user = getUserName();
-    setUserName(user);
-  }, []);
-
-
+      const user = getUserName();
+      setUserName(user);
+  }, [getUserName()]); 
+  
   return (
     <div className="min-h-screen">
       <header className="bg-blue-500 p-4 text-white flex justify-between items-center">
@@ -101,7 +99,7 @@ const Layout = ({ children }) => {
               </li>
               {/* Add more menu items as needed */}
             </ul>
-            <div className="self-end">{true && <ProfileDropdown />}</div>
+            <div className="self-end">{getCookie('user') && <ProfileDropdown />}</div>
           </div>
         </nav>
         <main>{children}</main>

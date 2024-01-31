@@ -3,7 +3,7 @@ import { HttpException, HttpStatus } from "@nestjs/common";
 import  AuthService from "./auth.service";
 import { AuthDto } from "./dto/auth.dto";
 import { UserService } from "src/models/user-folder/user.service";
-import { Response } from "express";
+import e, { Response } from "express";
 import { Res } from "@nestjs/common";
 import { Error, MongooseError } from "mongoose";
 import { AdminAuthorizationGuard } from "./admin_authorization/admin.authorization.guard";
@@ -12,6 +12,8 @@ import { sendVerificationEmail } from "./email_service/email.service";
 import { sendForgotPasswordEmail } from "./email_service/email.service";
 import { generateVerificationCode } from "./email_service/email.service";
 import { InternalServerErrorException } from "@nestjs/common";
+import * as argon from "argon2"
+import { User } from "src/models/user-folder/user.schema";
 
 @Controller('auth')
 class AuthController{
@@ -37,7 +39,7 @@ class AuthController{
     @Post('login')
     async login(@Body() body: any,@Res({passthrough:true}) response: Response ){
 
-        return this.authService.login(body.email, body.password, response);
+        return this.authService.login(body.email, body.password);
         
     }
     @Post('verify')
@@ -145,6 +147,28 @@ class AuthController{
   }
 
 
+  @Post('change-name')
+  @UseGuards(AuthGuard) 
+  async changeUserName(@Body() body: { email: string; password: string; newName: string }): Promise<{ message: string }> {
+    
+    const { email, password, newName } = body;
+    console.log(email, 'the email')
+    console.log(email, password, newName);
+  
+
+    // const user = this.authService.findOne(email);
+    // console.log(user);
+
+    // if (!user){
+    //   return {message: 'No user found'}
+    // }
+    // const pwMatches = await argon.verify((await user).password, password);
+    // if (!pwMatches){
+    // return {message: 'Wrong password'} }
+
+    // (await user).fullName = newName;
+    return {message: 'Success'}
+}
 
 
     

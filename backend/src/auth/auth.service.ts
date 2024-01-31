@@ -8,6 +8,7 @@ import {Model} from 'mongoose';
 import { Response, Request} from "express";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
 import { sendVerificationEmail, generateVerificationCode } from './email_service/email.service';
+import { InternalServerErrorException } from '@nestjs/common';
 
 import { Res } from "@nestjs/common";
 
@@ -78,7 +79,7 @@ class AuthService{
        
     }
 
-    async login(email: string, password: string, response: Response): Promise<{ message: string, access_token?:string, email?: string }> {
+    async login(email: string, password: string): Promise<{ message: string, access_token?:string, email?: string }> {
 
         try{
             const user: User = await this.userModel.findOne({ email: email });
@@ -107,6 +108,7 @@ class AuthService{
                 sub: user.email,
                 roles: user.roles,
                 name: user.fullName,
+                email: user.email
       
               };
               console.log(user.fullName);
@@ -200,6 +202,31 @@ class AuthService{
         });
         console.log('this method is being called', totalBlockedUsers)
         return totalBlockedUsers;
+      }
+
+      async updateUserName(user, newName): Promise<any> {
+        try {
+          user.full = newName;
+          await user.save();
+        } catch (error) {
+          console.error('Error updating user name:', error);
+          throw new InternalServerErrorException('Internal server error');
+        }
+      }
+
+      async authenticateUser(email: string, password: string): Promise<{message: string}> {
+        const user = await this.userModel.findOne({ email });
+    
+        if (!user) {
+          return {message: 'User not found'};
+        }
+    
+      
+        if (user.password !== password) {
+            return {message: 'Wrong password'};
+        }
+    
+        return {message: 'Success'};
       }
       
 

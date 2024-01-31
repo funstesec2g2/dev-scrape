@@ -3,7 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
+import { useLogin } from "../../hooks/useLogin";
 import "./CreateYourAccount.css";
+
 
 const CreateYourAccount = () => {
   const [fullName, setFullName] = useState('');
@@ -16,6 +18,9 @@ const CreateYourAccount = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
+  const { login,  error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
+
+
 
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
@@ -32,6 +37,15 @@ const CreateYourAccount = () => {
     } else {
       setNameError('');
     }
+  };
+
+  const handleGoogle = async (e) => {
+    e.preventDefault();
+    await signInWithGoogle();
+  };
+  const handleGithub = async (e) => {
+    e.preventDefault();
+    await signInWithGitHub();
   };
 
   const validateEmail = () => {
@@ -87,7 +101,7 @@ const CreateYourAccount = () => {
           fullName, email, password
         })
       });
-
+      console.log('this method is being reached')
       const jsonResponse = await response.json();
       console.log(jsonResponse);
 
@@ -268,7 +282,7 @@ const CreateYourAccount = () => {
 
             <div className="text-center text-gray-400 my-1">- OR -</div>
             <div className="buttons flex flex-wrap justify-around">
-              <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+              <button className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={handleGoogle}>
                 <img
                   src={google}
                   alt="google"
@@ -277,8 +291,8 @@ const CreateYourAccount = () => {
                 <a href="" className="mx-2 cursor-pointer my-3">
                   Sign up with Google
                 </a>
-              </div>
-              <div className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+              </button>
+              <button className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={handleGithub}>
                 <img
                   src={github}
                   alt="google"
@@ -287,7 +301,7 @@ const CreateYourAccount = () => {
                 <a href="" className="mx-1 cursor-pointer my-1">
                   Sign up with Github
                 </a>
-              </div>
+              </button>
             </div>
           </div>
         </div>

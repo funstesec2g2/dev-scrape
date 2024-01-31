@@ -38,7 +38,6 @@ function App() {
           <Layout>
             {/* <Heading /> */}
             <Routes>
-              <Route path="/editProfile" element={<EditProfile />} />
               <Route path="/" element={<HomePage />} />
               <Route
                 path="/login"
@@ -83,6 +82,13 @@ function App() {
               <Route path="" element={<ProtectedRoute role='admin'/>}>
                   <Route path="/admin" element={<AdminApp/>} />
               </Route>
+              {/* <Route path="" element={<ProtectedRoute role='user'/>}>
+              <Route path="/editProfile" element={<EditProfile />} />
+              </Route> */}
+              <Route
+                path="/editProfile"
+                element={user ? <EditProfile /> : <Navigate to="/" />}
+              />
               
 
               {/* <Route element={

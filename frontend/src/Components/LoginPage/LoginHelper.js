@@ -29,11 +29,13 @@ export const getCookie = (name) => {
 
 
   export const getUserEmail = () =>{
+   
 
     const token = getCookie('user');
     if (token){
         const payload = jwt_decode(token);
-        console.log(payload, 'the payload')
+        console.log(payload, 'the payload, this is the paylod')
+        
         return payload?.email;
     }
 

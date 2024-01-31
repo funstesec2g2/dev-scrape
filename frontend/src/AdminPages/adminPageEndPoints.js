@@ -14,7 +14,9 @@ export const blockUser = (email) => {
     body: JSON.stringify({ email }),
   });
 
-  if (response.ok)
+  if (response.ok){
+    console.log('User blocked successfully');
+  }
 
 
 

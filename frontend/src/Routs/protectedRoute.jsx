@@ -26,10 +26,10 @@ export const ProtectedRoute = (props) => {
 
   if (!auth || (props?.role && props.role !== role)) {
     toast.error("You are not authorized to view this page", {
-      autoClose: 3000, // The pop-up will close after 3000 milliseconds (3 seconds)
+      autoClose: 3000, 
     });
-    navigate("/"); // You can redirect to another page if needed
-    return null; // Render nothing if not authorized
+    navigate("/");
+    return null; 
   }
 
   return <Outlet />;
