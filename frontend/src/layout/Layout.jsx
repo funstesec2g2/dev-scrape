@@ -4,8 +4,12 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
-import { getCookie, getUserName, getUserRole } from "../Components/LoginPage/LoginHelper";
-import {useEffect} from 'react'
+import {
+  getCookie,
+  getUserName,
+  getUserRole,
+} from "../Components/LoginPage/LoginHelper";
+import { useEffect } from "react";
 
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);
@@ -15,16 +19,14 @@ const Layout = ({ children }) => {
     logout();
   };
   const navigate = useNavigate();
-  const [userName, setUserName] = useState('');
-  console.log('this is the username', userName)
+  const [userName, setUserName] = useState("");
+  console.log("this is the username", userName);
 
   const handleAdminClick = (e) => {
     e.preventDefault();
     console.log("admin clicked");
     navigate("/admin");
-   
-
-  }
+  };
 
   useEffect(() => {
       const user = getUserName();
@@ -55,11 +57,8 @@ const Layout = ({ children }) => {
         ) : (
           <>
             {" "}
-            <div className="user-name position-absolute ">
-              {userName }
-            
-            </div>
-            {getUserRole()=== "admin" && (
+            <div className="user-name position-absolute">{userName}</div>
+            {getUserRole() === "admin" && (
               <button onClick={handleAdminClick}>Admin Page</button>
             )}
             <button onClick={handleClick}>Log Out</button>
@@ -80,13 +79,6 @@ const Layout = ({ children }) => {
                   Favorites
                 </Link>
               </li>
-              {user && (
-                <li>
-                  <Link to="/dashboard" className="text-blue-500">
-                    Dashboard
-                  </Link>
-                </li>
-              )}
               <li>
                 <Link to="/about" className="text-blue-500">
                   About
@@ -99,7 +91,9 @@ const Layout = ({ children }) => {
               </li>
               {/* Add more menu items as needed */}
             </ul>
-            <div className="self-end">{getCookie('user') && <ProfileDropdown />}</div>
+            <div className="self-end">
+              {getCookie("user") && <ProfileDropdown />}
+            </div>
           </div>
         </nav>
         <main>{children}</main>

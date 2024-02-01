@@ -1,26 +1,24 @@
 import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
 import { useLogin } from "../../hooks/useLogin";
 import "./CreateYourAccount.css";
 
-
 const CreateYourAccount = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [userBlockedErrorMessage, setUserBlockedErrorMessage] = useState('');
-  const [passwordMatchError, setPasswordMatchError] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [userBlockedErrorMessage, setUserBlockedErrorMessage] = useState("");
+  const [passwordMatchError, setPasswordMatchError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
-  const { login,  error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
-
-
+  const { login, error, isLoading, signInWithGitHub, signInWithGoogle } =
+    useLogin();
 
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
@@ -33,9 +31,9 @@ const CreateYourAccount = () => {
 
   const validateName = () => {
     if (!fullName) {
-      setNameError('Name is required.');
+      setNameError("Name is required.");
     } else {
-      setNameError('');
+      setNameError("");
     }
   };
 
@@ -51,11 +49,11 @@ const CreateYourAccount = () => {
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      setEmailError('Email is required.');
+      setEmailError("Email is required.");
     } else if (!emailRegex.test(email)) {
-      setEmailError('Invalid email format.');
+      setEmailError("Invalid email format.");
     } else {
-      setEmailError('');
+      setEmailError("");
     }
   };
 
@@ -63,11 +61,11 @@ const CreateYourAccount = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[0-9a-zA-Z!@#$%^&*(),.?":{}|<>]{8,}$/;
   
     if (!password) {
-      setPasswordError('Password is required.');
+      setPasswordError("Password is required.");
     } else if (!passwordRegex.test(password)) {
       setPasswordError('Password should contain at least one digit, one uppercase letter, one lowercase letter, one special character, and be at least 8 characters long.');
     } else {
-      setPasswordError('');
+      setPasswordError("");
     }
   };
 
@@ -81,12 +79,12 @@ const CreateYourAccount = () => {
 
     // Check if passwords match
     if (password !== confirmPassword) {
-      setPasswordMatchError('Passwords do not match.');
+      setPasswordMatchError("Passwords do not match.");
       return;
     }
 
     // Reset password match error if passwords match
-    setPasswordMatchError('');
+    setPasswordMatchError("");
 
     // Check if there are any validation errors
     if (nameError || emailError || passwordError) {
@@ -94,27 +92,29 @@ const CreateYourAccount = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5500/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5500/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName, email, password
-        })
+          fullName,
+          email,
+          password,
+        }),
       });
-      console.log('this method is being reached')
+      console.log("this method is being reached");
       const jsonResponse = await response.json();
       console.log(jsonResponse);
 
-      if ('message' in jsonResponse) {
-        if (jsonResponse.message === 'User already exists') {
+      if ("message" in jsonResponse) {
+        if (jsonResponse.message === "User already exists") {
           // Redirect to login
-          navigate('/userAlreadyExist');
-        } else if (jsonResponse.message === 'user is blocked') {
-          setUserBlockedErrorMessage('You are blocked; you cannot register');
+          navigate("/userAlreadyExist");
+        } else if (jsonResponse.message === "user is blocked") {
+          setUserBlockedErrorMessage("You are blocked; you cannot register");
         }
       } else {
         // Redirect to verify email
-        navigate('/verifyEmail');
+        navigate("/verifyEmail");
       }
     } catch (error) {
       console.error(error);
@@ -137,7 +137,9 @@ const CreateYourAccount = () => {
           <div className="inputs">
             <form onSubmit={createAccount}>
               <label htmlFor="fullname">
-                <p className="text-white md:text-gray-900 text-left">Full Name</p>
+                <p className="text-white md:text-gray-900 text-left">
+                  Full Name
+                </p>
               </label>
               <input
                 id="fullname"
@@ -146,13 +148,13 @@ const CreateYourAccount = () => {
                 value={fullName}
                 onBlur={validateName}
                 onChange={(e) => setFullName(e.target.value)}
-                className={`w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${nameError ? 'border-red-500' : ''}`}
+                className={`w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${
+                  nameError ? "border-red-500" : ""
+                }`}
                 placeholder="Enter your Full Name here"
               />
               {nameError && (
-                <div className="text-red-500 text-sm mt-1">
-                  {nameError}
-                </div>
+                <div className="text-red-500 text-sm mt-1">{nameError}</div>
               )}
 
               <label htmlFor="email">
@@ -164,26 +166,32 @@ const CreateYourAccount = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4 ${emailError ? 'border-red-500' : ''}`}
+                className={`w-full h-3 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4 ${
+                  emailError ? "border-red-500" : ""
+                }`}
                 placeholder="Enter your E-mail Address here"
               />
               {emailError && (
-                <div className="text-red-500 text-sm mt-1">
-                  {emailError}
-                </div>
+                <div className="text-red-500 text-sm mt-1">{emailError}</div>
               )}
 
               <label htmlFor="passSignup">
-                <p className="text-white md:text-gray-900 text-left">Password</p>
+                <p className="text-white md:text-gray-900 text-left">
+                  Password
+                </p>
               </label>
-              <div className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${passwordError ? 'border-red-500' : ''}`}>
+              <div
+                className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${
+                  passwordError ? "border-red-500" : ""
+                }`}
+              >
                 <input
                   id="passSignup"
                   name="pwd"
                   onBlur={validatePassword}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full py-2 rounded-xl px-3 "
+                  className="w-full py-2 rounded-xl px-3  "
                   type="password"
                   placeholder="Enter New Password"
                 />
@@ -207,23 +215,27 @@ const CreateYourAccount = () => {
                 </span>
               </div>
               {passwordError && (
-                <div className="text-red-700 text-sm mt-1">
-                  {passwordError}
-                </div>
+                <div className="text-red-500 text-sm mt-1">{passwordError}</div>
               )}
 
               <label htmlFor="confirmPass">
-                <p className="text-white md:text-gray-900 text-left">Confirm Password</p>
+                <p className="text-white md:text-gray-900 text-left">
+                  Confirm Password
+                </p>
               </label>
-              <div className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${passwordMatchError ? 'border-red-500' : ''}`}>
+              <div
+                className={`input md:border-2 md:border-gray-400 rounded-xl mb-4 flex items-center justify-between bg-white ${
+                  passwordMatchError ? "border-red-500" : ""
+                }`}
+              >
                 <input
                   id="confirmPass"
                   name="confirmPwd"
                   onBlur={() => {
                     if (password !== confirmPassword) {
-                      setPasswordMatchError('Passwords do not match.');
+                      setPasswordMatchError("Passwords do not match.");
                     } else {
-                      setPasswordMatchError('');
+                      setPasswordMatchError("");
                     }
                   }}
                   value={confirmPassword}
@@ -261,7 +273,7 @@ const CreateYourAccount = () => {
               <div className="flex justify-center mt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-blue-300 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
+                  className="w-full py-3 bg-blue-300 md:bg-slate-800 text-white my-4 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
                 >
                   Create Account
                 </button>
@@ -272,8 +284,8 @@ const CreateYourAccount = () => {
               Already have an account?
             </span>
 
-            <Link to='/login'>
-              <button className='text-white font-bold hover:text-black'>
+            <Link to="/login">
+              <button className="text-white font-bold hover:text-black">
                 Sign In
               </button>
             </Link>
@@ -282,23 +294,29 @@ const CreateYourAccount = () => {
 
             <div className="text-center text-white my-1">- OR -</div>
             <div className="buttons flex flex-wrap justify-around">
-              <div className="button bg-blue-900 text-sm md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={(e)=>{
-                e.preventDefault();
-                signInWithGoogle();
-              }}>
+              <div
+                className="button bg-blue-900 text-sm md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signInWithGoogle();
+                }}
+              >
                 <img
                   src={google}
                   alt="google"
                   className="w-8 mx-2 inline-block h-6"
                 />
-                <a href="" className="mx-2 cursor-pointer ">
+                <a href="" className="mx-1 cursor-pointer my-1">
                   Sign up with Google
                 </a>
               </div>
-              <button className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black" onClick={(e)=>{
-                e.preventDefault();
-                signInWithGitHub();
-              }}>
+              <button
+                className="button my-1 bg-blue-900 md:bg-white border border-gray-500 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signInWithGitHub();
+                }}
+              >
                 <img
                   src={github}
                   alt="google"
@@ -314,6 +332,6 @@ const CreateYourAccount = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CreateYourAccount;
