@@ -81,28 +81,28 @@ useEffect(() => {
       </div>
 
       <div className='main-cards'>
-        <div className='card'>
+        <div className='card card1'>
           <div className='card-inner'>
             <h3>Activity Chart </h3>
             <BsFillGrid3X3GapFill className='card_icon' />
           </div>
           <h1>12</h1>
         </div>
-        <div className='card'>
+        <div className='card card1'>
           <div className='card-inner'>
             <h3>{dailyUsers} Total User Users </h3>
             <BsPeopleFill className='card_icon' />
           </div>
           <h1>{dailyUsers}</h1>
         </div>
-        <div className='card'>
+        <div className='card card1'>
           <div className='card-inner'>
             <h3>Block Users </h3>
             <BsPeopleFill className='card_icon' />
           </div>
           <h1>{blockedUsers}</h1>
         </div>
-        <div className='card'>
+        <div className='card card1'>
           <div className='card-inner'>
             <h3>ALERTS</h3>
             <BsFillBellFill className='card_icon' />

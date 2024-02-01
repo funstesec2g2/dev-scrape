@@ -7,7 +7,6 @@ import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
 import "./LoginPage.css";
-
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,11 +90,11 @@ const LoginPage = () => {
             <h1 className="text-xl font-bold h-10 text-white md:text-black text-center">
               Log in
             </h1>
-            <span className="text-sm pr-2 text-white md:text-slate-900 ml-5">
+            <span className=" pr-2 text-white md:text-slate-900 ml-5">
               Don't have an account?
             </span>
             <Link to="/createYourAccount">
-              <button className="text-gray-300 hover:text-black">
+              <button className="text-blue-700 text-sm hover:text-black">
                 Sign Up
               </button>
             </Link>
@@ -145,7 +144,7 @@ const LoginPage = () => {
 
               <div className="forgot-password flex justify-end mb-6">
                 <a
-                  className="text-sm cursor-pointer text-gray-300 hover:text-slate-800 "
+                  className="text-sm cursor-pointer text-gray-500 hover:text-slate-800 "
                   onClick={() => {
                     navigate("/sendResetCode");
                   }}
@@ -196,6 +195,6 @@ const LoginPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;
