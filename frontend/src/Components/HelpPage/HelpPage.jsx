@@ -15,14 +15,12 @@ export default function HelpPage() {
       message: e.target.message.value,
     };
 
-    emailjs.send('service_j78femla', 'template_8kjyozs', templateParams, 'plLnMxkqli4nCAQgc')
+    emailjs.send('service_ksx7hqh', 'template_tm39utx', templateParams, 'plLnMxkqli4nCAQgc')
       .then((result) => {
         console.log(result.text);
       }, (error) => {
         console.log(error.text);
       });
-
-    // Clear the form fields after sending the email
     e.target.reset();
   };
 

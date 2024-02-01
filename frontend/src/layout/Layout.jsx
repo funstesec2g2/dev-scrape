@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
       const user = getUserName();
       setUserName(user);
-  }, [getUserName()]); 
+  }, [getUserName]); 
   
   return (
     <div className="min-h-screen">

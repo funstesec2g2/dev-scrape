@@ -60,12 +60,12 @@ const CreateYourAccount = () => {
   };
 
   const validatePassword = () => {
-    // Password should contain at least one digit, one uppercase, one lowercase letter, and be at least 8 characters long
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[0-9a-zA-Z!@#$%^&*(),.?":{}|<>]{8,}$/;
+  
     if (!password) {
       setPasswordError('Password is required.');
     } else if (!passwordRegex.test(password)) {
-      setPasswordError('Password should contain at least one digit, one uppercase letter, one lowercase letter, and be at least 8 characters long.');
+      setPasswordError('Password should contain at least one digit, one uppercase letter, one lowercase letter, one special character, and be at least 8 characters long.');
     } else {
       setPasswordError('');
     }
@@ -207,7 +207,7 @@ const CreateYourAccount = () => {
                 </span>
               </div>
               {passwordError && (
-                <div className="text-red-500 text-sm mt-1">
+                <div className="text-red-700 text-sm mt-1">
                   {passwordError}
                 </div>
               )}
@@ -253,7 +253,7 @@ const CreateYourAccount = () => {
                 </span>
               </div>
               {passwordMatchError && (
-                <div className="text-red-500 text-sm mt-1">
+                <div className="text-red-700 text-sm mt-1">
                   {passwordMatchError}
                 </div>
               )}
@@ -289,9 +289,9 @@ const CreateYourAccount = () => {
                 <img
                   src={google}
                   alt="google"
-                  className="w-8 mx-2 my-3 inline-block"
+                  className="w-8 mx-2 inline-block h-6"
                 />
-                <a href="" className="mx-2 cursor-pointer my-3">
+                <a href="" className="mx-2 cursor-pointer ">
                   Sign up with Google
                 </a>
               </div>
@@ -302,7 +302,7 @@ const CreateYourAccount = () => {
                 <img
                   src={github}
                   alt="google"
-                  className="w-8 mx-2 my-3 inline-block"
+                  className="w-8 mx-2  inline-block"
                 />
                 <a href="" className="mx-1 cursor-pointer my-1">
                   Sign up with Github

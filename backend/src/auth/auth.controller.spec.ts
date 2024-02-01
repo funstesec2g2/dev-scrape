@@ -1,8 +1,8 @@
+// Import necessary modules and classes
 import { Test, TestingModule } from '@nestjs/testing';
-import AuthService from './auth.service';
 import AuthController from './auth.controller';
 import { JwtService } from '@nestjs/jwt';
-import { access } from 'fs';
+import AuthService from './auth.service';
 
 describe('AuthController', () => {
   let authController: AuthController;
@@ -14,26 +14,31 @@ describe('AuthController', () => {
     })),
     findOne: jest.fn().mockImplementation(async (query) => {
       if (query.email === 'existinguser@example.com') {
-        return {
-         
-        };
+        return {}; 
       } else {
-        return null;
+        return null; 
       }
     }),
-    login: jest.fn().mockImplementation(async (query) =>{
-      if (query ==='amanueltsehay11@gmail.com'){
+    login: jest.fn().mockImplementation(async (query) => {
+      if (query === 'amanueltsehay11@gmail.com') {
         return {
-          // access_token: 'access_token',
           email: query,
-          message: 'success'
-      };
-      
+          message: 'success',
+        };
       }
       return null;
-
-    })
-    
+    }),
+    blockUser: jest.fn().mockImplementation(async (email) => {
+      if (email === 'blockeduser@example.com') {
+        return 'User blocked successfully';
+      } else if (email === 'notfound@example.com') {
+        throw new Error('User not found');
+      } else {
+        throw new Error('Error in blocking the user');
+      }
+    }),
+    getTotalUsers: jest.fn().mockResolvedValue(10),
+    getTotalBlockedUsers: jest.fn().mockResolvedValue(5),
   };
 
   beforeEach(async () => {
@@ -59,7 +64,7 @@ describe('AuthController', () => {
         email: 'amanueltsehay11@gmail.com',
         password: 'amanuel',
       };
-      console.log(mockDto);
+
       const result = await authController.register(mockDto);
 
       expect(result).toEqual({
@@ -73,16 +78,31 @@ describe('AuthController', () => {
       const mockUser = {
         email: 'amanueltsehay11@gmail.com',
         password: 'amanuel',
-        message: 'success'}
+        message: 'success',
+      };
 
-        const result = await authController.login(mockUser)
+      const result = await authController.login(mockUser);
 
-        expect(result).toEqual({ email: 'amanueltsehay11@gmail.com', message: 'success' });
-
-
+      expect(result).toEqual({
+        email: 'amanueltsehay11@gmail.com',
+        message: 'success',
+      });
     });
-    
-    
-    
+
+  
+
+   
+
+    it('should get the total number of users', async () => {
+      const result = await authController.getTotalUsers();
+
+      expect(result).toEqual({ totalUsers: 10 });
+    });
+
+    it('should get the total number of blocked users', async () => {
+      const result = await authController.getTotalBlockedUsers();
+
+      expect(result).toEqual({ totalBlockedUsers: 5 });
+    });
   });
 });

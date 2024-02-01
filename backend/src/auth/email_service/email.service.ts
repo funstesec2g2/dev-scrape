@@ -44,7 +44,7 @@ export const sendForgotPasswordEmail = async (email: string, resetCode: string) 
     from: { address: 'funstesec2g2@gmail.com' },
     to: email,
     subject: 'Password Reset',
-    text: `Your new password is: ${resetCode}`,
+    text: `Your password reset code is: ${resetCode}`,
   };
 
   await transporter.sendMail(mailOptions, (error, info) => {

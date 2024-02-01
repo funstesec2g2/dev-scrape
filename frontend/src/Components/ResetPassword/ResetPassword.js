@@ -2,17 +2,33 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo-img.png';
 
-
 export default function ResetPassword() {
   const location = useLocation();
-  const email = location?.state?.email || ''
-  console.log(email, 'this is the emailsdfsd');
+  const email = location?.state?.email || '';
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [message, setMessage] = useState('');
 
+  const validatePassword = () => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[0-9a-zA-Z!@#$%^&*(),.?":{}|<>]{8,}$/;
+
+    if (!password) {
+      setPasswordError('Password is required.');
+    } else if (!passwordRegex.test(password)) {
+      setPasswordError(
+        'Password should contain at least one digit, one uppercase letter, one lowercase letter, one special character, and be at least 8 characters long.'
+      );
+    } else {
+      setPasswordError('');
+    }
+  };
+
   const handleResetPassword = async () => {
+    // Validate password and confirmPassword
+    validatePassword();
+
     if (password !== confirmPassword) {
       setPasswordMatchError('Passwords do not match.');
       return;
@@ -29,13 +45,14 @@ export default function ResetPassword() {
 
       if (response.ok) {
         console.log('Password reset successfully');
-        setMessage('Password reset successfully')
-      
+        setMessage('Password reset successfully');
       } else {
         console.error('Error resetting password:', response.statusText);
       }
     } catch (error) {
       console.error('Error resetting password:', error.message);
+      
+      setPasswordError('Error resetting password');
     }
   };
 
@@ -57,7 +74,7 @@ export default function ResetPassword() {
           </div>
           <div>
             <form>
-              <div className="md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className={`md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white ${passwordError ? 'border-red-500' : ''}`}>
                 <input
                   name="password"
                   className="w-full h-full py-3 rounded-xl px-3"
@@ -65,11 +82,12 @@ export default function ResetPassword() {
                   placeholder="Your New Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onBlur={validatePassword}
                 />
                 {/* ... (eye icon remains unchanged) */}
               </div>
 
-              <div className="md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className={`md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white ${passwordError ? 'border-red-500' : ''}`}>
                 <input
                   name="confirmPassword"
                   className="w-full h-full py-3 rounded-xl px-3"
@@ -82,6 +100,9 @@ export default function ResetPassword() {
               </div>
 
               {/* Display error messages */}
+              {passwordError && (
+                <p className="text-red-500 mb-2">{passwordError}</p>
+              )}
               {passwordMatchError && (
                 <p className="text-red-500 mb-2">{passwordMatchError}</p>
               )}

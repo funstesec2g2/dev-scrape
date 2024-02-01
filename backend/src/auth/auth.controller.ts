@@ -23,6 +23,8 @@ class AuthController{
     @Post('register')
   async register( @Body() body: AuthDto): Promise<any> {
     const oldUser = await this.authService.findOne(body.email);
+    console.log(body.email, 'this isthe email')
+    console.log(oldUser);
 
     if(oldUser){
         if (oldUser.isBlocked){
@@ -155,19 +157,22 @@ class AuthController{
     console.log(email, 'the email')
     console.log(email, password, newName);
   
+  
 
-    // const user = this.authService.findOne(email);
-    // console.log(user);
+    const user = this.authService.findOne(email);
+    console.log(user);
 
-    // if (!user){
-    //   return {message: 'No user found'}
-    // }
-    // const pwMatches = await argon.verify((await user).password, password);
-    // if (!pwMatches){
-    // return {message: 'Wrong password'} }
-
-    // (await user).fullName = newName;
-    return {message: 'Success'}
+    if (!user){
+      return {message: 'No user found'}
+    }
+    const pwMatches = await argon.verify((await user).password, password);
+    console.log(pwMatches);
+    if (!pwMatches){
+    return {message: 'Wrong password'} }
+    
+    (await user).fullName = newName;
+    (await user).save();
+    return this.authService.login((await user).email, password.trim());
 }
 
 

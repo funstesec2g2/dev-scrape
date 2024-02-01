@@ -134,6 +134,7 @@ export default function EditProfile() {
               onClick={(e) => {
                 e.preventDefault();
                 handleChange();
+                getUserName();
               }}
             >
               Edit Profile
