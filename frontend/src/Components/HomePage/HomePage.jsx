@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-
+import {
+  faGooglePlay,
+  faYoutube,
+  faGithub,
+  faWikipediaW,
+  faImdb,
+} from "@fortawesome/free-brands-svg-icons";
 const HomePage = () => {
   const [selectedWebsite, setSelectedWebsite] = useState("");
   const navigate = useNavigate();
-
-  
 
   const handleWebsiteChange = (event) => {
     setSelectedWebsite(event.target.value);
@@ -43,10 +46,10 @@ const HomePage = () => {
           </div>
 
           <div className="w-9/12 m-auto mt-10">
-          
             <div className=" text-white text-center">
               <p className="text-lg">
-                Welcome to our website! Discover amazing content and explore the latest trends.
+                Welcome to our website! Discover amazing content and explore the
+                latest trends.
               </p>
               <p className="text-lg mt-4">
                 Join us on a journey of knowledge and entertainment.
@@ -61,49 +64,58 @@ const HomePage = () => {
           </div>
         </div>
 
-      
-         
-   
+        <div className="result-box flex flex-col items-center p-7 w-10/12 rounded-3xl">
+          <div className="cards-container flex flex-wrap justify-around">
+            {/* First Row */}
+            <div className="card bg-slate-900 text-white p-5 rounded-lg shadow-lg mb-4">
+              <FontAwesomeIcon icon={faGithub} className="fa-5x my-2" />
+              <h3 className="text-2xl font-bold mb-2">GitHub</h3>
+              <p>
+                GitHub is a platform where developers can collaborate on
+                projects, share code, and build amazing software together.
+              </p>
+            </div>
+            <div className="card bg-red-500 text-white p-5 rounded-lg shadow-lg mb-4">
+              <FontAwesomeIcon icon={faYoutube} className="fa-5x my-2" />
 
-<div className="result-box flex flex-col items-center p-7 w-10/12 rounded-3xl">
-  <div className="cards-container flex flex-wrap justify-around">
-    {/* First Row */}
-    <div className="card bg-white-500 text-white p-5 rounded-lg shadow-lg mb-4">
-      <h3 className="text-2xl font-bold mb-2">GitHub</h3>
-      <p>
-        GitHub is a platform where developers can collaborate on projects, share code, and build amazing software together.
-      </p>
-    </div>
-    <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
-      <h3 className="text-2xl font-bold mb-2">YouTube</h3>
-      <p>
-        YouTube is a video-sharing platform where users can discover, watch, and upload videos on various topics and interests.
-      </p>
-    </div>
-    <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
-      <h3 className="text-2xl font-bold mb-2">Play Store</h3>
-      <p>
-        Play Store is Google's official app store where users can find and download a wide range of Android applications for their devices.
-      </p>
-    </div>
+              <h3 className="text-2xl font-bold mb-2">YouTube</h3>
+              <p>
+                YouTube is a video-sharing platform where users can discover,
+                watch, and upload videos on various topics and interests.
+              </p>
+            </div>
+            <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
+              <FontAwesomeIcon icon={faGooglePlay} className="fa-5x my-2" />
 
-    {/* Second Column */}
-    <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
-      <h3 className="text-2xl font-bold mb-2">Wikipedia</h3>
-      <p>
-        Wikipedia is a free online encyclopedia where users can find information on various topics contributed by volunteers from around the world.
-      </p>
-    </div>
-    <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
-      <h3 className="text-2xl font-bold mb-2">Film</h3>
-      <p>
-        Explore the world of cinema and discover information about your favorite movies, actors, and directors on our Film website.
-      </p>
-    </div>
-  </div>
-</div>
+              <h3 className="text-2xl font-bold mb-2">Play Store</h3>
+              <p>
+                Play Store is Google's official app store where users can find
+                and download a wide range of Android applications for their
+                devices.
+              </p>
+            </div>
 
+            {/* Second Column */}
+            <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
+              <FontAwesomeIcon icon={faWikipediaW} className="fa-5x my-2" />
 
+              <h3 className="text-2xl font-bold mb-2">Wikipedia</h3>
+              <p>
+                Wikipedia is a free online encyclopedia where users can find
+                information on various topics contributed by volunteers from
+                around the world.
+              </p>
+            </div>
+            <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
+              <FontAwesomeIcon icon={faImdb} className="fa-5x my-2" />
+              <h3 className="text-2xl font-bold mb-2">Film</h3>
+              <p>
+                Explore the world of cinema and discover information about your
+                favorite movies, actors, and directors on our Film website.
+              </p>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   );

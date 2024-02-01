@@ -1,4 +1,4 @@
-import profilePic from "./image/profile-pic.jpg";
+import profilePic from "../assets/photo.jpg";
 import { getUserEmail, getUserName } from "../LoginPage/LoginHelper";
 import { getCookie } from "../LoginPage/LoginHelper";
 import { useEffect } from "react";
@@ -6,51 +6,50 @@ import { useState } from "react";
 import { useLogout } from "../../hooks/useLogout";
 import { useLogin } from "../../hooks/useLogin";
 
-
 // ... other imports
 
 export default function EditProfile() {
   const { login } = useLogin();
   const [userName, setUserName] = useState("");
   const email = getUserEmail();
-  console.log(email, "the email")
-  const [password, setPassword] = useState('');
-  const [newName, setNewName] = useState('');
-  const [error, setError] = useState('');
+  console.log(email, "the email");
+  const [password, setPassword] = useState("");
+  const [newName, setNewName] = useState("");
+  const [error, setError] = useState("");
   const { logout } = useLogout();
 
   const handleClick = () => {
     logout();
   };
 
-  const API = 'http://localhost:5500/auth/change-name';
+  const API = "http://localhost:5500/auth/change-name";
 
   const handleChange = async () => {
     try {
-      console.log('this method is being called');
+      console.log("this method is being called");
       const response = await fetch(API, {
         method: "POST",
         body: JSON.stringify({ email, password, newName }),
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${getCookie('user')}`
+          Authorization: `Bearer ${getCookie("user")}`,
         },
       });
 
       if (response.ok) {
         const json = await response.json();
-        if (json?.message === 'Success') {
-          console.log(email, 'this is the email')
+        if (json?.message === "Success") {
+          console.log(email, "this is the email");
           login(email, password);
         } else {
           setError(json?.message);
         }
       }
     } catch (error) {
-      console.error('Error during API call:', error);
-      setError('An unexpected error occurred');
+      console.error("Error during API call:", error);
+      setError("An unexpected error occurred");
     }
-  }
+  };
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -58,14 +57,14 @@ export default function EditProfile() {
       setUserName(user);
     };
 
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
     const user = getUserName();
     setUserName(user);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -81,22 +80,27 @@ export default function EditProfile() {
               {userName}
             </figcaption>
           </figure>
-          <table className="text-left w-100 text-white ">
-            <tr className="w-100">
-              <th>Join date</th>
-              <td className="text-right ">Jul 11, 2023</td>
-            </tr>
-            <tr>
-              <th>Times Visited</th>
-              <td className="text-right " id="played-games-count">
-                13
-              </td>
-            </tr>
-          </table>
-          <button className="w-full mx-auto mt-12 text-xl border rounded-3xl bg-pink-200 py-1 hover:bg-red-500 hover:text-white text-red-500" onClick={(e)=>{
-            e.preventDefault();
-            handleClick();
-          }}>
+          <div className="flex justify-center">
+            <table className="text-left w-100 text-white ">
+              <tr className="w-100">
+                <th>Join date</th>
+                <td className="text-right ">Jul 11, 2023</td>
+              </tr>
+              <tr>
+                <th>Times Visited</th>
+                <td className="text-right " id="played-games-count">
+                  13
+                </td>
+              </tr>
+            </table>
+          </div>
+          <button
+            className="w-full mx-auto mt-12 text-xl border rounded-3xl bg-slate-900 py-1 hover:bg-red-500 hover:text-white text-grey-500"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick();
+            }}
+          >
             Log out
           </button>
         </aside>
