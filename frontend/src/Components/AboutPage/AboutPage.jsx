@@ -1,7 +1,7 @@
 import logo from "../assets/logo.png";
 import profile from "../assets/photo.jpg";
-import Abraham from "../assets/Abraham.jpeg";
 // import Heading from "../Heading/Heading";
+import Abraham from "../assets/Abraham.jpeg";
 import {
   faGithub,
   faInstagram,
