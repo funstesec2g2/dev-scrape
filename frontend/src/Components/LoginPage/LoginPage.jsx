@@ -7,16 +7,16 @@ import github from "../assets/github.svg";
 import google from "../assets/google.svg";
 import logo from "../assets/logo.png";
 import "./LoginPage.css";
-const  LoginPage = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [wrongPassword, setWrongPassword] = useState("");
   const [onUserBlocked, setOnUserBlocked] = useState(false);
   const navigate = useNavigate();
-  
-  const [eye, setEye] = useState("closed");
-  const { login,  error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
 
+  const [eye, setEye] = useState("closed");
+  const { login, error, isLoading, signInWithGitHub, signInWithGoogle } =
+    useLogin();
 
   const handleGoogle = async (e) => {
     e.preventDefault();
@@ -28,14 +28,19 @@ const  LoginPage = () => {
   };
 
   const Login = async (event) => {
-    console.log("this funciton is called")
+    console.log("this funciton is called");
     event.preventDefault();
     try {
-      await login({email, password, onWrongPassword: setWrongPassword, onUserBlocked: setOnUserBlocked});
+      await login({
+        email,
+        password,
+        onWrongPassword: setWrongPassword,
+        onUserBlocked: setOnUserBlocked,
+      });
     } catch (error) {
       console.log(error);
-      setWrongPassword('Sever Error, please try again')
-      return
+      setWrongPassword("Sever Error, please try again");
+      return;
     }
   };
 
@@ -50,11 +55,11 @@ const  LoginPage = () => {
             <h1 className="text-xl font-bold h-10 text-white md:text-black text-center">
               Log in
             </h1>
-            <span className="text-sm pr-2 text-white md:text-slate-900 ml-5">
+            <span className=" pr-2 text-white md:text-slate-900 ml-5">
               Don't have an account?
             </span>
             <Link to="/createYourAccount">
-              <button className="text-gray-300 hover:text-black">
+              <button className="text-blue-700 text-sm hover:text-black">
                 Sign Up
               </button>
             </Link>
@@ -92,7 +97,7 @@ const  LoginPage = () => {
 
               <div className="forgot-password flex justify-end mb-6">
                 <a
-                  className="text-sm cursor-pointer text-gray-300 hover:text-slate-800 "
+                  className="text-sm cursor-pointer text-gray-500 hover:text-slate-800 "
                   onClick={() => {
                     navigate("/sendResetCode");
                   }}
@@ -147,6 +152,6 @@ const  LoginPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;
