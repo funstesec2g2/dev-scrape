@@ -36,10 +36,10 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen">
       <header className="bg-blue-500 p-4 text-white flex justify-between items-center">
-        <div className="container mx-auto">
+        <div className="container flex mx-auto">
           <Link to="/">
             {" "}
-            <h1 className="text-2xl font-semibold">DevScrape</h1>
+            <h1 className="text-3xl mx-6  font-semibold ">DevScrape</h1>
           </Link>
         </div>
         {!user ? (
@@ -68,7 +68,7 @@ const Layout = ({ children }) => {
       <div className="mx-auto">
         <nav className="p-4 px-10 flex flex-col justify-center shadow-md">
           <div className="flex">
-            <ul className="flex space-x-4 w-full">
+            <ul className="flex text-lg items-center space-x-4 w-full">
               <li>
                 <Link to="/" className="text-blue-500">
                   Home

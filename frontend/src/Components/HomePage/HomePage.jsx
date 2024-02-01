@@ -25,8 +25,18 @@ const HomePage = () => {
     <>
       <main className="flex flex-wrap justify-center items-center flex-col md:flex-row">
         <div className="md:col-span-4 col-span-12 sidebar">
+          <div className="w-9/12 m-auto mt-10">
+            <div className=" text-white text-center">
+              <p className="text-lg">
+                Welcome to DevScrape, your ultimate web scraping tool. Uncover
+                Insights with Precise Web Scraping Solutions"
+              </p>
+            </div>
+          </div>
           <div className="w-9/12 m-auto">
-            <h2 className="my-5 text-white">Choose the website to scrape</h2>
+            <h2 className="my-5 mt-10 text-white text-2xl">
+              Choose a website to scrape
+            </h2>
             <div className="dropdown text-black text-center">
               <select
                 name="website"
@@ -45,18 +55,6 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="w-9/12 m-auto mt-10">
-            <div className=" text-white text-center">
-              <p className="text-lg">
-                Welcome to our website! Discover amazing content and explore the
-                latest trends.
-              </p>
-              <p className="text-lg mt-4">
-                Join us on a journey of knowledge and entertainment.
-              </p>
-            </div>
-          </div>
-
           <div className="w-100 h-1 line mb-5 mt-10"></div>
 
           <div className="suggestions-container grid md:grid-cols-1 grid-cols-2 ">
@@ -67,7 +65,7 @@ const HomePage = () => {
         <div className="result-box flex flex-col items-center p-7 w-10/12 rounded-3xl">
           <div className="cards-container flex flex-wrap justify-around">
             {/* First Row */}
-            <div className="card bg-slate-900 text-white p-5 rounded-lg shadow-lg mb-4">
+            <div className="card shadow-2xl bg-slate-900 hover:bg-slate-800  text-white p-5 rounded-lg mb-10">
               <FontAwesomeIcon icon={faGithub} className="fa-5x my-2" />
               <h3 className="text-2xl font-bold mb-2">GitHub</h3>
               <p>
@@ -75,7 +73,8 @@ const HomePage = () => {
                 projects, share code, and build amazing software together.
               </p>
             </div>
-            <div className="card bg-red-500 text-white p-5 rounded-lg shadow-lg mb-4">
+
+            <div className="card shadow-2xl bg-red-600 hover:bg-red-700 text-white p-5 rounded-lg mb-10">
               <FontAwesomeIcon icon={faYoutube} className="fa-5x my-2" />
 
               <h3 className="text-2xl font-bold mb-2">YouTube</h3>
@@ -84,7 +83,7 @@ const HomePage = () => {
                 watch, and upload videos on various topics and interests.
               </p>
             </div>
-            <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
+            <div className="card shadow-2xl bg-green-700 hover:bg-green-800 text-white p-5 rounded-lg shadow-lg mb-10">
               <FontAwesomeIcon icon={faGooglePlay} className="fa-5x my-2" />
 
               <h3 className="text-2xl font-bold mb-2">Play Store</h3>
@@ -96,7 +95,7 @@ const HomePage = () => {
             </div>
 
             {/* Second Column */}
-            <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
+            <div className="card shadow-2xl bg-gray-400 hover:bg-gray-500 text-white p-5 rounded-lg shadow-lg mb-10">
               <FontAwesomeIcon icon={faWikipediaW} className="fa-5x my-2" />
 
               <h3 className="text-2xl font-bold mb-2">Wikipedia</h3>
@@ -106,7 +105,7 @@ const HomePage = () => {
                 around the world.
               </p>
             </div>
-            <div className="card bg-blue-500 text-white p-5 rounded-lg shadow-lg mb-4">
+            <div className="card shadow-2xl bg-orange-500 hover:bg-orange-700 text-white p-5 rounded-lg shadow-lg mb-10">
               <FontAwesomeIcon icon={faImdb} className="fa-5x my-2" />
               <h3 className="text-2xl font-bold mb-2">Film</h3>
               <p>

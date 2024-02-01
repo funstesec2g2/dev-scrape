@@ -143,19 +143,19 @@ body {
   border-radius: 5px;
 }
 
-/* .card:first-child {
-    background-color: #2962ff;
-  } */
+.card1:first-child {
+  background-color: #2962ff;
+}
 
-.card:nth-child(2) {
+.card1:nth-child(2) {
   background-color: #ff6d00;
 }
 
-.card:nth-child(3) {
+.card1:nth-child(3) {
   background-color: #2e7d32;
 }
 
-.card:nth-child(4) {
+.card1:nth-child(4) {
   background-color: #d50000;
 }
 

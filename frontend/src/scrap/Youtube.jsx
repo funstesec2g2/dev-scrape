@@ -1,18 +1,20 @@
 // Updated Youtube.jsx
 
-import React, { useState, useEffect } from 'react';
-import { searchYoutubeByTitle } from './api';
+import React, { useState, useEffect } from "react";
+import { searchYoutubeByTitle } from "./api";
 
 const Youtube = () => {
-  const [videoTitle, setVideoTitle] = useState('');
+  const [videoTitle, setVideoTitle] = useState("");
   const [youtubeInfo, setYoutubeInfo] = useState(null);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     // Check local storage to set initial favorite state
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    const isVideoFavorite = favorites.some((fav) => fav.title === youtubeInfo?.title);
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isVideoFavorite = favorites.some(
+      (fav) => fav.title === youtubeInfo?.title
+    );
     setIsFavorite(isVideoFavorite);
   }, [youtubeInfo]);
 
@@ -23,22 +25,24 @@ const Youtube = () => {
       setError(null);
     } catch (error) {
       setYoutubeInfo(null);
-      setError('Error fetching YouTube info.');
+      setError("Error fetching YouTube info.");
     }
   };
 
   const handleToggleFavorite = () => {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
     if (isFavorite) {
       // Remove from favorites
-      const updatedFavorites = favorites.filter((fav) => fav.title !== youtubeInfo.title);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      const updatedFavorites = favorites.filter(
+        (fav) => fav.title !== youtubeInfo.title
+      );
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     } else {
       // Add to favorites
       const newFavorite = { title: youtubeInfo.title, url: youtubeInfo.url };
       const updatedFavorites = [...favorites, newFavorite];
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     }
 
     setIsFavorite(!isFavorite);
@@ -46,15 +50,35 @@ const Youtube = () => {
 
   return (
     <div className="w-full max-w-screen-xl mx-auto p-8 bg-gray-100 rounded-md shadow-md my-10">
-   
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Discover YouTube Videos</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+        Discover YouTube Videos
+      </h1>
       <p className="text-gray-600 mb-6">
-        Welcome to our YouTube Video Information tool! Enter the title of a video, and we'll provide
-        you with details like the author, channel, likes, and a convenient download link.
+        Welcome to our YouTube Video Information tool! Enter the title of a
+        video, and we'll provide you with details like the author, channel,
+        likes, and a convenient download link.
       </p>
 
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-800">Enter Video Title:</label>
+      <div className="mb-6 flex items-center">
+        <input
+          type="text"
+          value={videoTitle}
+          onChange={(e) => setVideoTitle(e.target.value)}
+          placeholder="Enter Video Title"
+          className="p-2 border rounded-l focus:outline-none focus:border-blue-500 text-gray-800 flex-grow"
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-red-600 text-white rounded-r p-2 hover:bg-blue-600 transition duration-300 ease-in-out"
+        >
+          Search
+        </button>
+      </div>
+
+      {/* <div className="mb-6">
+        <label className="block font-medium text-gray-800">
+          Enter Video Title:
+        </label>
         <input
           type="text"
           value={videoTitle}
@@ -67,22 +91,21 @@ const Youtube = () => {
         className="bg-blue-500 text-white rounded p-2 w-full hover:bg-blue-600 transition duration-300 ease-in-out"
       >
         Search
-      </button>
+      </button> */}
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
-     
 
       {youtubeInfo && (
-
-        
         <div className="mt-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Title: {youtubeInfo.title}</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            Title: {youtubeInfo.title}
+          </h2>
           <p className="text-gray-600 mb-2">Author: {youtubeInfo.author}</p>
           <p className="text-gray-600 mb-2">Channel: {youtubeInfo.channel}</p>
           <p className="text-gray-600 mb-2">Likes: {youtubeInfo.likes}</p>
           <div className="bg-white rounded border border-gray-300 p-4">
             <p className="text-gray-600">
-              Download Link:{' '}
+              Download Link:{" "}
               <a
                 href={youtubeInfo.url}
                 className="text-blue-500 underline hover:text-blue-600"
@@ -97,14 +120,14 @@ const Youtube = () => {
           <div className="mt-4">
             {/* Heart icon for favorites */}
             <span
-              className={`text-xl cursor-pointer ${isFavorite ? 'text-red-500' : 'text-gray-400'}`}
+              className={`text-xl cursor-pointer ${
+                isFavorite ? "text-red-500" : "text-gray-400"
+              }`}
               onClick={handleToggleFavorite}
             >
               &#10084;
             </span>
           </div>
-
-          
         </div>
       )}
     </div>
