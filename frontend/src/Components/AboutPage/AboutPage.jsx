@@ -1,5 +1,6 @@
 import logo from "../assets/logo.png";
 import profile from "../assets/photo.jpg";
+import Abraham from "../assets/Abraham.jpeg";
 // import Heading from "../Heading/Heading";
 import {
   faGithub,
@@ -50,23 +51,25 @@ function AboutPage() {
 
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
               <div className=" flex flex-col items-center w-3/6 md:w-1/6">
-                <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
+                <img src={Abraham} className="w-48 rounded-full"></img>
+                <h3>Abrham Wube</h3>
+                <p className="text-yellow-600">Back-end developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
+                  Abraham is a 3rd year student at SiTE and has participated in
+                  lots of coding projects during his stay at AAiT and
+                  Highschool.{" "}
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/abrshewube" target="_blank">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -76,22 +79,24 @@ function AboutPage() {
 
               <div className="flex flex-col items-center w-3/6 md:w-1/6">
                 <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
+                <h3>Amanuel Tsehay</h3>
+                <p className="text-yellow-600">Back-end developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
+                  Amanuel is an outstanding student. He joined AAU with a
+                  whopping score of 647 and aced through the courses in
+                  pre-engineering, which earned him a spot in SiTE{" "}
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/Amantsehay">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -101,22 +106,24 @@ function AboutPage() {
 
               <div className="flex flex-col items-center w-3/6 md:w-1/6">
                 <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
+                <h3>Bikila Tariku</h3>
+                <p className="text-yellow-600">Back-end developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.
+                  Bikila is a 3rd year student at SiTE and has participated in
+                  lots of coding projects during his stay at AAiT and
+                  Highschool.
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/Borifansena">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -130,22 +137,24 @@ function AboutPage() {
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
               <div className="flex flex-col items-center w-3/6 md:w-1/6">
                 <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
-                <p className="text-yellow-600">developer</p>
+                <h3>Estifanos</h3>
+                <p className="text-yellow-600">Front-end developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.
+                  Estifanos is a 3rd year student at SiTE and has participated
+                  in lots of coding competitions during his stay at AAiT and
+                  Highschool..
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/EstifanosTaye320">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -155,22 +164,24 @@ function AboutPage() {
 
               <div className="flex flex-col items-center w-3/6 md:w-1/6">
                 <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
+                <h3>Joshua Taye</h3>
                 <p className="text-yellow-600">developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, , at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
+                  Joshua is a 3rd year student at SiTE and has participated in
+                  lots of coding projects during his stay at AAiT and
+                  Highschool..{" "}
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/JoshuaTaye">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -180,12 +191,12 @@ function AboutPage() {
 
               <div className="flex flex-col items-center w-3/6 md:w-1/6">
                 <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
+                <h3>Lidet Tadesse</h3>
                 <p className="text-yellow-600">developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
+                  Lidet is a 3rd year student at SiTE and has participated in
+                  lots of coding projects during her stay at AAiT and back
+                  Highschool as well.{" "}
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
@@ -209,22 +220,24 @@ function AboutPage() {
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
               <div className="flex flex-col items-center w-3/6 md:w-1/6">
                 <img className="w-48 rounded-full" src={profile}></img>
-                <h3>Full Name here</h3>
+                <h3>Meaza Tadele</h3>
                 <p className="text-yellow-600">developer</p>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet, at aliquam nunc ultricies. Nulla
-                  facilisi. Nullam tempor mauris a felis malesuada, eget
-                  tincidunt odio elementum.{" "}
+                  Meaza is a 3rd year student at SiTE and has participated in
+                  lots of coding projects during her stay at AAiT and
+                  Highschool..{" "}
                 </p>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/MeazaTadele">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
