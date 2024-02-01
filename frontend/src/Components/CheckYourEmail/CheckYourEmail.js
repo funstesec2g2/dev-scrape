@@ -1,16 +1,16 @@
-import logo from "../assets/logo-img.png";
+import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
 export default function CheckYourEmail() {
-    const navigate = useNavigate();
-  const  toggleLogin = (e) => {
+  const navigate = useNavigate();
+  const toggleLogin = (e) => {
     e.preventDefault();
-    navigate('/login'); 
-  }
+    navigate("/login");
+  };
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
-        <img src={logo} alt="logo-img" />
+        <img src={logo} alt="logo-img" className="w-8/12" />
       </div>
       <div className="flex justify-center items-center h-screen bg-slate-900 md:bg-white">
         <div className="h-1/2 w-3/4 grid items-between">

@@ -10,23 +10,23 @@ export default function EditProfile() {
               src={profilePic}
               alt="Profile Picture"
             />
-            <figcaption className="text-2xl" id="username">
+            <figcaption className="text-2xl text-black" id="username">
               User Name
             </figcaption>
           </figure>
           <table className="text-left w-100 ">
-            <tr className="w-100">
+            <tr className="w-100 text-black">
               <th>Join date</th>
               <td className="text-right">Jul 11, 2023</td>
             </tr>
             <tr>
-              <th>Times Visited</th>
-              <td className="text-right " id="played-games-count">
+              <th className="text-black">Times Visited</th>
+              <td className="text-right text-black" id="played-games-count">
                 13
               </td>
             </tr>
           </table>
-          <button className="w-full mx-auto mt-12 text-xl border rounded-3xl bg-pink-200 py-1 hover:bg-red-500 hover:text-white text-red-500">
+          <button className="w-full mx-auto mt-12 text-xl border rounded-3xl bg-slate-800 py-1 hover:bg-red-500 hover:text-white text-grey-500">
             Log out
           </button>
         </aside>

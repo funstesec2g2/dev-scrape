@@ -1,14 +1,13 @@
-import logo from "../assets/logo-img.png";
+import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
 export const UserNotExist = (props) => {
-
   const navigate = useNavigate();
   return (
     <>
       <div className="grid md:grid-cols-2">
         <div className="hidden md:flex h-screen justify-center items-center bg-slate-900">
-          <img src={logo} alt="logo-img" />
+          <img src={logo} alt="logo-img" className="w-8/12"/>
         </div>
         <div className="flex justify-center items-center h-screen bg-slate-900 md:bg-white">
           <div className="w-3/4 h-1/2 grid items-between">
@@ -22,8 +21,10 @@ export const UserNotExist = (props) => {
               </span>
             </div>
             <div className="flex justify-center">
-            
-              <button className="w-[100px] py-3 h-8 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500 flex items-center justify-center  " onClick={()=>navigate('/login')}>
+              <button
+                className="w-[100px] py-3 h-8 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500 flex items-center justify-center  "
+                onClick={() => navigate("/login")}
+              >
                 Login
               </button>
             </div>
@@ -32,5 +33,4 @@ export const UserNotExist = (props) => {
       </div>
     </>
   );
-}
-
+};

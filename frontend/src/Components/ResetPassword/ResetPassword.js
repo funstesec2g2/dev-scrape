@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo-img.png";
+import logo from "../assets/logo.png";
 
 export default function ResetPassword() {
   // function toggleLogin() {
@@ -93,13 +93,11 @@ export default function ResetPassword() {
               >
                 Reset Password
               </button>
-              <Link to='login'>
-              <button
-                className="bg-blue-900 md:bg-white w-full py-3 border border-black rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black"
-                >
-                Back to Login
-              </button>
-                </Link>
+              <Link to="login">
+                <button className="bg-blue-900 md:bg-white w-full py-3 border border-black rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 hover:text-white active:bg-blue-500 text-white md:text-black">
+                  Back to Login
+                </button>
+              </Link>
             </div>
           </div>
         </div>

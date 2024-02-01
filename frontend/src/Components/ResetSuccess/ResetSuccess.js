@@ -1,4 +1,4 @@
-import logo from "../assets/logo-img.png";
+import logo from "../assets/logo.png";
 
 export default function ResetSuccess() {
   function toggleHomePage() {
@@ -14,7 +14,7 @@ export default function ResetSuccess() {
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden bg-slate-900 h-screen text-white md:flex items-center justify-center">
-        <img src={logo} alt="logo-img" />
+        <img src={logo} alt="logo-img" className="w-8/12" />
       </div>
       <div className="flex justify-center h-screen items-center bg-slate-900 md:bg-white">
         <div className="h-1/2 w-3/4 flex flex-col items-between">

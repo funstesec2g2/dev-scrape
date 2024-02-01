@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
             {" "}
             <div className="">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm-9OvBU3eVMJZbGbQ84dAqW8XdebaXNyqpyV3tO_x5TJyfbEkbf29ATX55L_Ws2UbdxQ&usqp=CAU" // Replace with your profile image URL
+                src="#" // Replace with your profile image URL
                 alt="Profile"
                 className="w-8 h-8  rounded-full"
               />

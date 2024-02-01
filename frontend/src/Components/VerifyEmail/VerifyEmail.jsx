@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import logo from '../assets/logo-img.png';
-import { CCloseButton } from '@coreui/react';
+import React, { useState } from "react";
+import logo from "../assets/logo.png";
+import { CCloseButton } from "@coreui/react";
 
 function VerifyEmail(props) {
-  const [verificationStatus, setVerificationStatus] = useState('');
-  const API = 'http://localhost:5000/auth/verify'
+  const [verificationStatus, setVerificationStatus] = useState("");
+  const API = "http://localhost:5000/auth/verify";
   const [verificationCode, setVerificationCode] = useState(null);
 
   const handleVerification = async (verificationCode) => {
     try {
       const response = await fetch(API, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ verificationCode }),
-     
       });
 
       if (!response.ok) {
@@ -24,18 +23,18 @@ function VerifyEmail(props) {
       }
 
       const responseData = await response.json();
-      console.log(responseData); 
+      console.log(responseData);
       setVerificationStatus(responseData);
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
     }
   };
 
   return (
     <>
       <div className="grid md:grid-cols-2 relative">
-        <div className="hidden md:flex h-screen justify-center items-center bg-slate-900">
-          <img src={logo} alt="logo-img" />
+        <div className="hidden md:flex h-screen  justify-center items-center bg-slate-900">
+          <img src={logo} alt="logo-img"className="w-8/12" />
         </div>
         <div className="flex justify-center items-center h-screen bg-slate-900 md:bg-white">
           <div className="w-3/4 h-1/2 grid items-between">

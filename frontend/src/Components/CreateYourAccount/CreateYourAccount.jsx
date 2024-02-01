@@ -2,7 +2,7 @@ import "./CreateYourAccount.css";
 import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import { useState } from "react";
-import logo from "../assets/logo-img.png";
+import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 const CreateYourAccount = () => {
@@ -59,7 +59,7 @@ const CreateYourAccount = () => {
   return (
     <div className="grid md:grid-cols-2">
       <div className="hidden text-white md:flex items-center justify-center">
-        <img src={logo} alt="logo-img" />
+        <img src={logo} alt="logo-img" className="w-8/12" />
       </div>
 
       <div className="flex flex-col justify-center items-center  md:bg-white h-screen">
