@@ -3,14 +3,14 @@ import google from "../assets/google.svg";
 import github from "../assets/github.svg";
 import { useState } from "react";
 import logo from "../assets/logo-img.png";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-const  CreateYourAccount = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate  = useNavigate();
-  const [userBlockedErrorMessage, setUserBlockedErrorMessage] = useState('');
+const CreateYourAccount = () => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [userBlockedErrorMessage, setUserBlockedErrorMessage] = useState("");
 
   function passwordToggler() {
     let icon = document.getElementById("passSignup");
@@ -25,13 +25,15 @@ const  CreateYourAccount = () => {
     let response;
 
     try {
-      response = await fetch('http://localhost:5000/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      response = await fetch("http://localhost:5000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName, email, password
-        })
-      })
+          fullName,
+          email,
+          password,
+        }),
+      });
     } catch (error) {
       console.log(error);
       return;
@@ -40,25 +42,19 @@ const  CreateYourAccount = () => {
     const jsonResponse = await response.json();
     console.log(jsonResponse);
 
-    if ('message' in jsonResponse){
-
-      if (jsonResponse.message === 'User already exists') {
+    if ("message" in jsonResponse) {
+      if (jsonResponse.message === "User already exists") {
         // Redirect to login
-        navigate('/userAlreadyExist');
-    } 
-    if (jsonResponse.message === 'user is blocked'){
-      setUserBlockedErrorMessage('You are blocked you cant register');
-
-    }
+        navigate("/userAlreadyExist");
+      }
+      if (jsonResponse.message === "user is blocked") {
+        setUserBlockedErrorMessage("You are blocked you cant register");
+      }
     } else {
       // Redirect to verify email
-      navigate('/verifyEmail');
+      navigate("/verifyEmail");
     }
   };
-
-
-  
-  
 
   return (
     <div className="grid md:grid-cols-2">
@@ -72,52 +68,57 @@ const  CreateYourAccount = () => {
             <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">
               Create your Free Account
             </h1>
-
           </div>
           <div className="inputs">
             <form onSubmit={createAccount}>
               <label htmlFor="fullname">
-                <p className="text-white md:text-gray-400">Full Name</p>
+                <p className="px-3 text-white md:text-gray-400 text-start">
+                  Full Name
+                </p>
               </label>
               {/* <div className=""> */}
-                <input
-                  id="fullname"
-                  type="text"
-                  name="name"
-                  value={fullName}
-                  required
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full h-5 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4"
-                  placeholder="Enter your Full Name here"
-                />
+              <input
+                id="fullname"
+                type="text"
+                name="name"
+                value={fullName}
+                required
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full h-5 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4"
+                placeholder="Enter your Full Name here"
+              />
               {/* </div> */}
 
               <label htmlFor="email">
-                <p className="text-white md:text-gray-400">E-Mail</p>
+                <p className="px-3 text-white md:text-gray-400 text-start">
+                  E-Mail
+                </p>
               </label>
               {/* <div className="input md:border-2 md:border-gray-400 rounded-xl mb-4"> */}
-                <input
-                  // type="email"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-3 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-6 md:border-gray-400 rounded-xl mb-4"
-                  placeholder="Enter your E-mail Address here"
-                />
+              <input
+                // type="email"
+                name="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full h-3 py-5  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 input md:border-2 md:border-gray-400 rounded-xl mb-4"
+                placeholder="Enter your E-mail Address here"
+              />
               {/* </div> */}
 
               <label htmlFor="passSignup">
-                <p className="text-white md:text-gray-400">Password</p>
+                <p className="px-3 text-white md:text-gray-400 text-start">
+                  Password
+                </p>
               </label>
-              <div className="input md:border-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
+              <div className="input md:border-2 py-2 md:border-gray-400 rounded-xl mb-7 flex items-center justify-between bg-white">
                 <input
                   id="passSignup"
                   name="pwd"
                   value={password}
                   required
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-3 py-3 rounded-xl px-3 "
+                  className="w-full h-3 rounded-xl px-3 "
                   type="password"
                   placeholder="Enter New Password"
                 />
@@ -144,7 +145,7 @@ const  CreateYourAccount = () => {
               <div className="flex justify-center mt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-blue-300 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
+                  className="w-full py-3 bg-blue-300 md:bg-slate-800 text-white my-4 rounded-xl transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
                 >
                   Create Account
                 </button>
@@ -155,10 +156,10 @@ const  CreateYourAccount = () => {
               Already have an account?
             </span>
 
-            <Link to='/login'>
-            <button className='text-blue-700 font-bold hover:bg-black'>
-              Sign In
-            </button>
+            <Link to="/login">
+              <button className="text-blue-700 font-bold hover:text-black">
+                Sign In
+              </button>
             </Link>
 
             <div className="text-red-700">{userBlockedErrorMessage}</div>
@@ -188,10 +189,9 @@ const  CreateYourAccount = () => {
             </div>
           </div>
         </div>
-        </div>
-      
+      </div>
     </div>
   );
-}
+};
 
 export default CreateYourAccount;

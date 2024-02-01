@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 import profile from "../assets/photo.jpg";
-import Abraham from '../assets/Abraham.jpeg'
+import Abraham from "../assets/Abraham.jpeg";
 // import Heading from "../Heading/Heading";
 import {
   faGithub,
@@ -51,10 +51,7 @@ function AboutPage() {
 
             <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
               <div className=" flex flex-col items-center w-3/6 md:w-1/6">
-                <img
-                  src={Abraham}
-                  className="w-48 rounded-full"
-                ></img>
+                <img src={Abraham} className="w-48 rounded-full"></img>
                 <h3>Abrham Wube</h3>
                 <p className="text-yellow-600">Back-end developer</p>
                 <p className="text-center">
@@ -94,10 +91,12 @@ function AboutPage() {
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/Amantsehay">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -119,10 +118,12 @@ function AboutPage() {
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/Borifansena">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -148,10 +149,12 @@ function AboutPage() {
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/EstifanosTaye320">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -173,10 +176,12 @@ function AboutPage() {
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/JoshuaTaye">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
@@ -227,10 +232,12 @@ function AboutPage() {
                     className="hover:text-white"
                     icon={faInstagram}
                   />
-                  <FontAwesomeIcon
-                    className="hover:text-white"
-                    icon={faGithub}
-                  />
+                  <a href="https://github.com/MeazaTadele">
+                    <FontAwesomeIcon
+                      className="hover:text-white"
+                      icon={faGithub}
+                    />
+                  </a>
                   <FontAwesomeIcon
                     className="hover:text-white"
                     icon={faLinkedin}
