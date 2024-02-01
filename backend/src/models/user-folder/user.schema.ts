@@ -1,16 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { mongo } from 'mongoose';
 import { Bookmark } from '../bookmarks-folder/bookmark.schema';
-import { Role } from 'src/auth/roles/role.enum';
+import { Role } from '../../auth/roles/role.enum'
 @Schema()
 export class User {
   @Prop({ unique: true, default: new mongoose.Types.ObjectId() , type: mongoose.Schema.Types.ObjectId})
-  id: mongoose.Types.ObjectId;
+  id?: mongoose.Types.ObjectId;
   @Prop()
   fullName: string;
-
-  @Prop()
-  username: string;
 
   @Prop()
   password: string;
@@ -25,7 +22,7 @@ export class User {
   isBlocked: boolean;
 
   @Prop()
-  profilePicture: string;
+  profilePicture?: string;
 
 
   @Prop({type: Boolean, default: false})
