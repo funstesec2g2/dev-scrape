@@ -7,16 +7,16 @@ import logo from "../assets/logo.png";
 import Eyeclosed from "../assets/Eyeclosed";
 import Eyeopened from "../assets/Eyeopened";
 import { useLogin } from "../../hooks/useLogin";
-const  LoginPage = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [wrongPassword, setWrongPassword] = useState("");
-  const [onUserBlocked, setOnUserBlocked] = useState(false);  
+  const [onUserBlocked, setOnUserBlocked] = useState(false);
   const navigate = useNavigate();
-  
-  const [eye, setEye] = useState("closed");
-  const { login,  error, isLoading, signInWithGitHub, signInWithGoogle } = useLogin();
 
+  const [eye, setEye] = useState("closed");
+  const { login, error, isLoading, signInWithGitHub, signInWithGoogle } =
+    useLogin();
 
   const handleGoogle = async (e) => {
     e.preventDefault();
@@ -28,14 +28,19 @@ const  LoginPage = () => {
   };
 
   const Login = async (event) => {
-    console.log("this funciton is called")
+    console.log("this funciton is called");
     event.preventDefault();
     try {
-      await login({email, password, onWrongPassword: setWrongPassword, onUserBlocked: setOnUserBlocked});
+      await login({
+        email,
+        password,
+        onWrongPassword: setWrongPassword,
+        onUserBlocked: setOnUserBlocked,
+      });
     } catch (error) {
       console.log(error);
-      setWrongPassword('Sever Error, please try again')
-      return 
+      setWrongPassword("Sever Error, please try again");
+      return;
     }
   };
 
@@ -147,6 +152,6 @@ const  LoginPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;

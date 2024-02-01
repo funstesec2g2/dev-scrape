@@ -62,11 +62,11 @@ const  CreateYourAccount = () => {
 
   return (
     <div className="grid md:grid-cols-2">
-      <div className="hidden bg-slate-900 text-white md:flex items-center justify-center">
+      <div className="hidden text-white md:flex items-center justify-center">
         <img src={logo} alt="logo-img" />
       </div>
 
-      <div className="flex flex-col justify-center items-center bg-slate-900 md:bg-white h-screen">
+      <div className="flex flex-col justify-center items-center  md:bg-white h-screen">
         <div className="card">
           <div className="title mb-7">
             <h1 className="text-xl font-bold h-10  text-center text-white md:text-black mt-6">

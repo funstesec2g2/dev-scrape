@@ -17,10 +17,7 @@ const Layout = ({ children }) => {
     e.preventDefault();
     console.log("admin clicked");
     navigate("/admin");
-   
-
-  }
-
+  };
 
   return (
     <div className="min-h-screen">
@@ -35,7 +32,7 @@ const Layout = ({ children }) => {
           <>
             {" "}
             <div className="flex px-4 gap-4">
-              <Link to="/register" className="text-white">
+              <Link to="/createYourAccount" className="text-white">
                 Signup
               </Link>
               <Link to="/login" className="text-white">
@@ -91,7 +88,7 @@ const Layout = ({ children }) => {
               </li>
               {/* Add more menu items as needed */}
             </ul>
-            <div className="self-end">{true && <ProfileDropdown />}</div>
+            <div className="self-end">{user && <ProfileDropdown />}</div>
           </div>
         </nav>
         <main>{children}</main>
