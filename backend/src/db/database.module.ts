@@ -3,10 +3,10 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { env } from "process";
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import {DatabaseService} from "./database.service"; // Import mongoose to access connection events
-import {User} from "../models/user-folder/user.schema";
+import { DatabaseService } from "./database.service"; // Import mongoose to access connection events
+import { User } from "../models/user-folder/user.schema";
 import { UserSchema } from "src/models/user-folder/user.schema";
-import { BookmarkSchema, Bookmark} from "../models/bookmarks-folder/bookmark.schema"
+import { BookmarkSchema, Bookmark } from "../models/bookmarks-folder/bookmark.schema"
 config();
 
 @Global()
@@ -14,7 +14,7 @@ config();
   imports: [
     MongooseModule.forRoot(env.MONGODB_URL_LOCAL, {}),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{name: Bookmark.name, schema: BookmarkSchema}]),
+    MongooseModule.forFeature([{ name: Bookmark.name, schema: BookmarkSchema }]),
   ],
   exports: [DatabaseService],
   providers: [DatabaseService],
@@ -25,8 +25,8 @@ config();
 export class DatabaseModule implements OnModuleInit {
   async onModuleInit() {
     try {
-    
-        // Listen for the "connected" event
+
+      // Listen for the "connected" event
       const defaultConnection = mongoose.connection;
       defaultConnection.on("connected", () => {
         console.log("Connected to MongoDB");
