@@ -8,6 +8,7 @@ const Youtube = () => {
   const [youtubeInfo, setYoutubeInfo] = useState(null);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     // Check local storage to set initial favorite state
@@ -18,17 +19,21 @@ const Youtube = () => {
     setIsFavorite(isVideoFavorite);
   }, [youtubeInfo]);
 
+  
   const handleSearch = async () => {
     try {
+      setLoading(true); // Set loading to true when starting the search
+
       const response = await searchYoutubeByTitle(videoTitle);
       setYoutubeInfo(response.video_info);
       setError(null);
     } catch (error) {
       setYoutubeInfo(null);
       setError("Error fetching YouTube info.");
+    } finally {
+      setLoading(false); // Set loading to false regardless of success or failure
     }
   };
-
   const handleToggleFavorite = () => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
@@ -92,6 +97,12 @@ const Youtube = () => {
       >
         Search
       </button> */}
+
+{loading && (
+        <div className="flex justify-center items-center">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
 
