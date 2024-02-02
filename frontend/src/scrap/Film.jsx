@@ -1,16 +1,17 @@
 // FilmSearch.js
-
 import React, { useState, useEffect } from "react";
-import { searchImdbByTitle } from "./api"; // Replace with the actual path
+import { searchImdbByTitle } from "./api"; 
+
+import "./film.css"; 
 
 const FilmSearch = () => {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState(null);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Check local storage to set initial favorite state
     const favorites = JSON.parse(localStorage.getItem("filmFavorites")) || [];
     const isMovieFavorite = favorites.some(
       (fav) => fav.title === movieInfo?.title
@@ -20,23 +21,29 @@ const FilmSearch = () => {
 
   const handleSearch = async () => {
     try {
+      setIsLoading(true);
       const result = await searchImdbByTitle(movieTitle);
       setMovieInfo(result.movie_info);
       setError(null);
     } catch (error) {
       setMovieInfo(null);
       setError("Error searching IMDb. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleToggleFavorite = () => {
+    if (!movieInfo) {
+      return; // Prevent toggling favorites if movieInfo is not available
+    }
+  
     const favorites = JSON.parse(localStorage.getItem("filmFavorites")) || [];
-
-    if (isFavorite) {
+    const isMovieFavorite = favorites.some((fav) => fav.title === movieInfo.title);
+  
+    if (isMovieFavorite) {
       // Remove from favorites
-      const updatedFavorites = favorites.filter(
-        (fav) => fav.title !== movieInfo.title
-      );
+      const updatedFavorites = favorites.filter((fav) => fav.title !== movieInfo.title);
       localStorage.setItem("filmFavorites", JSON.stringify(updatedFavorites));
     } else {
       // Add to favorites
@@ -44,13 +51,12 @@ const FilmSearch = () => {
         title: movieInfo.title,
         posterPath: movieInfo.poster_path,
       };
-      const updatedFavorites = [...favorites, newFavorite];
-      localStorage.setItem("filmFavorites", JSON.stringify(updatedFavorites));
+      localStorage.setItem("filmFavorites", JSON.stringify([...favorites, newFavorite]));
     }
-
-    setIsFavorite(!isFavorite);
+  
+    setIsFavorite(!isMovieFavorite);
   };
-
+  
   return (
     <div className="container mx-auto p-8">
       <div className="mb-6 flex items-center">
@@ -70,19 +76,11 @@ const FilmSearch = () => {
       </div>
 
       <div className="mx-4 bg-white rounded-lg overflow-hidden shadow-md">
-        {/* <input
-          className="border rounded p-2 w-full"
-          type="text"
-          placeholder="Enter movie title"
-          value={movieTitle}
-          onChange={(e) => setMovieTitle(e.target.value)}
-        />
-        <button
-          className="bg-yellow-500 text-white rounded p-2 mt-2 w-full"
-          onClick={handleSearch}
-        >
-          Search IMDb
-        </button> */}
+        {isLoading && (
+          <div className="flex justify-center items-center p-8">
+            <div className="loading-spinner"></div>
+          </div>
+        )}
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
 
