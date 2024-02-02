@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import AuthModule from './auth/auth.module';
 import { DatabaseModule } from './db/database.module';
-import {JwtModule} from '@nestjs/jwt'
+import { JwtModule } from '@nestjs/jwt'
 
 @Module({
   imports: [AuthModule, DatabaseModule],
@@ -11,4 +11,4 @@ import {JwtModule} from '@nestjs/jwt'
   providers: [AppService],
 
 })
-export class AppModule {}
+export class AppModule { }

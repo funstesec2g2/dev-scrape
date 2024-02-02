@@ -37,3 +37,6 @@
 !/backend/.vscode/tasks.json
 !/backend/.vscode/launch.json
 !/backend/.vscode/extensions.json
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
