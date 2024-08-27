@@ -24,8 +24,9 @@ import Youtube from "./scrap/Youtube.jsx";
 import PlayStore  from './scrap/PlayStore.jsx'
 import Wikipedia from './scrap/Wikipedia.jsx'
 import Film from './scrap/Film.jsx'
-import Favorites from "./Components/Favorites/Favorite.jsx";
+import SendResetCode from "./Components/ForgotPassword/SendResetCode.js";
 
+import Favorites from "./Components/Favorites/Favorite.jsx";
 function App() {
 
   const { user } = useAuthContext();
@@ -37,7 +38,6 @@ function App() {
           <Layout>
             {/* <Heading /> */}
             <Routes>
-              <Route path="/editProfile" element={<EditProfile />} />
               <Route path="/" element={<HomePage />} />
               <Route
                 path="/login"
@@ -53,8 +53,10 @@ function App() {
                 path="/createYourAccount"
                 element={<CreateYourAccount />}
               />
+              <Route path="/register" element={<CreateYourAccount />} />
               <Route path="/verifyEmail" element={<VerifyEmail />} />
-              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/forgotPassword" element={<ForgotPassword/>} />
+
               <Route path="/checkYourEmail" element={<CheckYourEmail />} />
               <Route path="/resetPassword" element={<ResetPassword />} />
               <Route path="/resetSuccess" element={<ResetSuccess />} />
@@ -65,8 +67,10 @@ function App() {
               <Route path="/playstore" element={<PlayStore />} />
               <Route path="/wikipedia" element={<Wikipedia />} />
               <Route path="/film" element={<Film />} />
+              <Route path="/sendResetCode" element={<SendResetCode />} />
+
               <Route path="/favorited" element={<Favorites />} />
-              
+
 
               {/* <Route path="/playstore" element={<PlayStore  />} />
               <Route path="/twitter" element={<TwitterSearch  />} />
@@ -78,6 +82,13 @@ function App() {
               <Route path="" element={<ProtectedRoute role='admin'/>}>
                   <Route path="/admin" element={<AdminApp/>} />
               </Route>
+              {/* <Route path="" element={<ProtectedRoute role='user'/>}>
+              <Route path="/editProfile" element={<EditProfile />} />
+              </Route> */}
+              <Route
+                path="/editProfile"
+                element={user ? <EditProfile /> : <Navigate to="/" />}
+              />
               
 
               {/* <Route element={

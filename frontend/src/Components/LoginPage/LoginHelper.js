@@ -29,15 +29,27 @@ export const getCookie = (name) => {
 
 
   export const getUserEmail = () =>{
+   
 
     const token = getCookie('user');
     if (token){
         const payload = jwt_decode(token);
-        console.log(payload, 'the payload')
+        console.log(payload, 'the payload, this is the paylod')
+        
         return payload?.email;
     }
 
     return null;
+  }
+  export const getUserName = () =>{
+    console.log("this is the getUserName function")
+    const token = getCookie('user');
+    console.log(token, 'the token ')
+    if (token){
+      const name = jwt_decode(token);
+      return name?.name;
+    }
+    return "";
   }
 
   export const getUserRole = () =>{

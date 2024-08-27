@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo-img.png';
 import { CCloseButton } from '@coreui/react';
 
 function VerifyEmail(props) {
-  const [verificationStatus, setVerificationStatus] = useState('');
-  const API = 'http://localhost:5000/auth/verify'
+  const [verificationStatus, setVerificationStatus] = useState(false);
+  const API = 'http://localhost:5500/auth/verify';
   const [verificationCode, setVerificationCode] = useState(null);
 
   const handleVerification = async (verificationCode) => {
@@ -15,19 +16,15 @@ function VerifyEmail(props) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ verificationCode }),
-     
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message);
+      if (response.ok) {
+        console.log('The email is verified');
+        setVerificationStatus(true);
       }
-
-      const responseData = await response.json();
-      console.log(responseData); 
-      setVerificationStatus(responseData);
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error('Error during verification:', error);
+      setVerificationStatus(false);
     }
   };
 
@@ -60,11 +57,20 @@ function VerifyEmail(props) {
 
               {/* Button to trigger verification */}
               <button
-                onClick={handleVerification}
+                onClick={() => {
+                  handleVerification(verificationCode);
+                }}
                 className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
               >
                 Verify Email
               </button>
+
+              {/* Link to login page if email is verified */}
+              {verificationStatus && (
+                <Link to="/login" className="text-blue-500">
+                  Email Verified! Click here to Login.
+                </Link>
+              )}
             </div>
           </div>
         </div>

@@ -8,8 +8,12 @@ const SearchComponent = () => {
   const [searchResults, setSearchResults] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const [loading, setLoading] = useState(false); // Add loading state
+
   const handleSearch = async () => {
     try {
+      setLoading(true); // Set loading to true when starting the search
+
       const response = await searchWikipediaByTitle(searchTerm);
       const wikipediaResults = response.page_info;
 
@@ -23,6 +27,8 @@ const SearchComponent = () => {
       });
     } catch (error) {
       console.error('Error fetching search results:', error);
+    } finally {
+      setLoading(false); // Set loading to false regardless of success or failure
     }
   };
 
@@ -74,6 +80,12 @@ const SearchComponent = () => {
     Search
   </button>
 </div>
+
+{loading && (
+        <div className="flex justify-center items-center">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
 
       {searchResults && (
         <div className="mt-8">

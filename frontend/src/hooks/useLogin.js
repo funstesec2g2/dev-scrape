@@ -18,7 +18,7 @@ export const useLogin = () => {
   const login = async ({ email, password , onWrongPassword = () => {}}, onUserBlocked = () => {}) => {
     setIsLoading(true);
     setError(null);
-    const response = await fetch("http://localhost:6000/auth/login", {
+    const response = await fetch("http://localhost:5500/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: {
@@ -48,6 +48,11 @@ export const useLogin = () => {
       }
     } else if (json.message === "wrong password") {
       onWrongPassword("You have entered a wrong password");
+    }
+
+      else if (json?.message ==='user is not verified') {
+        navigate("/verifyEmail");
+      
     }
      
     }

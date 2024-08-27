@@ -1,24 +1,23 @@
 import {Injectable} from "@nestjs/common";
 import {AuthDto} from "./dto/auth.dto";
 import * as argon from "argon2"
-import {User} from "src/models/user-folder/user.schema";
+import {User} from '../models/user-folder/user.schema'
 import {JwtService} from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/mongoose";
 import {Model} from 'mongoose';
 import { Response, Request} from "express";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
-import   {DatabaseService} from "src/db/database.service";
-
 import { sendVerificationEmail, generateVerificationCode } from './email_service/email.service';
+import { InternalServerErrorException } from '@nestjs/common';
 
 import { Res } from "@nestjs/common";
-import { UserModule } from "src/models/user-folder/user.module";
-import { threadId } from "worker_threads";
+
+
 
 @Injectable()
 class AuthService{
     constructor(@InjectModel(User.name) private readonly userModel: Model<User>,
-    private jwtService: JwtService, private databaseService: DatabaseService
+    private jwtService: JwtService
     ){}
 
     async validateUser(email: string, pass: string): Promise<User> {
@@ -39,13 +38,27 @@ class AuthService{
         return await this.userModel.find().exec();
     }
 
-    async findOne(email: string): Promise<User>{
+    async findOne(email: string){
         console.log(this.userModel)
         return this.userModel.findOne({email: email});
     }
 
+    async findUserByResetCode(code: string){
+        return this.userModel.findOne({passwordResetCode: code})
+    }
 
-    async createUser (createUserDto: AuthDto) : Promise<any>{
+    async updatePassword(email: string, newPassword: string){
+        console.log(email)
+        const user = await this.userModel.findOne({email: email});
+        if (!user){
+            throw new Error("user not found");
+        }
+        user.password = await argon.hash(newPassword);
+        user.passwordResetCode = null;
+        return user.save();
+    }
+
+    async createUser (createUserDto: AuthDto) {
         const hash = await argon.hash(createUserDto.password);
         createUserDto.password = hash;
         const verificationCode = generateVerificationCode();
@@ -66,12 +79,13 @@ class AuthService{
        
     }
 
-    async login(email: string, password: string, response: Response): Promise<{ message: string, access_token?:string, email?: string }> {
+    async login(email: string, password: string): Promise<{ message: string, access_token?:string, email?: string }> {
 
         try{
             const user: User = await this.userModel.findOne({ email: email });
             console.log(user);
             if (!user) {
+                console.log('the user doesnt exist ')
                 return {message: "no user found"};
             }
     
@@ -83,12 +97,21 @@ class AuthService{
             if (user.isBlocked){
                 return {message: 'user is blocked'}
             }
+            if (!user.isVerified){
+                const code = generateVerificationCode();
+                user.emailToken = code;
+                sendVerificationEmail(user.email, code);
+                return {message: 'user is not verified'}
+            }
            
             const payload = {
                 sub: user.email,
-                roles: user.roles
+                roles: user.roles,
+                name: user.fullName,
+                email: user.email
       
               };
+              console.log(user.fullName);
             const access_token: string = await this.jwtService.signAsync(payload);
             
         
@@ -165,7 +188,49 @@ class AuthService{
     async findByVerificationCode(verificationCode: string){
         return this.userModel.findOne({ emailToken: verificationCode }).exec();
       }
+
+      async getTotalUsers(): Promise<number> {
+        const totalUsers = await this.userModel.countDocuments();
+        console.log('this method is being called', totalUsers)
+        return totalUsers;
+      }
+    
+      async getTotalBlockedUsers(): Promise<number> {
+        console.log('this method is being called', )
+        const totalBlockedUsers = await this.userModel.countDocuments({
+          isBlocked: true,
+        });
+        console.log('this method is being called', totalBlockedUsers)
+        return totalBlockedUsers;
+      }
+
+      async updateUserName(user, newName): Promise<any> {
+        try {
+          user.full = newName;
+          await user.save();
+        } catch (error) {
+          console.error('Error updating user name:', error);
+          throw new InternalServerErrorException('Internal server error');
+        }
+      }
+
+      async authenticateUser(email: string, password: string): Promise<{message: string}> {
+        const user = await this.userModel.findOne({ email });
+    
+        if (!user) {
+          return {message: 'User not found'};
+        }
+    
       
+        if (user.password !== password) {
+            return {message: 'Wrong password'};
+        }
+    
+        return {message: 'Success'};
+      }
+      
+
+    
 
   
 

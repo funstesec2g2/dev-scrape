@@ -26,6 +26,8 @@ export class AuthDto{
 
     @IsOptional()
     emailToken?: string
+    @IsOptional()
+    passwordResetCode?: string
 
     
 

@@ -4,6 +4,13 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../Components/ProfileDropdown/ProfileDropdown";
+import {
+  getCookie,
+  getUserName,
+  getUserRole,
+} from "../Components/LoginPage/LoginHelper";
+import { useEffect } from "react";
+
 const Layout = ({ children }) => {
   const [openProfile, setOpenProfile] = useState(false);
   const { user } = useAuthContext();
@@ -12,23 +19,27 @@ const Layout = ({ children }) => {
     logout();
   };
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  console.log("this is the username", userName);
 
   const handleAdminClick = (e) => {
     e.preventDefault();
     console.log("admin clicked");
     navigate("/admin");
-   
+  };
 
-  }
-
-
+  useEffect(() => {
+      const user = getUserName();
+      setUserName(user);
+  }, [getUserName]); 
+  
   return (
     <div className="min-h-screen">
       <header className="bg-blue-500 p-4 text-white flex justify-between items-center">
-        <div className="container mx-auto">
+        <div className="container flex mx-auto">
           <Link to="/">
             {" "}
-            <h1 className="text-2xl font-semibold">DevScrape</h1>
+            <h1 className="text-3xl mx-6  font-semibold ">DevScrape</h1>
           </Link>
         </div>
         {!user ? (
@@ -46,14 +57,10 @@ const Layout = ({ children }) => {
         ) : (
           <>
             {" "}
-            <div className="">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm-9OvBU3eVMJZbGbQ84dAqW8XdebaXNyqpyV3tO_x5TJyfbEkbf29ATX55L_Ws2UbdxQ&usqp=CAU" // Replace with your profile image URL
-                alt="Profile"
-                className="w-8 h-8  rounded-full"
-              />
-            </div>
-            <button onClick={handleAdminClick}>admin page</button>
+            <div className="user-name position-absolute">{userName}</div>
+            {getUserRole() === "admin" && (
+              <button onClick={handleAdminClick}>Admin Page</button>
+            )}
             <button onClick={handleClick}>Log Out</button>
           </>
         )}
@@ -61,7 +68,7 @@ const Layout = ({ children }) => {
       <div className="mx-auto">
         <nav className="p-4 px-10 flex flex-col justify-center shadow-md">
           <div className="flex">
-            <ul className="flex space-x-4 w-full">
+            <ul className="flex text-lg items-center space-x-4 w-full">
               <li>
                 <Link to="/" className="text-blue-500">
                   Home
@@ -72,13 +79,6 @@ const Layout = ({ children }) => {
                   Favorites
                 </Link>
               </li>
-              {user && (
-                <li>
-                  <Link to="/dashboard" className="text-blue-500">
-                    Dashboard
-                  </Link>
-                </li>
-              )}
               <li>
                 <Link to="/about" className="text-blue-500">
                   About
@@ -91,7 +91,9 @@ const Layout = ({ children }) => {
               </li>
               {/* Add more menu items as needed */}
             </ul>
-            <div className="self-end">{true && <ProfileDropdown />}</div>
+            <div className="self-end">
+              {getCookie("user") && <ProfileDropdown />}
+            </div>
           </div>
         </nav>
         <main>{children}</main>

@@ -5,6 +5,7 @@ input {
 .card {
   width: 100%;
   max-width: 540px;
+  max-height: 700px;
 }
 
 .button {

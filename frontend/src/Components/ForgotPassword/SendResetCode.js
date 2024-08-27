@@ -1,41 +1,33 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo-img.png';
 import { CCloseButton } from '@coreui/react';
 
-function ForgotPassword() {
+function SendResetCode(props) {
+  const [email, setEmail] = useState('');
   const [verificationStatus, setVerificationStatus] = useState(false);
-  const API = 'http://localhost:5500/auth/verify-resetcode';
-  const [verificationCode, setVerificationCode] = useState('');
-  const [error, setError] = useState('');
+  const API = 'http://localhost:5500/auth/reset-password';
   const navigate = useNavigate();
-  const location = useLocation();
-  const email = location?.state?.email || ''
 
-  const handleVerification = async (verificationCode) => {
+  const handlePasswordResetRequest = async () => {
     try {
       const response = await fetch(API, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ verificationCode }),
+        body: JSON.stringify({ email }),
       });
 
       if (response.ok) {
-        console.log('The reset code is verified');
+        console.log('Password reset code sent to the email');
         setVerificationStatus(true);
-        setError('');
-        console.log(email, 'this is the email');
-        navigate("/resetPassword", { state: { email } });
 
-      } else {
-        setError('Wrong code. Please check and try again.');
-        setVerificationStatus(false);
+        // Use the useNavigate hook to navigate and pass email in state
+        navigate('/forgotPassword', { state: { email } });
       }
     } catch (error) {
-      console.error('Error during verification:', error);
-      setError('An error occurred. Please try again.');
+      console.error('Error during password reset request:', error);
       setVerificationStatus(false);
     }
   };
@@ -50,34 +42,29 @@ function ForgotPassword() {
           <div className="w-3/4 h-1/2 grid items-between">
             <div>
               <h2 className="text-xl font-bold h-10 text-white md:text-black">
-                Enter The Reset Code
+                Password Reset Request
               </h2>
 
               <span className="text-sm text-white md:text-black">
-                Enter the password reset code we have sent you
+                Enter your email, and we will send you a verification code.
               </span>
             </div>
             <div>
-              {/* Input field for verification code */}
+              {/* Input field for user's email */}
               <input
-                type="text"
-                placeholder="Enter Verification Code"
+                type="email"
+                placeholder="Enter your email"
                 className="w-full h-10 border rounded-md p-2 my-2"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
-              {/* Display error message */}
-              {error && <p className="text-red-500">{error}</p>}
-
-              {/* Button to trigger verification */}
+              {/* Button to trigger password reset request */}
               <button
-                onClick={() => {
-                  handleVerification(verificationCode);
-                }}
+                onClick={handlePasswordResetRequest}
                 className="w-full py-3 bg-blue-900 md:bg-slate-800 text-white my-4 rounded transition-colors duration-300 ease-in-out hover:bg-blue-700 active:bg-blue-500"
               >
-                Verify Reset Code
+                Send Verification Code
               </button>
             </div>
           </div>
@@ -90,4 +77,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default SendResetCode;

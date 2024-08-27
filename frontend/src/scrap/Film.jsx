@@ -1,65 +1,86 @@
 // FilmSearch.js
+import React, { useState, useEffect } from "react";
+import { searchImdbByTitle } from "./api"; 
 
-import React, { useState, useEffect } from 'react';
-import { searchImdbByTitle } from './api'; // Replace with the actual path
+import "./film.css"; 
 
 const FilmSearch = () => {
-  const [movieTitle, setMovieTitle] = useState('');
+  const [movieTitle, setMovieTitle] = useState("");
   const [movieInfo, setMovieInfo] = useState(null);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Check local storage to set initial favorite state
-    const favorites = JSON.parse(localStorage.getItem('filmFavorites')) || [];
-    const isMovieFavorite = favorites.some((fav) => fav.title === movieInfo?.title);
+    const favorites = JSON.parse(localStorage.getItem("filmFavorites")) || [];
+    const isMovieFavorite = favorites.some(
+      (fav) => fav.title === movieInfo?.title
+    );
     setIsFavorite(isMovieFavorite);
   }, [movieInfo]);
 
   const handleSearch = async () => {
     try {
+      setIsLoading(true);
       const result = await searchImdbByTitle(movieTitle);
       setMovieInfo(result.movie_info);
       setError(null);
     } catch (error) {
       setMovieInfo(null);
-      setError('Error searching IMDb. Please try again.');
+      setError("Error searching IMDb. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleToggleFavorite = () => {
-    const favorites = JSON.parse(localStorage.getItem('filmFavorites')) || [];
-
-    if (isFavorite) {
+    if (!movieInfo) {
+      return; // Prevent toggling favorites if movieInfo is not available
+    }
+  
+    const favorites = JSON.parse(localStorage.getItem("filmFavorites")) || [];
+    const isMovieFavorite = favorites.some((fav) => fav.title === movieInfo.title);
+  
+    if (isMovieFavorite) {
       // Remove from favorites
       const updatedFavorites = favorites.filter((fav) => fav.title !== movieInfo.title);
-      localStorage.setItem('filmFavorites', JSON.stringify(updatedFavorites));
+      localStorage.setItem("filmFavorites", JSON.stringify(updatedFavorites));
     } else {
       // Add to favorites
-      const newFavorite = { title: movieInfo.title, posterPath: movieInfo.poster_path };
-      const updatedFavorites = [...favorites, newFavorite];
-      localStorage.setItem('filmFavorites', JSON.stringify(updatedFavorites));
+      const newFavorite = {
+        title: movieInfo.title,
+        posterPath: movieInfo.poster_path,
+      };
+      localStorage.setItem("filmFavorites", JSON.stringify([...favorites, newFavorite]));
     }
-
-    setIsFavorite(!isFavorite);
+  
+    setIsFavorite(!isMovieFavorite);
   };
-
+  
   return (
     <div className="container mx-auto p-8">
-      <div className="mx-4 bg-white rounded-lg overflow-hidden shadow-md">
+      <div className="mb-6 flex items-center">
         <input
-          className="border rounded p-2 w-full"
           type="text"
-          placeholder="Enter movie title"
           value={movieTitle}
           onChange={(e) => setMovieTitle(e.target.value)}
+          placeholder="Enter Topic"
+          className="p-2 border rounded-l focus:outline-none focus:border-blue-500 text-gray-800 flex-grow"
         />
         <button
-          className="bg-yellow-500 text-white rounded p-2 mt-2 w-full"
           onClick={handleSearch}
+          className="bg-yellow-500 text-white rounded-r p-2 hover:bg-blue-600 transition duration-300 ease-in-out"
         >
-          Search IMDb
+          Search
         </button>
+      </div>
+
+      <div className="mx-4 bg-white rounded-lg overflow-hidden shadow-md">
+        {isLoading && (
+          <div className="flex justify-center items-center p-8">
+            <div className="loading-spinner"></div>
+          </div>
+        )}
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
 
@@ -73,13 +94,16 @@ const FilmSearch = () => {
                 aria-label="Favorite"
                 onClick={handleToggleFavorite}
               >
-                {isFavorite ? '❤️' : '🤍'}
+                {isFavorite ? "❤️" : "🤍"}
               </span>
             </div>
             <p className="mb-2 text-gray-700">{movieInfo.overview}</p>
             <p className="mb-2 text-gray-700">
               Release Date:
-              <span className="font-semibold"> {new Date(movieInfo.release_date).toLocaleDateString()}</span>
+              <span className="font-semibold">
+                {" "}
+                {new Date(movieInfo.release_date).toLocaleDateString()}
+              </span>
             </p>
             <img
               className="rounded-lg shadow-md w-full mt-4"

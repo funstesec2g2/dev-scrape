@@ -22,7 +22,7 @@ function ProfileDropdown() {
             >
               Edit Profile
             </Link>
-            <li>Logout</li>
+            {/* <li><button onClick={}>Log Out</button></li> */}
             <li>Exit</li>
           </ul>
         </div>

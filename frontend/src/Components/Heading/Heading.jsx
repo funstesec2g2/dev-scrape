@@ -3,14 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Heading = () => {
-  // function dropDown() {
-  //   const navMenu = document.getElementsByClassName('nav-menu');
-  //   Array.from(navMenu).forEach((element) => {
-  //     element.classList.toggle('hidden');
-  //     element.classList.toggle('flex');
-  //   });
-  // }
-
   return (
     <>
       <header>
